@@ -42,12 +42,74 @@ namespace WindowsFormsApplication1
 
         private void Reg_Log_Enter(object sender, EventArgs e)
         {
-            textBox6.Text = "";
+            if (loginTextBox.Text == "Введите логин")
+            {
+                loginTextBox.Text = "";
+            }
         }
 
         private void Reg_Log_Leave(object sender, EventArgs e)
         {
-            textBox6.Text = "Введите логинг";
+            if (loginTextBox.Text == "")
+            {
+                loginTextBox.Text = "Введите логин";
+            }
+        }
+
+        private void textBox6_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox5_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ParolTextBox_Leave(object sender, EventArgs e)
+        {
+            if (ParolTextBox.Text == "")
+            {
+                ParolTextBox.Text = "Введите пароль";
+            }
+            else
+            {
+                ParolTextBox.PasswordChar = '*';
+            }
+        }
+
+        private void PotParolTextBox4_Leave(object sender, EventArgs e)
+        {
+            if (PotParolTextBox.Text == "")
+            {
+                PotParolTextBox.Text = "Повторите пароль";
+            }
+            else
+            {
+                PotParolTextBox.PasswordChar = '*';
+            }
+        }
+
+        private void PotParolTextBox4_Enter(object sender, EventArgs e)
+        {
+            if (PotParolTextBox.Text == "Повторите пароль")
+            {
+                PotParolTextBox.Text = "";
+            }
+
+        }
+
+        private void ParolTextBox_Enter(object sender, EventArgs e)
+        {
+            if(ParolTextBox.Text == "Введите пароль")
+            {
+                ParolTextBox.Text = "";
+            }
         }
     }
 
