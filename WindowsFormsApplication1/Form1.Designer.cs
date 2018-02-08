@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.PPorolTextBox = new System.Windows.Forms.TextBox();
+            this.LoginTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
@@ -45,19 +45,26 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // textBox1
+            // PPorolTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(3, 54);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(165, 20);
-            this.textBox1.TabIndex = 1;
+            this.PPorolTextBox.Location = new System.Drawing.Point(3, 54);
+            this.PPorolTextBox.Name = "PPorolTextBox";
+            this.PPorolTextBox.Size = new System.Drawing.Size(165, 20);
+            this.PPorolTextBox.TabIndex = 1;
+            this.PPorolTextBox.Text = "Пороль";
+            this.PPorolTextBox.Enter += new System.EventHandler(this.PPorolTextBox_Enter);
+            this.PPorolTextBox.Leave += new System.EventHandler(this.textBox1_Leave);
             // 
-            // textBox2
+            // LoginTextBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(3, 28);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(165, 20);
-            this.textBox2.TabIndex = 2;
+            this.LoginTextBox.Location = new System.Drawing.Point(3, 28);
+            this.LoginTextBox.Name = "LoginTextBox";
+            this.LoginTextBox.Size = new System.Drawing.Size(165, 20);
+            this.LoginTextBox.TabIndex = 2;
+            this.LoginTextBox.Text = "Логин";
+            this.LoginTextBox.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.LoginTextBox.Enter += new System.EventHandler(this.LoginTextBox_Enter);
+            this.LoginTextBox.Leave += new System.EventHandler(this.LoginTextBox_Leave);
             // 
             // label1
             // 
@@ -87,8 +94,8 @@
             this.ClientSize = new System.Drawing.Size(173, 123);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.LoginTextBox);
+            this.Controls.Add(this.PPorolTextBox);
             this.Controls.Add(this.button1);
             this.Name = "LoginForm";
             this.Text = "Чат";
@@ -101,11 +108,10 @@
         #endregion
 
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox PPorolTextBox;
+        private System.Windows.Forms.TextBox LoginTextBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.LinkLabel linkLabel1;
-
     }
 }
 
