@@ -51,7 +51,7 @@
             this.PPorolTextBox.Name = "PPorolTextBox";
             this.PPorolTextBox.Size = new System.Drawing.Size(165, 20);
             this.PPorolTextBox.TabIndex = 1;
-            this.PPorolTextBox.Text = "Пороль";
+            this.PPorolTextBox.Text = "ПАроль";
             this.PPorolTextBox.Enter += new System.EventHandler(this.PPorolTextBox_Enter);
             this.PPorolTextBox.Leave += new System.EventHandler(this.textBox1_Leave);
             // 
