@@ -16,7 +16,7 @@ namespace WindowsFormsApplication1
         public string login;
         public string password;
     };
-                
+                        
     public partial class LoginForm : Form
     {
         public Polzovatel user1;
@@ -53,9 +53,8 @@ namespace WindowsFormsApplication1
 
         private void button1_Click(object sender, EventArgs e)
         {
-
-
-        //    Close();
+            Form2 f = new Form2();
+            f.ShowDialog();
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -133,6 +132,5 @@ namespace WindowsFormsApplication1
                 PPorolTextBox.Text = "";
             }
         }
-
     }
 }
