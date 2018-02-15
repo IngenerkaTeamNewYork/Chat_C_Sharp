@@ -36,13 +36,16 @@ namespace WindowsFormsApplication1
             usery[1].password = "Алена";
 
           
-            FileStream file2 = new FileStream("d:\\password.txt", FileMode.Open); //создаем файловый поток
+            FileStream file2 = new FileStream("password.txt", FileMode.Open); //создаем файловый поток
             StreamReader reader = new StreamReader(file2); // создаем «потоковый читатель» и связываем его с файловым потоком 
 
             int i = 0;
             while (reader.Peek() >= 0)
             {
-                usery[i].login = reader.ReadLine();
+                string stroka_iz_faila = reader.ReadLine().Trim();
+                string[] podstroki = stroka_iz_faila.Split(new Char[] { ' ' });
+                usery[i].login = podstroki[0];
+                usery[i].password = podstroki[1];
                 i++;
             }
             /*Console.WriteLine(reader.ReadToEnd()); //считываем все данные с потока и выводим на экран*/
@@ -101,7 +104,7 @@ namespace WindowsFormsApplication1
                 bool net_polzovatelya = true;
                 bool ne_pomnit_parol = true;
                 for (int i = 0; i < 2; i++ )
-                {                   
+                {        
                     if (usery[i].login == user1.login)
                     {
                         net_polzovatelya = false;

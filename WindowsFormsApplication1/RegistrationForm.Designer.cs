@@ -47,7 +47,6 @@
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(60, 9);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(72, 13);
@@ -110,7 +109,10 @@
             this.Controls.Add(this.PotParolTextBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.button2);
+            this.MaximumSize = new System.Drawing.Size(240, 220);
+            this.MinimumSize = new System.Drawing.Size(220, 213);
             this.Name = "RegistrationForm";
+            this.Text = "Регистрация";
             this.ResumeLayout(false);
             this.PerformLayout();
 

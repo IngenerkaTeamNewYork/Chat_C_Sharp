@@ -98,7 +98,7 @@
             this.Controls.Add(this.PPorolTextBox);
             this.Controls.Add(this.button1);
             this.Name = "LoginForm";
-            this.Text = "Чат";
+            this.Text = "вход";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
