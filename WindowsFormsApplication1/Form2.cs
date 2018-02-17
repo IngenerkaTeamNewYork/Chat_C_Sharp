@@ -61,29 +61,40 @@ namespace WindowsFormsApplication1
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            string filename = "23423424.txt";
+            string filename = "peregovory.txt";
             string fileText = System.IO.File.ReadAllText(filename);
-            textBox2.Text = fileText;
-       
+            
+            textBox2.Text = fileText; 
+        /*
             for (int n = 0; n < 11; n++)
             {
                 DateTime thisDay = DateTime.Now;
                 textBox2.Text += thisDay.ToString("dd-MM-yyyy hh:mm:ss") + Environment.NewLine + sobch[n].login + ":" + sobch[n].text + Environment.NewLine;
             }
+        */
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (textBox1.Text == "")
+            { }
+        else
+            {
             DateTime thisDay = DateTime.Now;
-            textBox2.Text += thisDay.ToString("dd-MM-yyyy hh:mm:ss") + Environment.NewLine + textBox1.Text + Environment.NewLine;
+            textBox2.Text += thisDay.ToString("dd-MM-yyyy hh:mm:ss") + Environment.NewLine + sobch[0].login + ":   " + textBox1.Text + Environment.NewLine;
+            textBox1.Text = "";
+            }
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
-            string filename = "23423424.txt";
-            System.IO.File.WriteAllText(filename, "");
-            System.IO.File.AppendAllText(filename, textBox2.Text + Environment.NewLine);
+            DateTime thisDay = DateTime.Now;
+            string filename = "peregovory.txt";
+           // System.IO.File.WriteAllText(filename, "");
+            System.IO.File.AppendAllText(filename, Environment.NewLine + thisDay.ToString("dd-MM-yyyy hh:mm:ss") + "$~#~@*&" + sobch[0].login + "$~#~@*&" + textBox1.Text);
+
             textBox2.ScrollToCaret();
+            
 
             
         }

@@ -45,7 +45,7 @@ namespace WindowsFormsApplication1
                 string stroka_iz_faila = reader.ReadLine().Trim();
                 string[] podstroki = stroka_iz_faila.Split(new Char[] { ' ' });
                 usery[i].login = podstroki[0];
-                usery[i].password = podstroki[1];
+                usery[i].password = podstroki[0];  
                 i++;
             }
             /*Console.WriteLine(reader.ReadToEnd()); //считываем все данные с потока и выводим на экран*/
