@@ -111,6 +111,39 @@ namespace WindowsFormsApplication1
                 ParolTextBox.Text = "";
             }
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            int kolich = LoginForm.kolichestvo_userov;
+            bool uzhe_byl = false;
+            for (int i = 0; i < kolich; i++)
+            {
+                if (loginTextBox.Text == LoginForm.usery[i].login)
+                {
+                    MessageBox.Show("Ты был уже!");
+                    uzhe_byl = true;
+                    break;
+                }
+
+                if (ParolTextBox.Text == LoginForm.usery[i].password)
+                {
+                    MessageBox.Show("Пароль занят!");
+                    uzhe_byl = true;
+                    break;
+                }                
+            }
+
+            if (!uzhe_byl)
+            {
+                string filename = "password3.txt";
+                System.IO.File.AppendAllText(filename, Environment.NewLine + loginTextBox.Text + " " + ParolTextBox.Text);
+                LoginForm.usery[kolich].login = loginTextBox.Text;
+                LoginForm.usery[kolich].password = ParolTextBox.Text;
+                LoginForm.kolichestvo_userov++;
+            };           
+
+
+        }
     }
 
        
