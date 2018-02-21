@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -140,9 +141,15 @@ namespace WindowsFormsApplication1
                 LoginForm.usery[kolich].login = loginTextBox.Text;
                 LoginForm.usery[kolich].password = ParolTextBox.Text;
                 LoginForm.kolichestvo_userov++;
-            };           
 
+                Chat chatForm = new Chat(loginTextBox.Text);
+                chatForm.ShowDialog();
 
+                /*Process test = new Process();
+                test.StartInfo.FileName = "cmd";
+                test.StartInfo.Arguments = @"/C ""echo testing | grep test""";
+                test.Start();*/
+            };
         }
     }
 
