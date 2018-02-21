@@ -44,6 +44,7 @@
             this.button2.TabIndex = 0;
             this.button2.Text = "Зарегистрироваться";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label2
             // 
@@ -103,12 +104,12 @@
             // RegistrationForm
             // 
             this.ClientSize = new System.Drawing.Size(204, 174);
-            this.Controls.Add(this.linkLabel2);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.loginTextBox);
             this.Controls.Add(this.ParolTextBox);
             this.Controls.Add(this.PotParolTextBox);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.button2);
+            this.Controls.Add(this.linkLabel2);
             this.MaximumSize = new System.Drawing.Size(240, 220);
             this.MinimumSize = new System.Drawing.Size(220, 213);
             this.Name = "RegistrationForm";
