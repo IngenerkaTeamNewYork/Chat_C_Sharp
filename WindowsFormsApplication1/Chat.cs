@@ -16,38 +16,16 @@ namespace WindowsFormsApplication1
     };
     public partial class Chat : Form
     {
-        public Soobshenie[] sobch = new Soobshenie[11];
+        public string login;
 
-        public Chat(string login)
+        public Chat(string _login)
         {
             InitializeComponent();
-            sobch[0].login = "Жуков";
-            sobch[0].text = "Я продал кота в рабство";
-            sobch[1].login = "Жуков";
-            sobch[1].text = "Я продал кота в рабство";
-            sobch[2].login = "Жуков";
-            sobch[2].text = "Я продал кота в рабство";
-            sobch[3].login = "Жуков";
-            sobch[3].text = "Я продал кота в рабство";
-            sobch[4].login = "Жуков";
-            sobch[4].text = "Я продал кота в рабство";
-            sobch[5].login = "Жуков";
-            sobch[5].text = "Я продал кота в рабство";
-            sobch[6].login = "Жуков";
-            sobch[6].text = "Я продал кота в рабство";
-            sobch[7].login = "Жуков";
-            sobch[7].text = "Я продал кота в рабство";
-            sobch[8].login = "Жуков";
-            sobch[8].text = "Я продал кота в рабство";
-            sobch[9].login = "Жуков";
-            sobch[9].text = "Я продал кота в рабство";
-            sobch[10].login = "Жуков";
-            sobch[10].text = "Я продал кота в рабство";
+            login = _login;
+           
 
             saveFileDialog1.Filter = "Text files(*SaveFileDialog.txt)|*.txt|All files(*.*)|*.*";
             openFileDialog1.Filter = "Text files(*OpenFileDialog.txt)|*.txt|All files(*.*)|*.*";
-
-            textBox1.Text = login;
         }
 
 
@@ -83,7 +61,7 @@ namespace WindowsFormsApplication1
         else
             {
             DateTime thisDay = DateTime.Now;
-            textBox2.Text += thisDay.ToString("dd-MM-yyyy hh:mm:ss") + Environment.NewLine + sobch[0].login + ":   " + textBox1.Text + Environment.NewLine;
+            textBox2.Text += thisDay.ToString("dd-MM-yyyy hh:mm:ss") + Environment.NewLine + login + ":   " + textBox1.Text + Environment.NewLine;
             textBox1.Text = "";
             }
         }
@@ -93,7 +71,7 @@ namespace WindowsFormsApplication1
             DateTime thisDay = DateTime.Now;
             string filename = "peregovory.txt";
            // System.IO.File.WriteAllText(filename, "");
-            System.IO.File.AppendAllText(filename, Environment.NewLine + thisDay.ToString("dd-MM-yyyy hh:mm:ss") + "$~#~@*&" + sobch[0].login + "$~#~@*&" + textBox1.Text);
+            System.IO.File.AppendAllText(filename, Environment.NewLine + thisDay.ToString("dd-MM-yyyy hh:mm:ss") + "$~#~@*&" + login + "$~#~@*&" + textBox1.Text);
 
             textBox2.ScrollToCaret();
             
