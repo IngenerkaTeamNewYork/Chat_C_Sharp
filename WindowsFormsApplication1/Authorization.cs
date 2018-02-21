@@ -30,10 +30,14 @@ namespace WindowsFormsApplication1
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            usery = new Polzovatel[500];
+            usery = new Polzovatel[3];
+            usery[0].login = "Демид";
+            usery[0].password = "Демид";
+            usery[1].login = "Алена";
+            usery[1].password = "Алена";
 
           
-            FileStream file2 = new FileStream("password3.txt", FileMode.Open); //создаем файловый поток
+            FileStream file2 = new FileStream("password.txt", FileMode.Open); //создаем файловый поток
             StreamReader reader = new StreamReader(file2); // создаем «потоковый читатель» и связываем его с файловым потоком 
 
             int i = 0;
@@ -42,10 +46,12 @@ namespace WindowsFormsApplication1
                 string stroka_iz_faila = reader.ReadLine().Trim();
                 string[] podstroki = stroka_iz_faila.Split(new Char[] { ' ' });
                 usery[i].login = podstroki[0];
-                usery[i].password = podstroki[1];
+                usery[i].password = podstroki[0];  
                 i++;
             }
+
             kolichestvo_userov = i;
+            /*Console.WriteLine(reader.ReadToEnd()); //считываем все данные с потока и выводим на экран*/
             reader.Close(); //закрываем поток
 
          
@@ -53,7 +59,7 @@ namespace WindowsFormsApplication1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Chat f = new Chat();
+            Chat f = new Chat(LoginTextBox.Text);
             f.ShowDialog();
         }
 
@@ -131,11 +137,6 @@ namespace WindowsFormsApplication1
             {
                 PPorolTextBox.Text = "";
             }
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
