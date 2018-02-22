@@ -33,6 +33,8 @@
             this.LoginTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.pictureBox_Log = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Log)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -52,7 +54,6 @@
             this.PPorolTextBox.Size = new System.Drawing.Size(165, 20);
             this.PPorolTextBox.TabIndex = 1;
             this.PPorolTextBox.Text = "Пароль";
-            this.PPorolTextBox.TextChanged += new System.EventHandler(this.PPorolTextBox_TextChanged);
             this.PPorolTextBox.Enter += new System.EventHandler(this.PPorolTextBox_Enter);
             this.PPorolTextBox.Leave += new System.EventHandler(this.textBox1_Leave);
             // 
@@ -88,6 +89,14 @@
             this.linkLabel1.Text = "Регистрация\r\n";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
+            // pictureBox_Log
+            // 
+            this.pictureBox_Log.Location = new System.Drawing.Point(-7, -7);
+            this.pictureBox_Log.Name = "pictureBox_Log";
+            this.pictureBox_Log.Size = new System.Drawing.Size(183, 137);
+            this.pictureBox_Log.TabIndex = 5;
+            this.pictureBox_Log.TabStop = false;
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -98,9 +107,11 @@
             this.Controls.Add(this.LoginTextBox);
             this.Controls.Add(this.PPorolTextBox);
             this.Controls.Add(this.button1);
+            this.Controls.Add(this.pictureBox_Log);
             this.Name = "LoginForm";
             this.Text = "вход";
             this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Log)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -113,6 +124,7 @@
         private System.Windows.Forms.TextBox LoginTextBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.PictureBox pictureBox_Log;
     }
 }
 

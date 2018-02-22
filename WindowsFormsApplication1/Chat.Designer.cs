@@ -33,6 +33,8 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.pictureBox_Chat = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Chat)).BeginInit();
             this.SuspendLayout();
             // 
             // textBox1
@@ -59,7 +61,7 @@
             // 
             this.textBox2.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.textBox2.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox2.Location = new System.Drawing.Point(268, 12);
+            this.textBox2.Location = new System.Drawing.Point(269, 12);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
@@ -72,17 +74,28 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // Form2
+            // pictureBox_Chat
+            // 
+            this.pictureBox_Chat.Location = new System.Drawing.Point(0, -3);
+            this.pictureBox_Chat.Name = "pictureBox_Chat";
+            this.pictureBox_Chat.Size = new System.Drawing.Size(605, 517);
+            this.pictureBox_Chat.TabIndex = 4;
+            this.pictureBox_Chat.TabStop = false;
+            this.pictureBox_Chat.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // Chat
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(603, 510);
+            this.ClientSize = new System.Drawing.Size(605, 513);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
-            this.Name = "Form2";
+            this.Controls.Add(this.pictureBox_Chat);
+            this.Name = "Chat";
             this.Text = "Form2";
             this.Load += new System.EventHandler(this.Form2_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Chat)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -95,6 +108,7 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.PictureBox pictureBox_Chat;
 
     }
 }

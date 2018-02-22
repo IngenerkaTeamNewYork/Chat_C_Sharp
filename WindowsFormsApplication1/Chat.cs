@@ -43,6 +43,7 @@ namespace WindowsFormsApplication1
         {
             string filename = "peregovory.txt";
             string fileText = System.IO.File.ReadAllText(filename);
+            pictureBox_Chat.Image = Image.FromFile("fon.jpg");
             
             textBox2.Text = fileText; 
         /*
@@ -72,10 +73,13 @@ namespace WindowsFormsApplication1
             string filename = "peregovory.txt";
            // System.IO.File.WriteAllText(filename, "");
             System.IO.File.AppendAllText(filename, Environment.NewLine + thisDay.ToString("dd-MM-yyyy hh:mm:ss") + "$~#~@*&" + login + "$~#~@*&" + textBox1.Text);
-
-            textBox2.ScrollToCaret();
             
 
+            
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
             
         }
     }
