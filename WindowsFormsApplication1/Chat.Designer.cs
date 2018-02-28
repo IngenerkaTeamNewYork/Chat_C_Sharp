@@ -1,4 +1,6 @@
-﻿namespace WindowsFormsApplication1
+﻿using System;
+
+namespace WindowsFormsApplication1
 {
     partial class Chat
     {
@@ -34,6 +36,8 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.pictureBox_Chat = new System.Windows.Forms.PictureBox();
+            this.fontDialog1 = new System.Windows.Forms.FontDialog();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Chat)).BeginInit();
             this.SuspendLayout();
             // 
@@ -56,6 +60,7 @@
             this.button1.Text = "Отправить";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.button1_KeyPress);
             // 
             // textBox2
             // 
@@ -81,13 +86,27 @@
             this.pictureBox_Chat.Size = new System.Drawing.Size(605, 517);
             this.pictureBox_Chat.TabIndex = 4;
             this.pictureBox_Chat.TabStop = false;
-            this.pictureBox_Chat.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // fontDialog1
+            // 
+            this.fontDialog1.Apply += new System.EventHandler(this.fontDialog1_Apply);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(25, 22);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(105, 24);
+            this.button2.TabIndex = 5;
+            this.button2.Text = "Для слепых";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // Chat
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(605, 513);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
@@ -109,6 +128,8 @@
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.PictureBox pictureBox_Chat;
-
+        private System.Windows.Forms.FontDialog fontDialog1;
+        private System.Windows.Forms.Button button2;
+        //pivate  pictureBox1_Click;
     }
 }

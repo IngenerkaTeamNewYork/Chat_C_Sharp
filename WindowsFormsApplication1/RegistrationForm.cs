@@ -151,6 +151,12 @@ namespace WindowsFormsApplication1
                 test.Start();*/
             };
         }
+
+        private void Space(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (int)Keys.Space)
+                e.KeyChar = '\0';
+        }
     }
 
        

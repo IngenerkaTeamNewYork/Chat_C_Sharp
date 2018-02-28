@@ -15,11 +15,16 @@ namespace WindowsFormsApplication1
     {
         public string login;
         public string text;
+        public DateTime day;
     };
+   
 
     public partial class Chat : Form
     {
+        public static Soobshenie[] messages = new Soobshenie[15016];
+       
         public string login;
+        public const string rasd = "$~#~@*&";
 
         public Chat(string _login)
         {
@@ -50,12 +55,18 @@ namespace WindowsFormsApplication1
             while (reader.Peek() >= 0)
             {
                 string stroka_iz_faila = reader.ReadLine().Trim();
-                string[] podstroki = stroka_iz_faila.Split(new String[] { "$~#~@*&" }, StringSplitOptions.None);
-
-                textBox2.Text = textBox2.Text + podstroki[0] + Environment.NewLine;
-                textBox2.Text = textBox2.Text + podstroki[1] + Environment.NewLine;
-                textBox2.Text = textBox2.Text + podstroki[2] + Environment.NewLine;
-                i++;
+                string[] podstroki = stroka_iz_faila.Split(new String[] { rasd }, StringSplitOptions.None);
+                
+                if (podstroki.Length > 2)
+                {
+                    messages[i].day = Convert.ToDateTime(podstroki[0]);
+                    messages[i].login = podstroki[1];
+                    messages[i].text = podstroki[2];
+                    textBox2.Text = textBox2.Text + podstroki[0] + Environment.NewLine;
+                    textBox2.Text = textBox2.Text + podstroki[1] + Environment.NewLine;
+                    textBox2.Text = textBox2.Text + podstroki[2] + Environment.NewLine;
+                    i++;
+                }
             }
 
             reader.Close(); //закрываем поток
@@ -67,14 +78,29 @@ namespace WindowsFormsApplication1
             {
                 DateTime thisDay = DateTime.Now;
                 textBox2.Text += thisDay.ToString("dd-MM-yyyy hh:mm:ss") + Environment.NewLine + login + ":   " + textBox1.Text + Environment.NewLine;
-            
-                System.IO.File.AppendAllText("peregovory.txt", Environment.NewLine + thisDay.ToString("dd-MM-yyyy hh:mm:ss") + "$~#~@*&" + login + "$~#~@*&" + textBox1.Text);
+
+                System.IO.File.AppendAllText("peregovory.txt", Environment.NewLine + thisDay.ToString("dd-MM-yyyy hh:mm:ss") + rasd + login + rasd + textBox1.Text);
                 textBox1.Text = "";
             }
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {            
+        }
+
+        private void button1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void fontDialog1_Apply(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Font = new Font(this.Font.FontFamily, this.Font.Height + 1);
         }
     }
 }

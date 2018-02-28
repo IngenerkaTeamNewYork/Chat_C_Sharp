@@ -89,6 +89,7 @@
             this.loginTextBox.Text = "Введите логин";
             this.loginTextBox.TextChanged += new System.EventHandler(this.textBox6_TextChanged);
             this.loginTextBox.Enter += new System.EventHandler(this.Reg_Log_Enter);
+            this.loginTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Space);
             this.loginTextBox.Leave += new System.EventHandler(this.Reg_Log_Leave);
             // 
             // linkLabel2
