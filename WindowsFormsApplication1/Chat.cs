@@ -101,6 +101,7 @@ namespace WindowsFormsApplication1
                 e.SuppressKeyPress = true;
                 button1_Click(sender, e);
             }
+        }
 
         private void button1_KeyPress(object sender, KeyPressEventArgs e)
         {
