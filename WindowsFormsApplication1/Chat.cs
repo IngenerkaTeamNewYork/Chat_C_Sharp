@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApplication1
 {    
-	public struct Soobshenie
+    public struct Soobshenie
     {
         public string login;
         public string text;
@@ -54,15 +54,6 @@ namespace WindowsFormsApplication1
             int i = 0;
             while (reader.Peek() >= 0)
             {
-<<<<<<< HEAD
-                string stroka_iz_faila = reader.ReadLine().Trim();
-                string[] podstroki = stroka_iz_faila.Split(new String[] { "$~#~@*&" }, StringSplitOptions.None);
-
-                if (podstroki.Length > 2)
-                {
-                    textBox2.Text = textBox2.Text + podstroki[0] + Environment.NewLine;
-                    textBox2.Text = textBox2.Text + podstroki[1] + Environment.NewLine;
-=======
                 string stroka_iz_faila = reader.ReadLine().Trim();
                 string[] podstroki = stroka_iz_faila.Split(new String[] { rasd }, StringSplitOptions.None);
                 
@@ -73,7 +64,6 @@ namespace WindowsFormsApplication1
                     messages[i].text = podstroki[2];
                     textBox2.Text = textBox2.Text + podstroki[0] + Environment.NewLine;
                     textBox2.Text = textBox2.Text + podstroki[1] + Environment.NewLine;
->>>>>>> 792b5ea33084b177638c4d0a6f1420c596c1f401
                     textBox2.Text = textBox2.Text + podstroki[2] + Environment.NewLine;
                     i++;
                 }
@@ -86,28 +76,18 @@ namespace WindowsFormsApplication1
         {
             if (textBox1.Text.Trim() != "")
             {
-<<<<<<< HEAD
                 DateTime thisDay = DateTime.Now;
                 textBox2.AppendText(thisDay.ToString("dd-MM-yyyy hh:mm:ss") + Environment.NewLine + login + ":   " + textBox1.Text + Environment.NewLine);
-                System.IO.File.AppendAllText("peregovory.txt", Environment.NewLine + thisDay.ToString("dd-MM-yyyy hh:mm:ss") + "$~#~@*&" + login + "$~#~@*&" + textBox1.Text);
+                System.IO.File.AppendAllText("peregovory.txt", Environment.NewLine + thisDay.ToString("dd-MM-yyyy hh:mm:ss") + rasd + login + rasd + textBox1.Text);
             } 
             
             textBox1.Text = null;
-=======
-                DateTime thisDay = DateTime.Now;
-                textBox2.Text += thisDay.ToString("dd-MM-yyyy hh:mm:ss") + Environment.NewLine + login + ":   " + textBox1.Text + Environment.NewLine;
-
-                System.IO.File.AppendAllText("peregovory.txt", Environment.NewLine + thisDay.ToString("dd-MM-yyyy hh:mm:ss") + rasd + login + rasd + textBox1.Text);
-                textBox1.Text = "";
-            }
->>>>>>> 792b5ea33084b177638c4d0a6f1420c596c1f401
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {            
         }
 
-<<<<<<< HEAD
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
 
@@ -122,7 +102,6 @@ namespace WindowsFormsApplication1
                 button1_Click(sender, e);
             }
 
-=======
         private void button1_KeyPress(object sender, KeyPressEventArgs e)
         {
 
@@ -136,7 +115,6 @@ namespace WindowsFormsApplication1
         private void button2_Click(object sender, EventArgs e)
         {
             this.Font = new Font(this.Font.FontFamily, this.Font.Height + 1);
->>>>>>> 792b5ea33084b177638c4d0a6f1420c596c1f401
         }
     }
 }

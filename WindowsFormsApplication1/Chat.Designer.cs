@@ -36,11 +36,8 @@ namespace WindowsFormsApplication1
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.pictureBox_Chat = new System.Windows.Forms.PictureBox();
-<<<<<<< HEAD
-=======
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.button2 = new System.Windows.Forms.Button();
->>>>>>> 792b5ea33084b177638c4d0a6f1420c596c1f401
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Chat)).BeginInit();
             this.SuspendLayout();
             // 
@@ -53,11 +50,8 @@ namespace WindowsFormsApplication1
             this.textBox1.TabIndex = 0;
             this.textBox1.Tag = "";
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-<<<<<<< HEAD
             this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
             this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
-=======
->>>>>>> 792b5ea33084b177638c4d0a6f1420c596c1f401
             // 
             // button1
             // 
@@ -68,10 +62,7 @@ namespace WindowsFormsApplication1
             this.button1.Text = "Отправить";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-<<<<<<< HEAD
-=======
             this.button1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.button1_KeyPress);
->>>>>>> 792b5ea33084b177638c4d0a6f1420c596c1f401
             // 
             // textBox2
             // 
@@ -98,8 +89,6 @@ namespace WindowsFormsApplication1
             this.pictureBox_Chat.TabIndex = 4;
             this.pictureBox_Chat.TabStop = false;
             // 
-<<<<<<< HEAD
-=======
             // fontDialog1
             // 
             this.fontDialog1.Apply += new System.EventHandler(this.fontDialog1_Apply);
@@ -114,16 +103,12 @@ namespace WindowsFormsApplication1
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
->>>>>>> 792b5ea33084b177638c4d0a6f1420c596c1f401
             // Chat
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(605, 513);
-<<<<<<< HEAD
-=======
             this.Controls.Add(this.button2);
->>>>>>> 792b5ea33084b177638c4d0a6f1420c596c1f401
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
