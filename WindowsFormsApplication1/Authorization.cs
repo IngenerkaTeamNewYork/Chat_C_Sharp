@@ -65,7 +65,7 @@ namespace WindowsFormsApplication1
                     if (usery[i].password == user1.password)
                     {
                         ne_pomnit_parol = false;
-                        MessageBox.Show("अच्छी तरह से किया, अनुवाद करें");
+                        
 
                         Chat chatForm = new Chat(LoginTextBox.Text);
                         chatForm.ShowDialog();
