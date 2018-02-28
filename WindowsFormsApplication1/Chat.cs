@@ -38,7 +38,7 @@ namespace WindowsFormsApplication1
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void Form2_Load(object sender, EventArgs e)
@@ -52,10 +52,13 @@ namespace WindowsFormsApplication1
                 string stroka_iz_faila = reader.ReadLine().Trim();
                 string[] podstroki = stroka_iz_faila.Split(new String[] { "$~#~@*&" }, StringSplitOptions.None);
 
-                textBox2.Text = textBox2.Text + podstroki[0] + Environment.NewLine;
-                textBox2.Text = textBox2.Text + podstroki[1] + Environment.NewLine;
-                textBox2.Text = textBox2.Text + podstroki[2] + Environment.NewLine;
-                i++;
+                if (podstroki.Length > 2)
+                {
+                    textBox2.Text = textBox2.Text + podstroki[0] + Environment.NewLine;
+                    textBox2.Text = textBox2.Text + podstroki[1] + Environment.NewLine;
+                    textBox2.Text = textBox2.Text + podstroki[2] + Environment.NewLine;
+                    i++;
+                }
             }
 
             reader.Close(); //закрываем поток
@@ -63,18 +66,34 @@ namespace WindowsFormsApplication1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (textBox1.Text != "")
+            if (textBox1.Text.Trim() != "")
             {
                 DateTime thisDay = DateTime.Now;
-                textBox2.Text += thisDay.ToString("dd-MM-yyyy hh:mm:ss") + Environment.NewLine + login + ":   " + textBox1.Text + Environment.NewLine;
-            
+                textBox2.AppendText(thisDay.ToString("dd-MM-yyyy hh:mm:ss") + Environment.NewLine + login + ":   " + textBox1.Text + Environment.NewLine);
                 System.IO.File.AppendAllText("peregovory.txt", Environment.NewLine + thisDay.ToString("dd-MM-yyyy hh:mm:ss") + "$~#~@*&" + login + "$~#~@*&" + textBox1.Text);
-                textBox1.Text = "";
-            }
+            } 
+            
+            textBox1.Text = null;
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {            
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+
+        }
+
+        private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                button1_Click(sender, e);
+            }
+
         }
     }
 }
