@@ -49,7 +49,10 @@ namespace WindowsFormsApplication1
         private void Form2_Load(object sender, EventArgs e)
         {
             FileStream file2 = new FileStream("peregovory.txt", FileMode.Open); //создаем файловый поток
-            StreamReader reader = new StreamReader(file2); // создаем «потоковый читатель» и связываем его с файловым потоком 
+            StreamReader reader = new StreamReader(file2); // создаем «потоковый читатель» и связываем его с файловым потоком
+            this.Height = 651;
+            this.Width =  547;
+
 
             int i = 0;
             while (reader.Peek() >= 0)
@@ -115,7 +118,18 @@ namespace WindowsFormsApplication1
 
         private void button2_Click(object sender, EventArgs e)
         {
-            this.Font = new Font(this.Font.FontFamily, this.Font.Height + 1);
+            fontDialog1.ShowColor = true;
+
+            fontDialog1.Font = textBox1.Font;
+            fontDialog1.Color = textBox1.ForeColor;
+
+            if (fontDialog1.ShowDialog() != DialogResult.Cancel)
+            {
+                Font = fontDialog1.Font;
+                ForeColor = fontDialog1.Color;
+            }
         }
     }
+
+    
 }
