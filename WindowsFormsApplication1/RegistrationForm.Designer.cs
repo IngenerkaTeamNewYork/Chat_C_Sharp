@@ -41,7 +41,7 @@
             this.button2.Location = new System.Drawing.Point(40, 123);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(123, 23);
-            this.button2.TabIndex = 0;
+            this.button2.TabIndex = 4;
             this.button2.Text = "Зарегистрироваться";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -60,7 +60,7 @@
             this.PotParolTextBox.Location = new System.Drawing.Point(51, 97);
             this.PotParolTextBox.Name = "PotParolTextBox";
             this.PotParolTextBox.Size = new System.Drawing.Size(100, 20);
-            this.PotParolTextBox.TabIndex = 2;
+            this.PotParolTextBox.TabIndex = 3;
             this.PotParolTextBox.Text = "Повторите пароль";
             this.PotParolTextBox.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
             this.PotParolTextBox.Enter += new System.EventHandler(this.PotParolTextBox4_Enter);
@@ -72,7 +72,7 @@
             this.ParolTextBox.Location = new System.Drawing.Point(51, 71);
             this.ParolTextBox.Name = "ParolTextBox";
             this.ParolTextBox.Size = new System.Drawing.Size(100, 20);
-            this.ParolTextBox.TabIndex = 3;
+            this.ParolTextBox.TabIndex = 2;
             this.ParolTextBox.Text = "Введите пароль";
             this.ParolTextBox.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
             this.ParolTextBox.Enter += new System.EventHandler(this.ParolTextBox_Enter);
@@ -85,7 +85,7 @@
             this.loginTextBox.Location = new System.Drawing.Point(51, 45);
             this.loginTextBox.Name = "loginTextBox";
             this.loginTextBox.Size = new System.Drawing.Size(100, 20);
-            this.loginTextBox.TabIndex = 4;
+            this.loginTextBox.TabIndex = 1;
             this.loginTextBox.Text = "Введите логин";
             this.loginTextBox.TextChanged += new System.EventHandler(this.textBox6_TextChanged);
             this.loginTextBox.Enter += new System.EventHandler(this.Reg_Log_Enter);
