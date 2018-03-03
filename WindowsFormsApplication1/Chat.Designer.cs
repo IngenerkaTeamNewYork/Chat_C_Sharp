@@ -49,7 +49,7 @@ namespace WindowsFormsApplication1
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(250, 63);
-            this.textBox1.TabIndex = 0;
+            this.textBox1.TabIndex = 1;
             this.textBox1.Tag = "";
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
@@ -57,10 +57,10 @@ namespace WindowsFormsApplication1
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(524, 477);
+            this.button1.Location = new System.Drawing.Point(524, 437);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
+            this.button1.Size = new System.Drawing.Size(75, 63);
+            this.button1.TabIndex = 2;
             this.button1.Text = "Отправить";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -76,7 +76,8 @@ namespace WindowsFormsApplication1
             this.textBox2.ReadOnly = true;
             this.textBox2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBox2.Size = new System.Drawing.Size(323, 419);
-            this.textBox2.TabIndex = 3;
+            this.textBox2.TabIndex = 0;
+            this.textBox2.TabStop = false;
             this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // openFileDialog1
@@ -90,6 +91,7 @@ namespace WindowsFormsApplication1
             this.pictureBox_Chat.Size = new System.Drawing.Size(605, 517);
             this.pictureBox_Chat.TabIndex = 4;
             this.pictureBox_Chat.TabStop = false;
+            this.pictureBox_Chat.Click += new System.EventHandler(this.pictureBox_Chat_Click);
             // 
             // fontDialog1
             // 
@@ -99,9 +101,11 @@ namespace WindowsFormsApplication1
             // 
             this.button2.Location = new System.Drawing.Point(25, 22);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(149, 24);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "Изменение шрифта";
+
+            this.button2.Size = new System.Drawing.Size(198, 75);
+            this.button2.TabIndex = 0;
+            this.button2.TabStop = false;
+            this.button2.Text = "Для слепых";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -138,7 +142,6 @@ namespace WindowsFormsApplication1
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.pictureBox_Chat);
             this.Name = "Chat";
-            this.Text = "Form2";
             this.Load += new System.EventHandler(this.Form2_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Chat)).EndInit();
             this.ResumeLayout(false);
@@ -158,6 +161,5 @@ namespace WindowsFormsApplication1
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
-        //pivate  pictureBox1_Click;
     }
 }

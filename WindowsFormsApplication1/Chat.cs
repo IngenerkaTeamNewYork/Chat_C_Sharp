@@ -52,7 +52,7 @@ namespace WindowsFormsApplication1
             FileStream file2 = new FileStream("peregovory.txt", FileMode.Open); //создаем файловый поток
             StreamReader reader = new StreamReader(file2); // создаем «потоковый читатель» и связываем его с файловым потоком
             this.Height = 651;
-            this.Width =  547;
+            this.Width =  630;
 
             int i = 0;
             while (reader.Peek() >= 0)
@@ -140,15 +140,16 @@ namespace WindowsFormsApplication1
 
         private void button2_Click(object sender, EventArgs e)
         {
-            fontDialog1.ShowColor = true;
-
+            fontDialog1.ShowColor = true;            
             fontDialog1.Font = textBox1.Font;
             fontDialog1.Color = textBox1.ForeColor;
 
-            if (fontDialog1.ShowDialog() != DialogResult.Cancel)
+            if (fontDialog1.ShowDialog() != DialogResult.Cancel) //Если чувак выбрал шрифт
             {
-                Font = fontDialog1.Font;
-                ForeColor = fontDialog1.Color;
+                textBox1.Font = fontDialog1.Font;   //Запиши этот шрифт в текстбокс
+                textBox2.Font = fontDialog1.Font;
+                button1.Font = fontDialog1.Font;
+                button2.Font = fontDialog1.Font; 
             }
         }
 
