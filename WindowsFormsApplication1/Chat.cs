@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -53,25 +54,25 @@ namespace WindowsFormsApplication1
             this.Height = 651;
             this.Width =  547;
 
-
             int i = 0;
             while (reader.Peek() >= 0)
             {
                 string stroka_iz_faila = reader.ReadLine().Trim();
-                string[] podstroki = stroka_iz_faila.Split(new String[] { rasd }, StringSplitOptions.None);  ////////////////////////////////////////////////////////////////////////////////////
+                string[] podstroki = stroka_iz_faila.Split(new String[] { rasd }, StringSplitOptions.None);
                 
                 if (podstroki.Length > 2)
                 {
                     messages[i].day = Convert.ToDateTime(podstroki[0]);
                     messages[i].login = podstroki[1];
                     messages[i].text = podstroki[2];
+
                     i++;
                 }                
             }
+
             int kolichestvo_soobsch = i;
 
             reader.Close(); //закрываем поток
-
             
             for (i = 0; i < kolichestvo_soobsch - 1; i++)
             {
@@ -118,8 +119,6 @@ namespace WindowsFormsApplication1
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
-
-
         }
 
         private void textBox1_KeyDown(object sender, KeyEventArgs e)
@@ -133,12 +132,10 @@ namespace WindowsFormsApplication1
 
         private void button1_KeyPress(object sender, KeyPressEventArgs e)
         {
-
         }
 
         private void fontDialog1_Apply(object sender, EventArgs e)
         {
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -148,14 +145,21 @@ namespace WindowsFormsApplication1
             fontDialog1.Font = textBox1.Font;
             fontDialog1.Color = textBox1.ForeColor;
 
-
             if (fontDialog1.ShowDialog() != DialogResult.Cancel)
             {
                 Font = fontDialog1.Font;
                 ForeColor = fontDialog1.Color;
             }
         }
-    }
 
-    
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Process.Start("get.exe", "\"peregovory.txt\" \"peregovory.txt\"");
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Process.Start("put.exe", "peregovory.txt peregovory.txt");
+        }
+    }
 }
