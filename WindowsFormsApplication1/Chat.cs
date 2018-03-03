@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApplication1
 {    
-	public struct Soobshenie
+    public struct Soobshenie
     {
         public string login;
         public string text;
@@ -43,13 +43,16 @@ namespace WindowsFormsApplication1
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void Form2_Load(object sender, EventArgs e)
         {
             FileStream file2 = new FileStream("peregovory.txt", FileMode.Open); //создаем файловый поток
-            StreamReader reader = new StreamReader(file2); // создаем «потоковый читатель» и связываем его с файловым потоком 
+            StreamReader reader = new StreamReader(file2); // создаем «потоковый читатель» и связываем его с файловым потоком
+            this.Height = 651;
+            this.Width =  547;
+
 
             int i = 0;
             while (reader.Peek() >= 0)
@@ -74,18 +77,33 @@ namespace WindowsFormsApplication1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (textBox1.Text != "")
+            if (textBox1.Text.Trim() != "")
             {
                 DateTime thisDay = DateTime.Now;
-                textBox2.Text += thisDay.ToString("dd-MM-yyyy hh:mm:ss") + Environment.NewLine + login + ":   " + textBox1.Text + Environment.NewLine;
-
+                textBox2.AppendText(thisDay.ToString("dd-MM-yyyy hh:mm:ss") + Environment.NewLine + login + ":   " + textBox1.Text + Environment.NewLine);
                 System.IO.File.AppendAllText("peregovory.txt", Environment.NewLine + thisDay.ToString("dd-MM-yyyy hh:mm:ss") + rasd + login + rasd + textBox1.Text);
-                textBox1.Text = "";
-            }
+            } 
+            
+            textBox1.Text = null;
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {            
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+
+        }
+
+        private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                button1_Click(sender, e);
+            }
         }
 
         private void button1_KeyPress(object sender, KeyPressEventArgs e)
@@ -100,7 +118,18 @@ namespace WindowsFormsApplication1
 
         private void button2_Click(object sender, EventArgs e)
         {
-            this.Font = new Font(this.Font.FontFamily, this.Font.Height + 1);
+            fontDialog1.ShowColor = true;
+
+            fontDialog1.Font = textBox1.Font;
+            fontDialog1.Color = textBox1.ForeColor;
+
+            if (fontDialog1.ShowDialog() != DialogResult.Cancel)
+            {
+                Font = fontDialog1.Font;
+                ForeColor = fontDialog1.Color;
+            }
         }
     }
+
+    
 }
