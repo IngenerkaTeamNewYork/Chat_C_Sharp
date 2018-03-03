@@ -58,21 +58,46 @@ namespace WindowsFormsApplication1
             while (reader.Peek() >= 0)
             {
                 string stroka_iz_faila = reader.ReadLine().Trim();
-                string[] podstroki = stroka_iz_faila.Split(new String[] { rasd }, StringSplitOptions.None);
+                string[] podstroki = stroka_iz_faila.Split(new String[] { rasd }, StringSplitOptions.None);  ////////////////////////////////////////////////////////////////////////////////////
                 
                 if (podstroki.Length > 2)
                 {
                     messages[i].day = Convert.ToDateTime(podstroki[0]);
                     messages[i].login = podstroki[1];
                     messages[i].text = podstroki[2];
-                    textBox2.Text = textBox2.Text + podstroki[0] + Environment.NewLine;
-                    textBox2.Text = textBox2.Text + podstroki[1] + Environment.NewLine;
-                    textBox2.Text = textBox2.Text + podstroki[2] + Environment.NewLine;
                     i++;
+                }                
+            }
+            int kolichestvo_soobsch = i;
+
+            reader.Close(); //закрываем поток
+
+            
+            for (i = 0; i < kolichestvo_soobsch - 1; i++)
+            {
+                for (int j = i + 1; j < kolichestvo_soobsch; j++)
+                {
+                    if (messages[i].day > messages[j].day)
+                    {
+                        Soobshenie soob = messages[j];
+                            
+                        messages[j].day = messages[i].day;
+                        messages[i].day = soob.day;
+                        messages[j].login = messages[i].login;
+                        messages[i].login = soob.login;
+                        messages[j].text = messages[i].text;
+                        messages[i].text = soob.text;                        
+                    }
                 }
             }
 
-            reader.Close(); //закрываем поток
+            for (i = 0; i < kolichestvo_soobsch; i++)
+            {
+                textBox2.Text = textBox2.Text + messages[i].day + Environment.NewLine;
+                textBox2.Text = textBox2.Text + "     " + messages[i].login + "  cказал(а):  ";
+                textBox2.Text = textBox2.Text + messages[i].text + Environment.NewLine;
+            }
+                
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -122,6 +147,7 @@ namespace WindowsFormsApplication1
 
             fontDialog1.Font = textBox1.Font;
             fontDialog1.Color = textBox1.ForeColor;
+
 
             if (fontDialog1.ShowDialog() != DialogResult.Cancel)
             {
