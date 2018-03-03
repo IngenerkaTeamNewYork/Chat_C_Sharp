@@ -54,7 +54,6 @@ namespace WindowsFormsApplication1
             this.Height = 651;
             this.Width =  547;
 
-
             int i = 0;
             while (reader.Peek() >= 0)
             {
@@ -66,14 +65,40 @@ namespace WindowsFormsApplication1
                     messages[i].day = Convert.ToDateTime(podstroki[0]);
                     messages[i].login = podstroki[1];
                     messages[i].text = podstroki[2];
-                    textBox2.Text = textBox2.Text + podstroki[0] + Environment.NewLine;
-                    textBox2.Text = textBox2.Text + podstroki[1] + Environment.NewLine;
-                    textBox2.Text = textBox2.Text + podstroki[2] + Environment.NewLine;
+
                     i++;
+                }                
+            }
+
+            int kolichestvo_soobsch = i;
+
+            reader.Close(); //закрываем поток
+            
+            for (i = 0; i < kolichestvo_soobsch - 1; i++)
+            {
+                for (int j = i + 1; j < kolichestvo_soobsch; j++)
+                {
+                    if (messages[i].day > messages[j].day)
+                    {
+                        Soobshenie soob = messages[j];
+                            
+                        messages[j].day = messages[i].day;
+                        messages[i].day = soob.day;
+                        messages[j].login = messages[i].login;
+                        messages[i].login = soob.login;
+                        messages[j].text = messages[i].text;
+                        messages[i].text = soob.text;                        
+                    }
                 }
             }
 
-            reader.Close(); //закрываем поток
+            for (i = 0; i < kolichestvo_soobsch; i++)
+            {
+                textBox2.Text = textBox2.Text + messages[i].day + Environment.NewLine;
+                textBox2.Text = textBox2.Text + "     " + messages[i].login + "  cказал(а):  ";
+                textBox2.Text = textBox2.Text + messages[i].text + Environment.NewLine;
+            }
+                
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -94,8 +119,6 @@ namespace WindowsFormsApplication1
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
-
-
         }
 
         private void textBox1_KeyDown(object sender, KeyEventArgs e)
@@ -109,12 +132,10 @@ namespace WindowsFormsApplication1
 
         private void button1_KeyPress(object sender, KeyPressEventArgs e)
         {
-
         }
 
         private void fontDialog1_Apply(object sender, EventArgs e)
         {
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -134,7 +155,6 @@ namespace WindowsFormsApplication1
         private void button3_Click(object sender, EventArgs e)
         {
             Process.Start("get.exe", "\"peregovory.txt\" \"peregovory.txt\"");
-
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -142,6 +162,4 @@ namespace WindowsFormsApplication1
             Process.Start("put.exe", "peregovory.txt peregovory.txt");
         }
     }
-
-    
 }
