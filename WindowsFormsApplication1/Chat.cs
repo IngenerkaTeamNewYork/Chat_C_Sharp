@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -128,6 +129,17 @@ namespace WindowsFormsApplication1
                 Font = fontDialog1.Font;
                 ForeColor = fontDialog1.Color;
             }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Process.Start("get.exe", "\"peregovory.txt\" \"peregovory.txt\"");
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Process.Start("put.exe", "peregovory.txt peregovory.txt");
         }
     }
 
