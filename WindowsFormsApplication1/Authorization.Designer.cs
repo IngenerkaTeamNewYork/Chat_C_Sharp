@@ -56,6 +56,9 @@
             this.PPorolTextBox.Text = "Пароль";
             this.PPorolTextBox.UseSystemPasswordChar = true;
             this.PPorolTextBox.Enter += new System.EventHandler(this.PPorolTextBox_Enter);
+            this.PPorolTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LoginTextBox_KeyDown);
+            this.PPorolTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.LoginTextBox_KeyPress);
+            this.PPorolTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.LoginTextBox_KeyDown);
             this.PPorolTextBox.Leave += new System.EventHandler(this.textBox1_Leave);
             // 
             // LoginTextBox
@@ -67,7 +70,9 @@
             this.LoginTextBox.Text = "Логин";
             this.LoginTextBox.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             this.LoginTextBox.Enter += new System.EventHandler(this.LoginTextBox_Enter);
-            this.LoginTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Enter);
+            this.LoginTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LoginTextBox_KeyDown);
+            this.LoginTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.LoginTextBox_KeyPress);
+            this.LoginTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.LoginTextBox_KeyUp);
             this.LoginTextBox.Leave += new System.EventHandler(this.LoginTextBox_Leave);
             // 
             // label1
@@ -129,4 +134,3 @@
         private System.Windows.Forms.PictureBox pictureBox_Log;
     }
 }
-

@@ -42,63 +42,74 @@ namespace WindowsFormsApplication1
 
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            FileStream file2 = new FileStream("peregovory.txt", FileMode.Open); //создаем файловый поток
-            StreamReader reader = new StreamReader(file2); // создаем «потоковый читатель» и связываем его с файловым потоком
-            this.Height = 651;
-            this.Width =  630;
-
-            int i = 0;
-            while (reader.Peek() >= 0)
-            {
-                string stroka_iz_faila = reader.ReadLine().Trim();
-                string[] podstroki = stroka_iz_faila.Split(new String[] { rasd }, StringSplitOptions.None);
-                
-                if (podstroki.Length > 2)
-                {
-                    messages[i].day = Convert.ToDateTime(podstroki[0]);
-                    messages[i].login = podstroki[1];
-                    messages[i].text = podstroki[2];
-
-                    i++;
-                }                
+            bool sos = false;
+            FileStream file2 = null;
+            try {
+                file2 = new FileStream("peregovory.txt", FileMode.Open); //создаем файловый поток
+            } catch (System.IO.FileNotFoundException) {
+                sos = true;
+       
             }
-
-            int kolichestvo_soobsch = i;
-
-            reader.Close(); //закрываем поток
-            
-            for (i = 0; i < kolichestvo_soobsch - 1; i++)
+            if (!sos)
             {
-                for (int j = i + 1; j < kolichestvo_soobsch; j++)
+                file2.Close();
+                file2 = new FileStream("peregovory.txt", FileMode.Open); //создаем файловый поток
+                StreamReader reader = new StreamReader(file2); // создаем «потоковый читатель» и связываем его с файловым потоком
+                this.Height = 651;
+                this.Width = 630;
+
+                int i = 0;
+                while (reader.Peek() >= 0)
                 {
-                    if (messages[i].day > messages[j].day)
+                    string stroka_iz_faila = reader.ReadLine().Trim();
+                    string[] podstroki = stroka_iz_faila.Split(new String[] { rasd }, StringSplitOptions.None);
+
+                    if (podstroki.Length > 2)
                     {
-                        Soobshenie soob = messages[j];
-                            
-                        messages[j].day = messages[i].day;
-                        messages[i].day = soob.day;
-                        messages[j].login = messages[i].login;
-                        messages[i].login = soob.login;
-                        messages[j].text = messages[i].text;
-                        messages[i].text = soob.text;                        
+                        messages[i].day = Convert.ToDateTime(podstroki[0]);
+                        messages[i].login = podstroki[1];
+                        messages[i].text = podstroki[2];
+
+                        i++;
                     }
                 }
-            }
 
-            for (i = 0; i < kolichestvo_soobsch; i++)
-            {
-                textBox2.Text = textBox2.Text + messages[i].day + Environment.NewLine;
-                textBox2.Text = textBox2.Text + "     " + messages[i].login + "  cказал(а):  ";
-                textBox2.Text = textBox2.Text + messages[i].text + Environment.NewLine;
+                int kolichestvo_soobsch = i;
+
+                reader.Close(); //закрываем поток
+
+                for (i = 0; i < kolichestvo_soobsch - 1; i++)
+                {
+                    for (int j = i + 1; j < kolichestvo_soobsch; j++)
+                    {
+                        if (messages[i].day > messages[j].day)
+                        {
+                            Soobshenie soob = messages[j];
+
+                            messages[j].day = messages[i].day;
+                            messages[i].day = soob.day;
+                            messages[j].login = messages[i].login;
+                            messages[i].login = soob.login;
+                            messages[j].text = messages[i].text;
+                            messages[i].text = soob.text;
+                        }
+                    }
+                }
+
+                for (i = 0; i < kolichestvo_soobsch; i++)
+                {
+                    textBox2.Text = textBox2.Text + messages[i].day + Environment.NewLine;
+                    textBox2.Text = textBox2.Text + "     " + messages[i].login + "  cказал(а):  ";
+                    textBox2.Text = textBox2.Text + messages[i].text + Environment.NewLine;
+                }
             }
-                
+            else
+            {
+                textBox2.Text = "";
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -106,10 +117,12 @@ namespace WindowsFormsApplication1
             if (textBox1.Text.Trim() != "")
             {
                 DateTime thisDay = DateTime.Now;
-                textBox2.AppendText(thisDay.ToString("dd-MM-yyyy hh:mm:ss") + Environment.NewLine + login + ":   " + textBox1.Text + Environment.NewLine);
-                System.IO.File.AppendAllText("peregovory.txt", Environment.NewLine + thisDay.ToString("dd-MM-yyyy hh:mm:ss") + rasd + login + rasd + textBox1.Text);
-                System.IO.File.AppendAllText("NewMessages.txt", thisDay.ToString("dd-MM-yyyy hh:mm:ss") + rasd + login + rasd + textBox1.Text + Environment.NewLine);
+                String dateStr = thisDay.ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz");
 
+                textBox2.AppendText(dateStr + Environment.NewLine + login + ":   " +
+                    textBox1.Text + Environment.NewLine);
+                System.IO.File.AppendAllText("peregovory.txt", Environment.NewLine + dateStr + rasd + login + rasd + textBox1.Text.Replace(Environment.NewLine, "%%%%"));
+                System.IO.File.AppendAllText("NewMessages.txt", dateStr + rasd + login + rasd + textBox1.Text.Replace(Environment.NewLine, "%%%%") + Environment.NewLine);
             } 
             
             textBox1.Text = null;
@@ -121,11 +134,15 @@ namespace WindowsFormsApplication1
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
+            if (e.KeyChar == (int)Keys.Enter)
+            {
+               // e.KeyChar = ' ';
+            }
         }
 
         private void textBox1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            if (e.Shift && e.KeyCode == Keys.Enter)
             {
                 e.SuppressKeyPress = true;
                 button1_Click(sender, e);
@@ -164,8 +181,10 @@ namespace WindowsFormsApplication1
         private void button4_Click(object sender, EventArgs e)
         {
             Process.Start("put.exe", "peregovory.txt peregovory.txt");
+        }
 
-
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
         }
     }
 }
