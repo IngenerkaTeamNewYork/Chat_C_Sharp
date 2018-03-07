@@ -134,4 +134,3 @@
         private System.Windows.Forms.PictureBox pictureBox_Log;
     }
 }
-

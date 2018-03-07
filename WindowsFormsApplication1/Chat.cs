@@ -117,9 +117,12 @@ namespace WindowsFormsApplication1
             if (textBox1.Text.Trim() != "")
             {
                 DateTime thisDay = DateTime.Now;
-                textBox2.AppendText(thisDay.ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz") + Environment.NewLine + login + ":   " +
+                String dateStr = thisDay.ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz");
+
+                textBox2.AppendText(dateStr + Environment.NewLine + login + ":   " +
                     textBox1.Text + Environment.NewLine);
-                System.IO.File.AppendAllText("peregovory.txt", Environment.NewLine + thisDay.ToString("dd-MM-yyyy hh:mm:ss") + rasd + login + rasd + textBox1.Text.Replace(Environment.NewLine, "%%%%"));
+                System.IO.File.AppendAllText("peregovory.txt", Environment.NewLine + dateStr + rasd + login + rasd + textBox1.Text.Replace(Environment.NewLine, "%%%%"));
+                System.IO.File.AppendAllText("NewMessages.txt", dateStr + rasd + login + rasd + textBox1.Text.Replace(Environment.NewLine, "%%%%") + Environment.NewLine);
             } 
             
             textBox1.Text = null;
@@ -160,9 +163,9 @@ namespace WindowsFormsApplication1
             fontDialog1.Font = textBox1.Font;
             fontDialog1.Color = textBox1.ForeColor;
 
-            if (fontDialog1.ShowDialog() != DialogResult.Cancel) //Если чувак выбрал шрифт
+            if (fontDialog1.ShowDialog() != DialogResult.Cancel)
             {
-                textBox1.Font = fontDialog1.Font;   //Запиши этот шрифт в текстбокс
+                textBox1.Font = fontDialog1.Font;
                 textBox2.Font = fontDialog1.Font;
                 button1.Font = fontDialog1.Font;
                 button2.Font = fontDialog1.Font; 
@@ -171,7 +174,8 @@ namespace WindowsFormsApplication1
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Process.Start("get.exe", "\"peregovory.txt\" \"peregovory.txt\"");
+            File.WriteAllText("AllMessages.txt", string.Empty);
+            Process.Start("get.exe", "peregovory.txt peregovory.txt");
         }
 
         private void button4_Click(object sender, EventArgs e)
