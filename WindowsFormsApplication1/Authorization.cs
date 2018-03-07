@@ -55,6 +55,9 @@ namespace WindowsFormsApplication1
             user1.password = PPorolTextBox.Text;
             PPorolTextBox.PasswordChar = '*';
 
+            Chat chatForm = new Chat(LoginTextBox.Text);
+            chatForm.ShowDialog();
+
             bool net_polzovatelya = true;
             bool ne_pomnit_parol = true;
             for (int i = 0; i < kolichestvo_userov; i++)
@@ -65,10 +68,6 @@ namespace WindowsFormsApplication1
                     if (usery[i].password == user1.password)
                     {
                         ne_pomnit_parol = false;
-                        
-
-                        Chat chatForm = new Chat(LoginTextBox.Text);
-                        chatForm.ShowDialog();
                     }
 
                 }
@@ -80,7 +79,8 @@ namespace WindowsFormsApplication1
             else if (ne_pomnit_parol)
             {
                 MessageBox.Show("Сиди, вспоминай пароль, идиот");
-            }              
+            }
+           
 
         }
 
@@ -137,5 +137,31 @@ namespace WindowsFormsApplication1
         {
 
         }
+
+        private void LoginTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+        }
+
+        private void LoginTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+
+        }
+
+        private void LoginTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                button1_Click(sender, null);
+            }
+        }
+
+        private void PPorolTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                button1_Click(sender, null);
+            }
+        }
+
     }
 }
