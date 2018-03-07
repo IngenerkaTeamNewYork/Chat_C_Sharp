@@ -65,14 +65,10 @@ namespace WindowsFormsApplication1
                     if (usery[i].password == user1.password)
                     {
                         ne_pomnit_parol = false;
-                        
-
-                        Chat chatForm = new Chat(LoginTextBox.Text);
-                        chatForm.ShowDialog();
                     }
-
                 }
             }
+
             if (net_polzovatelya)
             {
                 MessageBox.Show("Сиди, вспоминай имя, идиот");
@@ -80,16 +76,18 @@ namespace WindowsFormsApplication1
             else if (ne_pomnit_parol)
             {
                 MessageBox.Show("Сиди, вспоминай пароль, идиот");
-            }              
-
+            }
+            else
+            {
+                Chat chatForm = new Chat(LoginTextBox.Text);
+                chatForm.ShowDialog();
+            }
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            
+        {            
             RegistrationForm rf = new RegistrationForm();
-            rf.ShowDialog();
-            
+            rf.ShowDialog();            
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -120,9 +118,6 @@ namespace WindowsFormsApplication1
             {
                 PPorolTextBox.Text = "Пароль";
             }
-            else 
-            {      
-            }
         }
 
         private void PPorolTextBox_Enter(object sender, EventArgs e)
@@ -136,6 +131,31 @@ namespace WindowsFormsApplication1
         private void PPorolTextBox_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void LoginTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+        }
+
+        private void LoginTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+
+        }
+
+        private void LoginTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                button1_Click(sender, null);
+            }
+        }
+
+        private void PPorolTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                button1_Click(sender, null);
+            }
         }
     }
 }
