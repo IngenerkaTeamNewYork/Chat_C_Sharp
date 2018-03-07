@@ -67,6 +67,7 @@
             this.LoginTextBox.Text = "Логин";
             this.LoginTextBox.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             this.LoginTextBox.Enter += new System.EventHandler(this.LoginTextBox_Enter);
+            this.LoginTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Enter);
             this.LoginTextBox.Leave += new System.EventHandler(this.LoginTextBox_Leave);
             // 
             // label1
