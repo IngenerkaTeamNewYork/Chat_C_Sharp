@@ -71,7 +71,7 @@ namespace WindowsFormsApplication1
                     {
                         messages[i].day = Convert.ToDateTime(podstroki[0]);
                         messages[i].login = podstroki[1];
-                        messages[i].text = podstroki[2];
+                        messages[i].text = podstroki[2].Replace("%%%%", Environment.NewLine);
 
                         i++;
                     }
@@ -118,11 +118,12 @@ namespace WindowsFormsApplication1
             {
                 DateTime thisDay = DateTime.Now;
                 String dateStr = thisDay.ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz");
+                String dateStrfors = thisDay.ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz");
 
                 textBox2.AppendText(dateStr + Environment.NewLine + login + ":   " +
                     textBox1.Text + Environment.NewLine);
-                System.IO.File.AppendAllText("peregovory.txt", Environment.NewLine + dateStr + rasd + login + rasd + textBox1.Text.Replace(Environment.NewLine, "%%%%"));
-                System.IO.File.AppendAllText("NewMessages.txt", dateStr + rasd + login + rasd + textBox1.Text.Replace(Environment.NewLine, "%%%%") + Environment.NewLine);
+                File.AppendAllText("peregovory.txt", Environment.NewLine + dateStr + rasd + login + rasd + textBox1.Text.Replace(Environment.NewLine, "%%%%"));
+                File.AppendAllText("NewMessages.txt", dateStr + rasd + login + rasd + textBox1.Text.Replace(Environment.NewLine, "%%%%") + Environment.NewLine);
             } 
             
             textBox1.Text = null;
@@ -167,20 +168,58 @@ namespace WindowsFormsApplication1
             {
                 textBox1.Font = fontDialog1.Font;
                 textBox2.Font = fontDialog1.Font;
+               
+
+                textBox1.ForeColor = fontDialog1.Color;
+                textBox2.ForeColor = fontDialog1.Color;
+                
+
+                button1.ForeColor = fontDialog1.Color;
+                button2.ForeColor = fontDialog1.Color;
+                button3.ForeColor = fontDialog1.Color;
+
                 button1.Font = fontDialog1.Font;
-                button2.Font = fontDialog1.Font; 
+                button2.Font = fontDialog1.Font;
+                button3.Font = fontDialog1.Font; 
             }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             File.WriteAllText("AllMessages.txt", string.Empty);
-            Process.Start("get.exe", "peregovory.txt peregovory.txt");
+            Process myProcess = Process.Start("get.exe", "peregovory.txt peregovory.txt");
+            do
+            {
+                if (!myProcess.HasExited)
+                {
+                    // Refresh the current process property values.
+                    myProcess.Refresh();
+                }
+            }
+            while (!myProcess.WaitForExit(10000));
+            
+
+
+            FileStream file2 = new FileStream("NewMessages.txt", FileMode.Open);
+            StreamReader reader = new StreamReader(file2); // создаем «потоковый читатель» и связываем его с файловым потоком
+           
+            while (reader.Peek() >= 0)
+            {
+                string stroka_iz_faila = reader.ReadLine().Trim();
+                File.AppendAllText("peregovory.txt", Environment.NewLine + stroka_iz_faila);                
+            }
+
+            reader.Close(); //закрываем поток
+            
+            textBox2.Clear();
+            Form2_Load(sender, e);
+
+            Process.Start("put.exe", "peregovory.txt peregovory.txt");
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            Process.Start("put.exe", "peregovory.txt peregovory.txt");
+           // Process.Start("put.exe", "peregovory.txt peregovory.txt");
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
