@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -47,6 +48,10 @@ namespace WindowsFormsApplication1
             /*Console.WriteLine(reader.ReadToEnd()); //считываем все данные с потока и выводим на экран*/
             reader.Close(); //закрываем поток
 
+
+
+
+
          
         }
 
@@ -68,7 +73,36 @@ namespace WindowsFormsApplication1
                     }
                 }
             }
+            ///////////////////////////////////////////////////////////////////////////////////
+            File.WriteAllText("AllPolzovoteli.txt", string.Empty);
+            Process myProcess = Process.Start("get.exe", "password3.txt password3.txt");
+            do
+            {
+                if (!myProcess.HasExited)
+                {
+                    // Refresh the current process property values.
+                    myProcess.Refresh();
+                }
+            }
+            while (!myProcess.WaitForExit(10000));
 
+
+
+            FileStream file2 = new FileStream("NewPolzovoteli.txt", FileMode.Open);
+            StreamReader reader = new StreamReader(file2); // создаем «потоковый читатель» и связываем его с файловым потоком
+
+            while (reader.Peek() >= 0)
+            {
+                string stroka_iz_faila = reader.ReadLine().Trim();
+                File.AppendAllText("password3.txt", Environment.NewLine + stroka_iz_faila);
+            }
+
+            reader.Close(); //закрываем поток
+
+            //textBox2.Clear();
+
+            Process.Start("put.exe", "password3.txt password3.txt");
+            ///////////////////////////////////////////////////////////////////////////////////
             if (net_polzovatelya)
             {
                 MessageBox.Show("Сиди, вспоминай имя, идиот");
