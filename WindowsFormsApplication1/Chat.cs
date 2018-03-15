@@ -119,70 +119,70 @@ namespace WindowsFormsApplication1
             FileStream file2 = null;
 
           
-            try {
-                file2 = new FileStream("peregovory.txt", FileMode.Open); //создаем файловый поток
-            } catch (System.IO.FileNotFoundException) {
-                sos = true;
-       
-            }
-            if (!sos)
+            try 
             {
-                file2.Close();
                 file2 = new FileStream("peregovory.txt", FileMode.Open); //создаем файловый поток
-                StreamReader reader = new StreamReader(file2); // создаем «потоковый читатель» и связываем его с файловым потоком
-
-                this.Height = 651;
-                this.Width = 630;
-
-                int i = 0;
-                while (reader.Peek() >= 0)
-                {
-                    string stroka_iz_faila = reader.ReadLine().Trim();
-                    string[] podstroki = stroka_iz_faila.Split(new String[] { rasd }, StringSplitOptions.None);
-
-                    if (podstroki.Length > 2)
-                    {
-                        messages[i].day = Convert.ToDateTime(podstroki[0]);
-                        messages[i].login = podstroki[1];
-                        messages[i].text = podstroki[2].Replace("%%%%", Environment.NewLine);
-
-                        i++;
-                    }
-                }
-
-                int kolichestvo_soobsch = i;
-
-                reader.Close(); //закрываем поток
-
-                for (i = 0; i < kolichestvo_soobsch - 1; i++)
-                {
-                    for (int j = i + 1; j < kolichestvo_soobsch; j++)
-                    {
-                        if (messages[i].day > messages[j].day)
-                        {
-                            Soobshenie soob = messages[j];
-
-                            messages[j].day = messages[i].day;
-                            messages[i].day = soob.day;
-                            messages[j].login = messages[i].login;
-                            messages[i].login = soob.login;
-                            messages[j].text = messages[i].text;
-                            messages[i].text = soob.text;
-                        }
-                    }
-                }
-
-                for (i = 0; i < kolichestvo_soobsch; i++)
-                {
-                    textBox2.Text = textBox2.Text + messages[i].day + Environment.NewLine;
-                    textBox2.Text = textBox2.Text + "     " + messages[i].login + "  cказал(а):  ";
-                    textBox2.Text = textBox2.Text + messages[i].text + Environment.NewLine;
-                }
-            }
-            else
+            } 
+            catch (System.IO.FileNotFoundException) 
             {
+                sos = true;  
                 textBox2.Text = "";
+                return;
             }
+            
+            file2.Close();
+            file2 = new FileStream("peregovory.txt", FileMode.Open); //создаем файловый поток
+            StreamReader reader = new StreamReader(file2); // создаем «потоковый читатель» и связываем его с файловым потоком
+
+            this.Height = 651;
+            this.Width = 630;
+
+            int i = 0;
+            while (reader.Peek() >= 0)
+            {
+                string stroka_iz_faila = reader.ReadLine().Trim();
+                string[] podstroki = stroka_iz_faila.Split(new String[] { rasd }, StringSplitOptions.None);
+
+                if (podstroki.Length > 2)
+                {
+                    messages[i].day = Convert.ToDateTime(podstroki[0]);
+                    messages[i].login = podstroki[1];
+                    messages[i].text = podstroki[2].Replace("%%%%", Environment.NewLine);
+
+                    i++;
+                }
+            }
+
+            int kolichestvo_soobsch = i;
+
+            reader.Close(); //закрываем поток
+
+            for (i = 0; i < kolichestvo_soobsch - 1; i++)
+            {
+                for (int j = i + 1; j < kolichestvo_soobsch; j++)
+                {
+                    if (messages[i].day > messages[j].day)
+                    {
+                        Soobshenie soob = messages[j];
+
+                        messages[j].day = messages[i].day;
+                        messages[i].day = soob.day;
+                        messages[j].login = messages[i].login;
+                        messages[i].login = soob.login;
+                        messages[j].text = messages[i].text;
+                        messages[i].text = soob.text;
+                    }
+                }
+            }
+
+            for (i = 0; i < kolichestvo_soobsch; i++)
+            {
+                textBox2.Text = textBox2.Text + messages[i].day + Environment.NewLine;
+                textBox2.Text = textBox2.Text + "     " + messages[i].login + "  cказал(а):  ";
+                textBox2.Text = textBox2.Text + messages[i].text + Environment.NewLine;
+            }
+
+            readFontFromFile();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -231,27 +231,41 @@ namespace WindowsFormsApplication1
         {
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void readFontFromFile()
         {
-            FileStream config = new FileStream("config.txt", FileMode.Open); //создаем файловый поток
-            StreamReader reader2 = new StreamReader(config); // создаем «потоковый читатель» и связываем его с файловым потоком 
+            FileStream config = new FileStream("config.txt", FileMode.Open);
+            StreamReader reader2 = new StreamReader(config);
 
-
-            while (reader2.Peek() >= 0)
-            {
-                string stroka = reader2.ReadLine().Trim();
-                string[] view = stroka.Split(new Char[] { '$' });
-                str = view[0];
-            }
+            string stroka = reader2.ReadLine().Trim();
+            string[] view = stroka.Split(new Char[] { '$' });
             config.Close();
 
-            Font f1 = new Font(str, 10);
+            if (view.Length > 1)
+            {
+                Font fontFormFile = new Font(view[0], view[1]);
+            }
+            
+            textBox1.Font = fontFormFile;
+            textBox2.Font = fontFormFile;
+            button1.Font = fontFormFile;
+            button2.Font = fontFormFile;
+            button3.Font = fontFormFile;
 
+            /*textBox1.ForeColor = fontDialog1.Color;
+            textBox2.ForeColor = fontDialog1.Color;
+            button1.ForeColor = fontDialog1.Color;
+            button2.ForeColor = fontDialog1.Color;
+            button3.ForeColor = fontDialog1.Color;*/
+        }
+
+
+        private void button2_Click(object sender, EventArgs e)
+        {
             fontDialog1.ShowColor = true;
             fontDialog1.Font = f1;// textBox1.Font;
             fontDialog1.Color = textBox1.ForeColor;
-            fontDialog1.ShowDialog();
-            //if (fontDialog1.ShowDialog() != DialogResult.Cancel)
+
+            if (fontDialog1.ShowDialog() != DialogResult.Cancel)
             {
                 textBox1.Font = fontDialog1.Font;
                 textBox2.Font = fontDialog1.Font;
@@ -269,7 +283,9 @@ namespace WindowsFormsApplication1
                 button2.Font = fontDialog1.Font;
                 button3.Font = fontDialog1.Font;
 
-                File.WriteAllText("config.txt", textBox1.Font.FontFamily.Name.ToString() + "$" + textBox1.ForeColor);
+                File.WriteAllText("config.txt", textBox1.Font.FontFamily.Name.ToString() +
+                    "$" + textBox1.Font.Size.ToString() +
+                    "$" + textBox1.ForeColor);
             }
         }
 
@@ -285,8 +301,7 @@ namespace WindowsFormsApplication1
                     myProcess.Refresh();
                 }
             }
-            while (!myProcess.WaitForExit(10000));
-            
+            while (!myProcess.WaitForExit(10000));           
 
 
             FileStream file2 = new FileStream("NewMessages.txt", FileMode.Open);
@@ -314,8 +329,6 @@ namespace WindowsFormsApplication1
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             
-        }
-
-       
+        }       
     }
 }
