@@ -178,7 +178,7 @@ namespace WindowsFormsApplication1
             for (i = 0; i < kolichestvo_soobsch; i++)
             {
                 textBox2.Text = textBox2.Text + messages[i].day + Environment.NewLine;
-                textBox2.Text = textBox2.Text + "     " + messages[i].login + "  cказал(а):  ";
+                textBox2.Text = textBox2.Text + "     " + messages[i].login + "  сказал(а):  ";
                 textBox2.Text = textBox2.Text + messages[i].text + Environment.NewLine;
             }
 
@@ -240,33 +240,59 @@ namespace WindowsFormsApplication1
             string[] view = stroka.Split(new Char[] { '$' });
             config.Close();
 
-            if (view.Length > 1)
+            if (view.Length > 3)
             {
-                Font fontFormFile = new Font(view[0], view[1]);
+                Font fontFormFile = new Font (view[0], (float)Convert.ToDouble(view[1]));
+                
+                if (view[2] == "True")
+                {
+                    fontFormFile = new Font (view[0], (float)Convert.ToDouble(view[1]), FontStyle.Italic);
+                }
+                else if (view[3] == "True")
+                {
+                    fontFormFile = new Font (view[0], (float)Convert.ToDouble(view[1]), FontStyle.Bold);
+                }
+
+                textBox1.Font = fontFormFile;
+                textBox2.Font = fontFormFile;
+                button1.Font = fontFormFile;
+                button2.Font = fontFormFile;
+                button3.Font = fontFormFile;
+
+                Color c1 = ColorTranslator.FromHtml(view[4]);
+
+                textBox1.ForeColor = c1;
+                textBox2.ForeColor = c1;
+                button1.ForeColor = c1;
+                button2.ForeColor = c1;
+                button3.ForeColor = c1;
+
             }
             
-            textBox1.Font = fontFormFile;
-            textBox2.Font = fontFormFile;
-            button1.Font = fontFormFile;
-            button2.Font = fontFormFile;
-            button3.Font = fontFormFile;
 
-            /*textBox1.ForeColor = fontDialog1.Color;
-            textBox2.ForeColor = fontDialog1.Color;
-            button1.ForeColor = fontDialog1.Color;
-            button2.ForeColor = fontDialog1.Color;
-            button3.ForeColor = fontDialog1.Color;*/
+            /**/
         }
 
 
         private void button2_Click(object sender, EventArgs e)
         {
             fontDialog1.ShowColor = true;
-            fontDialog1.Font = f1;// textBox1.Font;
+            fontDialog1.Font =  textBox1.Font;
             fontDialog1.Color = textBox1.ForeColor;
 
             if (fontDialog1.ShowDialog() != DialogResult.Cancel)
             {
+                
+                ColorDialog MyDialog = new ColorDialog();
+                MyDialog.AllowFullOpen = false;
+                MyDialog.ShowHelp = true;
+                MyDialog.Color = textBox1.ForeColor;
+                
+                if (MyDialog.ShowDialog() == DialogResult.OK)
+                textBox1.ForeColor = MyDialog.Color;
+             
+
+                
                 textBox1.Font = fontDialog1.Font;
                 textBox2.Font = fontDialog1.Font;
                
@@ -284,8 +310,10 @@ namespace WindowsFormsApplication1
                 button3.Font = fontDialog1.Font;
 
                 File.WriteAllText("config.txt", textBox1.Font.FontFamily.Name.ToString() +
-                    "$" + textBox1.Font.Size.ToString() +
-                    "$" + textBox1.ForeColor);
+                    "$" + textBox1.Font.Size.ToString() + 
+                    "$" + textBox1.Font.Italic.ToString() +
+                    "$" + textBox1.Font.Bold.ToString() + 
+                    "$" + textBox1.ForeColor.ToArgb());
             }
         }
 
