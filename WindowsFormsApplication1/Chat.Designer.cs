@@ -39,6 +39,7 @@ namespace WindowsFormsApplication1
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Chat)).BeginInit();
             this.SuspendLayout();
             // 
@@ -146,5 +147,6 @@ namespace WindowsFormsApplication1
         private System.Windows.Forms.FontDialog fontDialog1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.ColorDialog colorDialog1;
     }
 }
