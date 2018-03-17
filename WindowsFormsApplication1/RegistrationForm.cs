@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -136,8 +137,8 @@ namespace WindowsFormsApplication1
 
             if (!uzhe_byl)
             {
-                string filename = "password3.txt";
-                System.IO.File.AppendAllText(filename, Environment.NewLine + loginTextBox.Text + " " + ParolTextBox.Text);
+                File.AppendAllText("password3.txt", loginTextBox.Text + " " + ParolTextBox.Text + Environment.NewLine);
+                File.AppendAllText("NewPolzovoteli.txt", loginTextBox.Text + " " + ParolTextBox.Text + Environment.NewLine);
                 LoginForm.usery[kolich].login = loginTextBox.Text;
                 LoginForm.usery[kolich].password = ParolTextBox.Text;
                 LoginForm.kolichestvo_userov++;
