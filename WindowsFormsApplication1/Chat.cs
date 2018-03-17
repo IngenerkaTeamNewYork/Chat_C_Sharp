@@ -242,15 +242,14 @@ namespace WindowsFormsApplication1
 
             if (view.Length > 1)
             {
-                Font fontFormFile = new Font(view[0], view[1]);
+                Font fontFormFile = new Font(view[0], (float)Convert.ToDouble(view[1]));
+                textBox1.Font = fontFormFile;
+                textBox2.Font = fontFormFile;
+                button1.Font = fontFormFile;
+                button2.Font = fontFormFile;
+                button3.Font = fontFormFile;
             }
             
-            textBox1.Font = fontFormFile;
-            textBox2.Font = fontFormFile;
-            button1.Font = fontFormFile;
-            button2.Font = fontFormFile;
-            button3.Font = fontFormFile;
-
             /*textBox1.ForeColor = fontDialog1.Color;
             textBox2.ForeColor = fontDialog1.Color;
             button1.ForeColor = fontDialog1.Color;
@@ -262,7 +261,6 @@ namespace WindowsFormsApplication1
         private void button2_Click(object sender, EventArgs e)
         {
             fontDialog1.ShowColor = true;
-            fontDialog1.Font = f1;// textBox1.Font;
             fontDialog1.Color = textBox1.ForeColor;
 
             if (fontDialog1.ShowDialog() != DialogResult.Cancel)

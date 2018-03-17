@@ -22,6 +22,8 @@ namespace WindowsFormsApplication1
         public Polzovatel user1;
         public static Polzovatel[] usery = new Polzovatel[500];
         public static int kolichestvo_userov;
+        public static bool savepass = false;
+        public static string saveduser = File.ReadAllText("saveduser.txt");
 
         public LoginForm()
         {
@@ -29,7 +31,8 @@ namespace WindowsFormsApplication1
         }
 
         private void Form1_Load(object sender, EventArgs e)
-        {          
+        {
+            LoginTextBox.Text = File.ReadAllText("saveduser.txt");
             FileStream file2 = new FileStream("password3.txt", FileMode.Open); //создаем файловый поток
             StreamReader reader = new StreamReader(file2); // создаем «потоковый читатель» и связываем его с файловым потоком 
 
@@ -46,8 +49,6 @@ namespace WindowsFormsApplication1
             kolichestvo_userov = i;
             /*Console.WriteLine(reader.ReadToEnd()); //считываем все данные с потока и выводим на экран*/
             reader.Close(); //закрываем поток
-
-         
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -55,11 +56,14 @@ namespace WindowsFormsApplication1
             user1.password = PPorolTextBox.Text;
             PPorolTextBox.PasswordChar = '*';
 
+            string user = user1.login;
+            string password = PPorolTextBox.Text;
+
             bool net_polzovatelya = true;
             bool ne_pomnit_parol = true;
             for (int i = 0; i < kolichestvo_userov; i++)
             {
-                if (usery[i].login == user1.login)
+                if (usery[i].login == user)
                 {
                     net_polzovatelya = false;
                     if (usery[i].password == user1.password)
@@ -81,6 +85,10 @@ namespace WindowsFormsApplication1
             {
                 Chat chatForm = new Chat(LoginTextBox.Text);
                 chatForm.ShowDialog();
+            }
+            if (savepass)
+            {
+                File.WriteAllText("saveduser.txt", user);
             }
         }
 
@@ -156,6 +164,16 @@ namespace WindowsFormsApplication1
             {
                 button1_Click(sender, null);
             }
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            savepass = (bool)(savepassbox.Checked);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            File.WriteAllText("saveduser.txt", "");
         }
     }
 }
