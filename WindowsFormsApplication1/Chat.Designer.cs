@@ -39,6 +39,7 @@ namespace WindowsFormsApplication1
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Chat)).BeginInit();
             this.SuspendLayout();
             // 
@@ -53,6 +54,7 @@ namespace WindowsFormsApplication1
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
             this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            this.textBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyUp);
             // 
             // button1
             // 
@@ -146,5 +148,6 @@ namespace WindowsFormsApplication1
         private System.Windows.Forms.FontDialog fontDialog1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.ColorDialog colorDialog1;
     }
 }

@@ -12,8 +12,9 @@ using System.Windows.Forms;
 using System.Net;
 using System.Net.Sockets;
 
+
 namespace WindowsFormsApplication1
-{    
+{
     public struct Soobshenie
     {
         public string login;
@@ -29,9 +30,12 @@ namespace WindowsFormsApplication1
 
     public partial class Chat : Form
     {
+        public static int kol_vo_bed_messages = 0;
+        public static String[] bedMessages = new string[500];
+
         public static Soobshenie[] messages = new Soobshenie[15016];
         public Polzovatel_view user2;
-        public static Polzovatel_view [] type = new Polzovatel_view [3];
+        public static Polzovatel_view[] type = new Polzovatel_view[3];
 
         public string login;
         public const string rasd = "$~#~@*&";
@@ -100,7 +104,7 @@ namespace WindowsFormsApplication1
         public Chat(string _login)
         {
             InitializeComponent();
-            login = _login;           
+            login = _login;
 
             saveFileDialog1.Filter = "Text files(*SaveFileDialog.txt)|*.txt|All files(*.*)|*.*";
             openFileDialog1.Filter = "Text files(*OpenFileDialog.txt)|*.txt|All files(*.*)|*.*";
@@ -115,21 +119,74 @@ namespace WindowsFormsApplication1
 
         private void Form2_Load(object sender, EventArgs e)
         {
+            bedMessages[kol_vo_bed_messages] = "Сцуко"; kol_vo_bed_messages++;
+            bedMessages[kol_vo_bed_messages] = "Антон"; kol_vo_bed_messages++;
+            bedMessages[kol_vo_bed_messages] = "Мирон"; kol_vo_bed_messages++;
+            bedMessages[kol_vo_bed_messages] = "Стас"; kol_vo_bed_messages++;
+            bedMessages[kol_vo_bed_messages] = "Эдик"; kol_vo_bed_messages++;
+            bedMessages[kol_vo_bed_messages] = "Денис"; kol_vo_bed_messages++;
+            bedMessages[kol_vo_bed_messages] = "Предаст"; kol_vo_bed_messages++;
+            bedMessages[kol_vo_bed_messages] = "Медиатор"; kol_vo_bed_messages++;
+            bedMessages[kol_vo_bed_messages] = "Педиатр"; kol_vo_bed_messages++;
+            bedMessages[kol_vo_bed_messages] = "Педогог"; kol_vo_bed_messages++;
+            bedMessages[kol_vo_bed_messages] = "Педсовет"; kol_vo_bed_messages++;
+            bedMessages[kol_vo_bed_messages] = "Кедр"; kol_vo_bed_messages++;
+            bedMessages[kol_vo_bed_messages] = "Курва"; kol_vo_bed_messages++;
+            bedMessages[kol_vo_bed_messages] = "Лох"; kol_vo_bed_messages++;
+            bedMessages[kol_vo_bed_messages] = "Санкт"; kol_vo_bed_messages++;
+            bedMessages[kol_vo_bed_messages] = "Дурак"; kol_vo_bed_messages++;
+            bedMessages[kol_vo_bed_messages] = "Мудрак"; kol_vo_bed_messages++;
+            bedMessages[kol_vo_bed_messages] = "Ниггер"; kol_vo_bed_messages++;
+            bedMessages[kol_vo_bed_messages] = "Навальный"; kol_vo_bed_messages++;
+            bedMessages[kol_vo_bed_messages] = "Кретин"; kol_vo_bed_messages++;
+            bedMessages[kol_vo_bed_messages] = "Бандерлог"; kol_vo_bed_messages++;
+            bedMessages[kol_vo_bed_messages] = "Феномен"; kol_vo_bed_messages++;
+            bedMessages[kol_vo_bed_messages] = "Кусудама"; kol_vo_bed_messages++;
+            bedMessages[kol_vo_bed_messages] = "Куй"; kol_vo_bed_messages++;
+            bedMessages[kol_vo_bed_messages] = "Псина"; kol_vo_bed_messages++;
+            bedMessages[kol_vo_bed_messages] = "Мудак"; kol_vo_bed_messages++;
+            bedMessages[kol_vo_bed_messages] = "Йобайт"; kol_vo_bed_messages++;
+            bedMessages[kol_vo_bed_messages] = "Днище"; kol_vo_bed_messages++;
+            bedMessages[kol_vo_bed_messages] = "Уху есть"; kol_vo_bed_messages++;
+            bedMessages[kol_vo_bed_messages] = "Уху ели"; kol_vo_bed_messages++;
+            bedMessages[kol_vo_bed_messages] = "Апчхуй"; kol_vo_bed_messages++;
+            bedMessages[kol_vo_bed_messages] = "От сосиски"; kol_vo_bed_messages++;
+            bedMessages[kol_vo_bed_messages] = "Сосиска"; kol_vo_bed_messages++;
+            bedMessages[kol_vo_bed_messages] = "Промискуитет"; kol_vo_bed_messages++;
+            bedMessages[kol_vo_bed_messages] = "Голубой"; kol_vo_bed_messages++;
+            bedMessages[kol_vo_bed_messages] = "Е брат"; kol_vo_bed_messages++;
+            bedMessages[kol_vo_bed_messages] = "Епархия"; kol_vo_bed_messages++;
+            bedMessages[kol_vo_bed_messages] = "Ша"; kol_vo_bed_messages++;
+            bedMessages[kol_vo_bed_messages] = "болда"; kol_vo_bed_messages++;
+            bedMessages[kol_vo_bed_messages] = "Синий"; kol_vo_bed_messages++;
+            bedMessages[kol_vo_bed_messages] = "Переобуться"; kol_vo_bed_messages++;
+            bedMessages[kol_vo_bed_messages] = "Сумка"; kol_vo_bed_messages++;
+            bedMessages[kol_vo_bed_messages] = "Конь"; kol_vo_bed_messages++;
+            bedMessages[kol_vo_bed_messages] = "Путь Анна"; kol_vo_bed_messages++;
+            bedMessages[kol_vo_bed_messages] = "Путный"; kol_vo_bed_messages++;
+            bedMessages[kol_vo_bed_messages] = "Публичный"; kol_vo_bed_messages++;
+            bedMessages[kol_vo_bed_messages] = "Приватный"; kol_vo_bed_messages++;
+            bedMessages[kol_vo_bed_messages] = "Паразит"; kol_vo_bed_messages++;
+            bedMessages[kol_vo_bed_messages] = "Прости тут"; kol_vo_bed_messages++;
+            bedMessages[kol_vo_bed_messages] = "Менуэт"; kol_vo_bed_messages++;
+            bedMessages[kol_vo_bed_messages] = "Молодец"; kol_vo_bed_messages++;
+            bedMessages[kol_vo_bed_messages] = "Щель"; kol_vo_bed_messages++;
+
             bool sos = false;
             FileStream file2 = null;
 
-          
-            try 
+
+            try
             {
                 file2 = new FileStream("peregovory.txt", FileMode.Open); //создаем файловый поток
-            } 
-            catch (System.IO.FileNotFoundException) 
+            }
+            catch (System.IO.FileNotFoundException)
             {
-                sos = true;  
+                sos = true;
                 textBox2.Text = "";
                 return;
             }
-            
+
             file2.Close();
             file2 = new FileStream("peregovory.txt", FileMode.Open); //создаем файловый поток
             StreamReader reader = new StreamReader(file2); // создаем «потоковый читатель» и связываем его с файловым потоком
@@ -178,7 +235,7 @@ namespace WindowsFormsApplication1
             for (i = 0; i < kolichestvo_soobsch; i++)
             {
                 textBox2.Text = textBox2.Text + messages[i].day + Environment.NewLine;
-                textBox2.Text = textBox2.Text + "     " + messages[i].login + "  cказал(а):  ";
+                textBox2.Text = textBox2.Text + "     " + messages[i].login + "  сказал(а):  ";
                 textBox2.Text = textBox2.Text + messages[i].text + Environment.NewLine;
             }
 
@@ -197,20 +254,31 @@ namespace WindowsFormsApplication1
                     textBox1.Text + Environment.NewLine);
                 File.AppendAllText("peregovory.txt", Environment.NewLine + dateStr + rasd + login + rasd + textBox1.Text.Replace(Environment.NewLine, "%%%%"));
                 File.AppendAllText("NewMessages.txt", dateStr + rasd + login + rasd + textBox1.Text.Replace(Environment.NewLine, "%%%%") + Environment.NewLine);
-            } 
-            
+            }
+
             textBox1.Text = null;
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
-        {            
+        {
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == (int)Keys.Enter)
+            string[] podstroki = textBox1.Text.Split(new String[] { " ", ",", Environment.NewLine }, StringSplitOptions.None);
+
+            for (int i = 0; i < podstroki.Length; i++)
             {
-               // e.KeyChar = ' ';
+                if (bedMessages.Contains(podstroki[i]))
+                {
+                    string antipm = "";
+                    for (int irep = 0; irep < podstroki[i].Length; irep++)
+                    {
+                        antipm = antipm + "*";
+                    }
+
+                    textBox1.Text = textBox1.Text.Replace(podstroki[i], antipm);
+                }
             }
         }
 
@@ -240,50 +308,70 @@ namespace WindowsFormsApplication1
             string[] view = stroka.Split(new Char[] { '$' });
             config.Close();
 
-            if (view.Length > 1)
+            if (view.Length > 4)
             {
-                Font fontFormFile = new Font(view[0], (float)Convert.ToDouble(view[1]));
+                Font fontFormFile = new Font (view[0], (float)Convert.ToDouble(view[1]));
+                
+                if (view[2] == "True")
+                {
+                    fontFormFile = new Font (view[0], (float)Convert.ToDouble(view[1]), FontStyle.Italic);
+                }
+                else if (view[3] == "True")
+                {
+                    fontFormFile = new Font (view[0], (float)Convert.ToDouble(view[1]), FontStyle.Bold);
+                }
+
                 textBox1.Font = fontFormFile;
                 textBox2.Font = fontFormFile;
                 button1.Font = fontFormFile;
                 button2.Font = fontFormFile;
                 button3.Font = fontFormFile;
-            }
-            
-            /*textBox1.ForeColor = fontDialog1.Color;
-            textBox2.ForeColor = fontDialog1.Color;
-            button1.ForeColor = fontDialog1.Color;
-            button2.ForeColor = fontDialog1.Color;
-            button3.ForeColor = fontDialog1.Color;*/
-        }
 
+                Color c1 = ColorTranslator.FromHtml(view[4]);
+
+                textBox1.ForeColor = c1;
+                textBox2.ForeColor = c1;
+                button1.ForeColor = c1;
+                button2.ForeColor = c1;
+                button3.ForeColor = c1;
+            }
+        }
 
         private void button2_Click(object sender, EventArgs e)
         {
             fontDialog1.ShowColor = true;
+            fontDialog1.Font = textBox1.Font;
             fontDialog1.Color = textBox1.ForeColor;
 
             if (fontDialog1.ShowDialog() != DialogResult.Cancel)
-            {
+            {                
+                ColorDialog MyDialog = new ColorDialog();
+                MyDialog.AllowFullOpen = false;
+                MyDialog.ShowHelp = true;
+                MyDialog.Color = textBox1.ForeColor;
+                
+                if (MyDialog.ShowDialog() == DialogResult.OK)
+                {
+                    textBox1.ForeColor = MyDialog.Color;
+                }
+                
                 textBox1.Font = fontDialog1.Font;
                 textBox2.Font = fontDialog1.Font;
-               
-
+                button1.Font = fontDialog1.Font;
+                button2.Font = fontDialog1.Font;
+                button3.Font = fontDialog1.Font;
+                
                 textBox1.ForeColor = fontDialog1.Color;
                 textBox2.ForeColor = fontDialog1.Color;
-                
-
                 button1.ForeColor = fontDialog1.Color;
                 button2.ForeColor = fontDialog1.Color;
                 button3.ForeColor = fontDialog1.Color;
 
-                button1.Font = fontDialog1.Font;
-                button2.Font = fontDialog1.Font;
-                button3.Font = fontDialog1.Font;
-
                 File.WriteAllText("config.txt", textBox1.Font.FontFamily.Name.ToString() +
-                    "$" + textBox1.Font.Size.ToString() +
-                    "$" + textBox1.ForeColor);
+                    "$" + textBox1.Font.Size.ToString() + 
+                    "$" + textBox1.Font.Italic.ToString() +
+                    "$" + textBox1.Font.Bold.ToString() + 
+                    "$" + textBox1.ForeColor.ToArgb());
             }
         }
 
@@ -299,34 +387,52 @@ namespace WindowsFormsApplication1
                     myProcess.Refresh();
                 }
             }
-            while (!myProcess.WaitForExit(10000));           
+            while (!myProcess.WaitForExit(10000));
 
 
             FileStream file2 = new FileStream("NewMessages.txt", FileMode.Open);
             StreamReader reader = new StreamReader(file2); // создаем «потоковый читатель» и связываем его с файловым потоком
-           
+
             while (reader.Peek() >= 0)
             {
                 string stroka_iz_faila = reader.ReadLine().Trim();
-                File.AppendAllText("peregovory.txt", Environment.NewLine + stroka_iz_faila);                
+                File.AppendAllText("peregovory.txt", Environment.NewLine + stroka_iz_faila);
             }
 
             reader.Close(); //закрываем поток
-            
+
             textBox2.Clear();
             Form2_Load(sender, e);
 
-            Process.Start("cmd", "/C start /B get.exe peregovory.txt peregovory.txt");
+            Process.Start("cmd", "/C start /B put.exe peregovory.txt peregovory.txt");
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-           // Process.Start("put.exe", "peregovory.txt peregovory.txt");
+            // Process.Start("put.exe", "peregovory.txt peregovory.txt");
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
+            string[] podstroki = textBox1.Text.Split(new String[] { " ", "," }, StringSplitOptions.None);
             
-        }       
+            for (int i = 0; i < podstroki.Length; i++)
+            {
+                if (bedMessages.Contains(podstroki[i]))
+                {
+                    string antipm = "";
+                    for (int irep = 0; irep < podstroki[i].Length; irep++)
+                    {
+                        antipm = antipm + "*";
+                    }
+
+                    textBox1.Text = textBox1.Text.Replace(podstroki[i], antipm);
+                }
+            }
+        }
+
+        private void textBox1_KeyUp(object sender, KeyEventArgs e)
+        {
+        }
     }
 }
