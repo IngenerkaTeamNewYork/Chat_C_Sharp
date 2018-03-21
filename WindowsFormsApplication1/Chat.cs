@@ -434,5 +434,15 @@ namespace WindowsFormsApplication1
         private void textBox1_KeyUp(object sender, KeyEventArgs e)
         {
         }
+
+        private void этоМатToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+            bedMessages[kol_vo_bed_messages] = textBox2.SelectedText; kol_vo_bed_messages++;
+        }
     }
 }
