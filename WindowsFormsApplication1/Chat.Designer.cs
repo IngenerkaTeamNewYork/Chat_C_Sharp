@@ -92,6 +92,7 @@ namespace WindowsFormsApplication1
             this.pictureBox_Chat.Size = new System.Drawing.Size(605, 517);
             this.pictureBox_Chat.TabIndex = 4;
             this.pictureBox_Chat.TabStop = false;
+            this.pictureBox_Chat.Click += new System.EventHandler(this.pictureBox_Chat_Click);
             // 
             // fontDialog1
             // 

@@ -119,6 +119,50 @@ namespace WindowsFormsApplication1
 
         private void Form2_Load(object sender, EventArgs e)
         {
+            ////////////////////////////////////////////////////////////////////////////////
+            
+            File.WriteAllText("Allmatt.txt", string.Empty);
+            Process myProcess = Process.Start("get.exe", "matt.txt matt.txt");
+            do
+            {
+                if (!myProcess.HasExited)
+                {
+                    myProcess.Refresh();
+                }
+            }
+            while (!myProcess.WaitForExit(10000));
+
+            FileStream file2 = new FileStream("matt1.txt", FileMode.Open);
+            StreamReader reader1 = new StreamReader(file2);
+
+            while (reader1.Peek() >= 0)
+            {
+                string stroka_iz_faila = reader1.ReadLine().Trim();
+                File.AppendAllText("matt.txt", stroka_iz_faila + Environment.NewLine);
+            }
+
+            reader1.Close();
+            /*
+            Process.Start("put.exe", "password3.txt password3.txt");
+
+ 
+            file2 = new FileStream("password3.txt", FileMode.Open); 
+            reader = new StreamReader(file2);
+
+            int i = 0;
+            while (reader.Peek() >= 0)
+            {
+                string stroka_iz_faila = reader.ReadLine().Trim();
+                string[] podstroki = stroka_iz_faila.Split(new Char[] { ' ' });
+                usery[i].login = podstroki[0];
+                usery[i].password = podstroki[1];  
+                i++;
+            }
+
+            kolichestvo_userov = i;
+            reader.Close();
+             */
+            ////////////////////////////////////////////////////////////////////////////////
             bedMessages[kol_vo_bed_messages] = "Сцуко"; kol_vo_bed_messages++;
             bedMessages[kol_vo_bed_messages] = "Антон"; kol_vo_bed_messages++;
             bedMessages[kol_vo_bed_messages] = "Мирон"; kol_vo_bed_messages++;
@@ -174,7 +218,7 @@ namespace WindowsFormsApplication1
             bedMessages[kol_vo_bed_messages] = "Щель"; kol_vo_bed_messages++;
 
             bool sos = false;
-            FileStream file2 = null;
+            //FileStream file2 = null;
 
 
             try
@@ -469,6 +513,11 @@ namespace WindowsFormsApplication1
 
         private void textBox1_KeyUp(object sender, KeyEventArgs e)
         {
+        }
+
+        private void pictureBox_Chat_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
