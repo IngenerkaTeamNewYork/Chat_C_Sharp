@@ -93,7 +93,7 @@
             this.linkLabel1.Location = new System.Drawing.Point(51, 106);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(72, 13);
-            this.linkLabel1.TabIndex = 4;
+            this.linkLabel1.TabIndex = 5;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "Регистрация\r\n";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
@@ -112,7 +112,7 @@
             this.savepassbox.Location = new System.Drawing.Point(84, 84);
             this.savepassbox.Name = "savepassbox";
             this.savepassbox.Size = new System.Drawing.Size(79, 17);
-            this.savepassbox.TabIndex = 6;
+            this.savepassbox.TabIndex = 4;
             this.savepassbox.Text = "Сохранить";
             this.savepassbox.UseVisualStyleBackColor = true;
             this.savepassbox.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);

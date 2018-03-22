@@ -129,6 +129,7 @@ namespace WindowsFormsApplication1
             bedMessages[kol_vo_bed_messages] = "Медиатор"; kol_vo_bed_messages++;
             bedMessages[kol_vo_bed_messages] = "Педиатр"; kol_vo_bed_messages++;
             bedMessages[kol_vo_bed_messages] = "Педогог"; kol_vo_bed_messages++;
+            bedMessages[kol_vo_bed_messages] = "Юра"; kol_vo_bed_messages++;
             bedMessages[kol_vo_bed_messages] = "Педсовет"; kol_vo_bed_messages++;
             bedMessages[kol_vo_bed_messages] = "Кедр"; kol_vo_bed_messages++;
             bedMessages[kol_vo_bed_messages] = "Курва"; kol_vo_bed_messages++;
@@ -281,6 +282,24 @@ namespace WindowsFormsApplication1
                 }
             }
         }
+        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            string[] podstroki = textBox2.Text.Split(new String[] { " ", ",", Environment.NewLine }, StringSplitOptions.None);
+
+            for (int i = 0; i < podstroki.Length; i++)
+            {
+                if (bedMessages.Contains(podstroki[i]))
+                {
+                    string antipm = "";
+                    for (int irep = 0; irep < podstroki[i].Length; irep++)
+                    {
+                        antipm = antipm + "*";
+                    }
+
+                    textBox2.Text = textBox2.Text.Replace(podstroki[i], antipm);
+                }
+            }
+        }
 
         private void textBox1_KeyDown(object sender, KeyEventArgs e)
         {
@@ -376,7 +395,7 @@ namespace WindowsFormsApplication1
         }
 
         private void button3_Click(object sender, EventArgs e)
-        {
+        {        
             File.WriteAllText("AllMessages.txt", string.Empty);
             Process myProcess = Process.Start("cmd", "/C start /B get.exe peregovory.txt peregovory.txt");
             do
@@ -405,6 +424,23 @@ namespace WindowsFormsApplication1
             Form2_Load(sender, e);
 
             Process.Start("cmd", "/C start /B put.exe peregovory.txt peregovory.txt");
+
+
+            string[] podstroki = textBox2.Text.Split(new String[] { " ", ",", Environment.NewLine }, StringSplitOptions.None);
+
+            for (int i = 0; i < podstroki.Length; i++)
+            {
+                if (bedMessages.Contains(podstroki[i]))
+                {
+                    string antipm = "";
+                    for (int irep = 0; irep < podstroki[i].Length; irep++)
+                    {
+                        antipm = antipm + "*";
+                    }
+
+                    textBox2.Text = textBox2.Text.Replace(podstroki[i], antipm);
+                }
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)
