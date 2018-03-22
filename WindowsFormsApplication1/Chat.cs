@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -119,6 +119,50 @@ namespace WindowsFormsApplication1
 
         private void Form2_Load(object sender, EventArgs e)
         {
+            ////////////////////////////////////////////////////////////////////////////////
+            
+            File.WriteAllText("Allmatt.txt", string.Empty);
+            Process myProcess = Process.Start("get.exe", "matt.txt matt.txt");
+            do
+            {
+                if (!myProcess.HasExited)
+                {
+                    myProcess.Refresh();
+                }
+            }
+            while (!myProcess.WaitForExit(10000));
+
+            FileStream file2 = new FileStream("matt1.txt", FileMode.Open);
+            StreamReader reader1 = new StreamReader(file2);
+
+            while (reader1.Peek() >= 0)
+            {
+                string stroka_iz_faila = reader1.ReadLine().Trim();
+                File.AppendAllText("matt.txt", stroka_iz_faila + Environment.NewLine);
+            }
+
+            reader1.Close();
+            /*
+            Process.Start("put.exe", "password3.txt password3.txt");
+
+ 
+            file2 = new FileStream("password3.txt", FileMode.Open); 
+            reader = new StreamReader(file2);
+
+            int i = 0;
+            while (reader.Peek() >= 0)
+            {
+                string stroka_iz_faila = reader.ReadLine().Trim();
+                string[] podstroki = stroka_iz_faila.Split(new Char[] { ' ' });
+                usery[i].login = podstroki[0];
+                usery[i].password = podstroki[1];  
+                i++;
+            }
+
+            kolichestvo_userov = i;
+            reader.Close();
+             */
+            ////////////////////////////////////////////////////////////////////////////////
             bedMessages[kol_vo_bed_messages] = "Сцуко"; kol_vo_bed_messages++;
             bedMessages[kol_vo_bed_messages] = "Антон"; kol_vo_bed_messages++;
             bedMessages[kol_vo_bed_messages] = "Мирон"; kol_vo_bed_messages++;
@@ -129,6 +173,7 @@ namespace WindowsFormsApplication1
             bedMessages[kol_vo_bed_messages] = "Медиатор"; kol_vo_bed_messages++;
             bedMessages[kol_vo_bed_messages] = "Педиатр"; kol_vo_bed_messages++;
             bedMessages[kol_vo_bed_messages] = "Педогог"; kol_vo_bed_messages++;
+            bedMessages[kol_vo_bed_messages] = "Юра"; kol_vo_bed_messages++;
             bedMessages[kol_vo_bed_messages] = "Педсовет"; kol_vo_bed_messages++;
             bedMessages[kol_vo_bed_messages] = "Кедр"; kol_vo_bed_messages++;
             bedMessages[kol_vo_bed_messages] = "Курва"; kol_vo_bed_messages++;
@@ -173,7 +218,7 @@ namespace WindowsFormsApplication1
             bedMessages[kol_vo_bed_messages] = "Щель"; kol_vo_bed_messages++;
 
             bool sos = false;
-            FileStream file2 = null;
+            //FileStream file2 = null;
 
 
             try
@@ -281,6 +326,24 @@ namespace WindowsFormsApplication1
                 }
             }
         }
+        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            string[] podstroki = textBox2.Text.Split(new String[] { " ", ",", Environment.NewLine }, StringSplitOptions.None);
+
+            for (int i = 0; i < podstroki.Length; i++)
+            {
+                if (bedMessages.Contains(podstroki[i]))
+                {
+                    string antipm = "";
+                    for (int irep = 0; irep < podstroki[i].Length; irep++)
+                    {
+                        antipm = antipm + "*";
+                    }
+
+                    textBox2.Text = textBox2.Text.Replace(podstroki[i], antipm);
+                }
+            }
+        }
 
         private void textBox1_KeyDown(object sender, KeyEventArgs e)
         {
@@ -376,7 +439,7 @@ namespace WindowsFormsApplication1
         }
 
         private void button3_Click(object sender, EventArgs e)
-        {
+        {        
             File.WriteAllText("AllMessages.txt", string.Empty);
             Process myProcess = Process.Start("cmd", "/C start /B get.exe peregovory.txt peregovory.txt");
             do
@@ -405,6 +468,23 @@ namespace WindowsFormsApplication1
             Form2_Load(sender, e);
 
             Process.Start("cmd", "/C start /B put.exe peregovory.txt peregovory.txt");
+
+
+            string[] podstroki = textBox2.Text.Split(new String[] { " ", ",", Environment.NewLine }, StringSplitOptions.None);
+
+            for (int i = 0; i < podstroki.Length; i++)
+            {
+                if (bedMessages.Contains(podstroki[i]))
+                {
+                    string antipm = "";
+                    for (int irep = 0; irep < podstroki[i].Length; irep++)
+                    {
+                        antipm = antipm + "*";
+                    }
+
+                    textBox2.Text = textBox2.Text.Replace(podstroki[i], antipm);
+                }
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -443,6 +523,11 @@ namespace WindowsFormsApplication1
         private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
             bedMessages[kol_vo_bed_messages] = textBox2.SelectedText; kol_vo_bed_messages++;
+        }
+
+        private void pictureBox_Chat_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
