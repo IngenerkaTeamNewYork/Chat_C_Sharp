@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net;
 using System.Net.Sockets;
+
 
 
 namespace WindowsFormsApplication1
@@ -38,69 +40,10 @@ namespace WindowsFormsApplication1
         public static Polzovatel_view[] type = new Polzovatel_view[3];
 
         public string login;
-        public const string rasd = "$~#~@*&";
+        
         public string str = " ";
         public string str2 = " ";
 
-        public static DateTime GetNetworkTime()
-        {
-            //default Windows time server
-            const string ntpServer = "pool.ntp.org";
-
-            // NTP message size - 16 bytes of the digest (RFC 2030)
-            var ntpData = new byte[48];
-
-            //Setting the Leap Indicator, Version Number and Mode values
-            ntpData[0] = 0x1B; //LI = 0 (no warning), VN = 3 (IPv4 only), Mode = 3 (Client Mode)
-
-            var addresses = Dns.GetHostEntry(ntpServer).AddressList;
-
-            //The UDP port number assigned to NTP is 123
-            var ipEndPoint = new IPEndPoint(addresses[0], 123);
-            //NTP uses UDP
-
-            using (var socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp))
-            {
-                socket.Connect(ipEndPoint);
-
-                //Stops code hang if NTP is blocked
-                socket.ReceiveTimeout = 3000;
-
-                socket.Send(ntpData);
-                socket.Receive(ntpData);
-                socket.Close();
-            }
-
-            //Offset to get to the "Transmit Timestamp" field (time at which the reply 
-            //departed the server for the client, in 64-bit timestamp format."
-            const byte serverReplyTime = 40;
-
-            //Get the seconds part
-            ulong intPart = BitConverter.ToUInt32(ntpData, serverReplyTime);
-
-            //Get the seconds fraction
-            ulong fractPart = BitConverter.ToUInt32(ntpData, serverReplyTime + 4);
-
-            //Convert From big-endian to little-endian
-            intPart = SwapEndianness(intPart);
-            fractPart = SwapEndianness(fractPart);
-
-            var milliseconds = (intPart * 1000) + ((fractPart * 1000) / 0x100000000L);
-
-            //**UTC** time
-            var networkDateTime = (new DateTime(1900, 1, 1, 0, 0, 0, DateTimeKind.Utc)).AddMilliseconds((long)milliseconds);
-
-            return networkDateTime.ToLocalTime();
-        }
-
-        // stackoverflow.com/a/3294698/162671
-        static uint SwapEndianness(ulong x)
-        {
-            return (uint)(((x & 0x000000ff) << 24) +
-                        ((x & 0x0000ff00) << 8) +
-                        ((x & 0x00ff0000) >> 8) +
-                        ((x & 0xff000000) >> 24));
-        }
         public Chat(string _login)
         {
             InitializeComponent();
@@ -120,9 +63,13 @@ namespace WindowsFormsApplication1
         private void Form2_Load(object sender, EventArgs e)
         {
             ////////////////////////////////////////////////////////////////////////////////
-            
-            File.WriteAllText("Allmatt.txt", string.Empty);
-            Process myProcess = Process.Start("get.exe", "matt.txt matt.txt");
+            /*TimerCallback tm = new TimerCallback(button3_Click( sender, null));
+            // создаем таймер
+            Timer timer = new Timer(tm, null, 0, 2000);
+            */
+           // Timer t = new Timer(button3_Click(sender, null), null, 0, 2000);
+            File.WriteAllText(Const.Allmatt, string.Empty);
+            Process myProcess = Process.Start(Const.get, Const.matt);
             do
             {
                 if (!myProcess.HasExited)
@@ -132,13 +79,13 @@ namespace WindowsFormsApplication1
             }
             while (!myProcess.WaitForExit(10000));
 
-            FileStream file2 = new FileStream("matt1.txt", FileMode.Open);
+            FileStream file2 = new FileStream(Const.slovar, FileMode.Open);
             StreamReader reader1 = new StreamReader(file2);
 
             while (reader1.Peek() >= 0)
             {
                 string stroka_iz_faila = reader1.ReadLine().Trim();
-                File.AppendAllText("matt.txt", stroka_iz_faila + Environment.NewLine);
+                File.AppendAllText(Const.matt, stroka_iz_faila + Environment.NewLine);
             }
 
             reader1.Close();
@@ -223,7 +170,7 @@ namespace WindowsFormsApplication1
 
             try
             {
-                file2 = new FileStream("peregovory.txt", FileMode.Open); //создаем файловый поток
+                file2 = new FileStream(Const.peregovory, FileMode.Open); //создаем файловый поток
             }
             catch (System.IO.FileNotFoundException)
             {
@@ -233,7 +180,7 @@ namespace WindowsFormsApplication1
             }
 
             file2.Close();
-            file2 = new FileStream("peregovory.txt", FileMode.Open); //создаем файловый поток
+            file2 = new FileStream(Const.peregovory, FileMode.Open); //создаем файловый поток
             StreamReader reader = new StreamReader(file2); // создаем «потоковый читатель» и связываем его с файловым потоком
 
             this.Height = 651;
@@ -243,13 +190,13 @@ namespace WindowsFormsApplication1
             while (reader.Peek() >= 0)
             {
                 string stroka_iz_faila = reader.ReadLine().Trim();
-                string[] podstroki = stroka_iz_faila.Split(new String[] { rasd }, StringSplitOptions.None);
+                string[] podstroki = stroka_iz_faila.Split(new String[] { Const.rasd }, StringSplitOptions.None);
 
                 if (podstroki.Length > 2)
                 {
                     messages[i].day = Convert.ToDateTime(podstroki[0]);
                     messages[i].login = podstroki[1];
-                    messages[i].text = podstroki[2].Replace("%%%%", Environment.NewLine);
+                    messages[i].text = podstroki[2].Replace(Const.rasd_enter, Environment.NewLine);
 
                     i++;
                 }
@@ -291,14 +238,14 @@ namespace WindowsFormsApplication1
         {
             if (textBox1.Text.Trim() != "")
             {
-                DateTime thisDay = GetNetworkTime();
-                String dateStr = thisDay.ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz");
-                String dateStrfors = thisDay.ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz");
+                DateTime thisDay = Time.GetNetworkTime();
+                String dateStr = thisDay.ToString(Const.data);
+                String dateStrfors = thisDay.ToString(Const.data);
 
                 textBox2.AppendText(dateStr + Environment.NewLine + login + ":   " +
                     textBox1.Text + Environment.NewLine);
-                File.AppendAllText("peregovory.txt", Environment.NewLine + dateStr + rasd + login + rasd + textBox1.Text.Replace(Environment.NewLine, "%%%%"));
-                File.AppendAllText("NewMessages.txt", dateStr + rasd + login + rasd + textBox1.Text.Replace(Environment.NewLine, "%%%%") + Environment.NewLine);
+                File.AppendAllText(Const.peregovory, Environment.NewLine + dateStr + Const.rasd + login + Const.rasd + textBox1.Text.Replace(Environment.NewLine, Const.rasd_enter));
+                File.AppendAllText(Const.NewMessages, dateStr + Const.rasd + login + Const.rasd + textBox1.Text.Replace(Environment.NewLine, Const.rasd_enter) + Environment.NewLine);
             }
 
             textBox1.Text = null;
@@ -364,7 +311,7 @@ namespace WindowsFormsApplication1
 
         private void readFontFromFile()
         {
-            FileStream config = new FileStream("config.txt", FileMode.Open);
+            FileStream config = new FileStream(Const.config, FileMode.Open);
             StreamReader reader2 = new StreamReader(config);
 
             string stroka = reader2.ReadLine().Trim();
@@ -430,7 +377,7 @@ namespace WindowsFormsApplication1
                 button2.ForeColor = fontDialog1.Color;
                 button3.ForeColor = fontDialog1.Color;
 
-                File.WriteAllText("config.txt", textBox1.Font.FontFamily.Name.ToString() +
+                File.WriteAllText(Const.config, textBox1.Font.FontFamily.Name.ToString() +
                     "$" + textBox1.Font.Size.ToString() + 
                     "$" + textBox1.Font.Italic.ToString() +
                     "$" + textBox1.Font.Bold.ToString() + 
@@ -439,9 +386,10 @@ namespace WindowsFormsApplication1
         }
 
         private void button3_Click(object sender, EventArgs e)
-        {        
-            File.WriteAllText("AllMessages.txt", string.Empty);
-            Process myProcess = Process.Start("cmd", "/C start /B get.exe peregovory.txt peregovory.txt");
+        {
+           
+            File.WriteAllText(Const.AllMessages, string.Empty);
+            Process myProcess = Process.Start("cmd", "/C start /B get.exe Const.peregovory Const.peregovory");
             do
             {
                 if (!myProcess.HasExited)
@@ -453,13 +401,13 @@ namespace WindowsFormsApplication1
             while (!myProcess.WaitForExit(10000));
 
 
-            FileStream file2 = new FileStream("NewMessages.txt", FileMode.Open);
+            FileStream file2 = new FileStream(Const.NewMessages, FileMode.Open);
             StreamReader reader = new StreamReader(file2); // создаем «потоковый читатель» и связываем его с файловым потоком
 
             while (reader.Peek() >= 0)
             {
                 string stroka_iz_faila = reader.ReadLine().Trim();
-                File.AppendAllText("peregovory.txt", Environment.NewLine + stroka_iz_faila);
+                File.AppendAllText(Const.peregovory, Environment.NewLine + stroka_iz_faila);
             }
 
             reader.Close(); //закрываем поток
@@ -467,7 +415,7 @@ namespace WindowsFormsApplication1
             textBox2.Clear();
             Form2_Load(sender, e);
 
-            Process.Start("cmd", "/C start /B put.exe peregovory.txt peregovory.txt");
+            Process.Start("cmd", "/C start /B put.exe Const.peregovory Const.peregovory");
 
 
             string[] podstroki = textBox2.Text.Split(new String[] { " ", ",", Environment.NewLine }, StringSplitOptions.None);
