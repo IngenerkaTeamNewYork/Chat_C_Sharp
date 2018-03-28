@@ -302,6 +302,7 @@ namespace WindowsFormsApplication1
             }
 
             textBox1.Text = null;
+	    textBox2_TextChanged(null, null);
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
