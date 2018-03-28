@@ -32,6 +32,8 @@ namespace WindowsFormsApplication1
         {
             this.components = new System.ComponentModel.Container();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.убитьКотаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.button1 = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
@@ -45,10 +47,12 @@ namespace WindowsFormsApplication1
             this.этоМатToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Chat)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
+            this.contextMenuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBox1
             // 
+            this.textBox1.ContextMenuStrip = this.contextMenuStrip2;
             this.textBox1.Location = new System.Drawing.Point(268, 437);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
@@ -59,6 +63,20 @@ namespace WindowsFormsApplication1
             this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
             this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             this.textBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyUp);
+            // 
+            // contextMenuStrip2
+            // 
+            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.убитьКотаToolStripMenuItem});
+            this.contextMenuStrip2.Name = "contextMenuStrip2";
+            this.contextMenuStrip2.Size = new System.Drawing.Size(218, 26);
+            // 
+            // убитьКотаToolStripMenuItem
+            // 
+            this.убитьКотаToolStripMenuItem.Name = "убитьКотаToolStripMenuItem";
+            this.убитьКотаToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.убитьКотаToolStripMenuItem.Text = "Удалить слово из словаря";
+            this.убитьКотаToolStripMenuItem.Click += new System.EventHandler(this.убитьКотаToolStripMenuItem_Click);
             // 
             // button1
             // 
@@ -154,6 +172,7 @@ namespace WindowsFormsApplication1
             this.Load += new System.EventHandler(this.Form2_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Chat)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
+            this.contextMenuStrip2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -173,5 +192,7 @@ namespace WindowsFormsApplication1
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem этоМатToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
+        private System.Windows.Forms.ToolStripMenuItem убитьКотаToolStripMenuItem;
     }
 }
