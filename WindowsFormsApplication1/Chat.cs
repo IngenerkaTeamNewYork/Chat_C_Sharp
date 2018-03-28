@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -119,50 +119,7 @@ namespace WindowsFormsApplication1
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            ////////////////////////////////////////////////////////////////////////////////
-            
-            File.WriteAllText("Allmatt.txt", string.Empty);
-            Process myProcess = Process.Start("get.exe", "matt.txt matt.txt");
-            do
-            {
-                if (!myProcess.HasExited)
-                {
-                    myProcess.Refresh();
-                }
-            }
-            while (!myProcess.WaitForExit(10000));
-
-            FileStream file2 = new FileStream("matt1.txt", FileMode.Open);
-            StreamReader reader1 = new StreamReader(file2);
-
-            while (reader1.Peek() >= 0)
-            {
-                string stroka_iz_faila = reader1.ReadLine().Trim();
-                File.AppendAllText("matt.txt", stroka_iz_faila + Environment.NewLine);
-            }
-
-            reader1.Close();
-            /*
-            Process.Start("put.exe", "password3.txt password3.txt");
-
- 
-            file2 = new FileStream("password3.txt", FileMode.Open); 
-            reader = new StreamReader(file2);
-
-            int i = 0;
-            while (reader.Peek() >= 0)
-            {
-                string stroka_iz_faila = reader.ReadLine().Trim();
-                string[] podstroki = stroka_iz_faila.Split(new Char[] { ' ' });
-                usery[i].login = podstroki[0];
-                usery[i].password = podstroki[1];  
-                i++;
-            }
-
-            kolichestvo_userov = i;
-            reader.Close();
-             */
-            ////////////////////////////////////////////////////////////////////////////////
+           
             bedMessages[kol_vo_bed_messages] = "Сцуко"; kol_vo_bed_messages++;
             bedMessages[kol_vo_bed_messages] = "Антон"; kol_vo_bed_messages++;
             bedMessages[kol_vo_bed_messages] = "Мирон"; kol_vo_bed_messages++;
@@ -173,7 +130,6 @@ namespace WindowsFormsApplication1
             bedMessages[kol_vo_bed_messages] = "Медиатор"; kol_vo_bed_messages++;
             bedMessages[kol_vo_bed_messages] = "Педиатр"; kol_vo_bed_messages++;
             bedMessages[kol_vo_bed_messages] = "Педогог"; kol_vo_bed_messages++;
-            bedMessages[kol_vo_bed_messages] = "Юра"; kol_vo_bed_messages++;
             bedMessages[kol_vo_bed_messages] = "Педсовет"; kol_vo_bed_messages++;
             bedMessages[kol_vo_bed_messages] = "Кедр"; kol_vo_bed_messages++;
             bedMessages[kol_vo_bed_messages] = "Курва"; kol_vo_bed_messages++;
@@ -217,8 +173,12 @@ namespace WindowsFormsApplication1
             bedMessages[kol_vo_bed_messages] = "Молодец"; kol_vo_bed_messages++;
             bedMessages[kol_vo_bed_messages] = "Щель"; kol_vo_bed_messages++;
 
+
+
+
+            
             bool sos = false;
-            //FileStream file2 = null;
+            FileStream file2 = null;
 
 
             try
@@ -240,6 +200,7 @@ namespace WindowsFormsApplication1
             this.Width = 630;
 
             int i = 0;
+
             while (reader.Peek() >= 0)
             {
                 string stroka_iz_faila = reader.ReadLine().Trim();
@@ -247,7 +208,7 @@ namespace WindowsFormsApplication1
 
                 if (podstroki.Length > 2)
                 {
-                    messages[i].day = Convert.ToDateTime(podstroki[0]);
+                    //messages[i].day = Convert.ToDateTime(podstroki[0]);
                     messages[i].login = podstroki[1];
                     messages[i].text = podstroki[2].Replace("%%%%", Environment.NewLine);
 
@@ -280,20 +241,21 @@ namespace WindowsFormsApplication1
             for (i = 0; i < kolichestvo_soobsch; i++)
             {
                 textBox2.Text = textBox2.Text + messages[i].day + Environment.NewLine;
-                textBox2.Text = textBox2.Text + "     " + messages[i].login + "  сказал(а):  ";
+                textBox2.Text = textBox2.Text + "     " + messages[i].login + "  cказал(а):  ";
                 textBox2.Text = textBox2.Text + messages[i].text + Environment.NewLine;
             }
 
             readFontFromFile();
+            textBox2_TextChanged(null, null);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             if (textBox1.Text.Trim() != "")
             {
-                DateTime thisDay = GetNetworkTime();
-                String dateStr = thisDay.ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz");
-                String dateStrfors = thisDay.ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz");
+                //DateTime thisDay = GetNetworkTime();
+                String dateStr = "";//thisDay.ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz");
+                String dateStrfors = "";//thisDay.ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz");
 
                 textBox2.AppendText(dateStr + Environment.NewLine + login + ":   " +
                     textBox1.Text + Environment.NewLine);
@@ -302,17 +264,73 @@ namespace WindowsFormsApplication1
             }
 
             textBox1.Text = null;
+
+            textBox2_TextChanged(null, null);
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
-        }
+            string[] podstroki;
+            int i = 0;
 
-        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            string[] podstroki = textBox1.Text.Split(new String[] { " ", ",", Environment.NewLine }, StringSplitOptions.None);
+            textBox2.Clear();
 
-            for (int i = 0; i < podstroki.Length; i++)
+            FileStream file2 = new FileStream("peregovory.txt", FileMode.Open); //создаем файловый поток
+            StreamReader reader = new StreamReader(file2); // создаем «потоковый читатель» и связываем его с файловым потоком
+            
+            i = 0;
+
+            while (reader.Peek() >= 0)
+            {
+                string stroka_iz_faila = reader.ReadLine().Trim();
+                podstroki = stroka_iz_faila.Split(new String[] { rasd }, StringSplitOptions.None);
+
+                if (podstroki.Length > 2)
+                {
+                    //messages[i].day = Convert.ToDateTime(podstroki[0]);
+                    messages[i].login = podstroki[1];
+                    messages[i].text = podstroki[2].Replace("%%%%", Environment.NewLine);
+
+                    i++;
+                }
+            }
+
+            int kolichestvo_soobsch = i;
+
+            reader.Close(); //закрываем поток
+
+            for (i = 0; i < kolichestvo_soobsch - 1; i++)
+            {
+                for (int j = i + 1; j < kolichestvo_soobsch; j++)
+                {
+                    if (messages[i].day > messages[j].day)
+                    {
+                        Soobshenie soob = messages[j];
+
+                        messages[j].day = messages[i].day;
+                        messages[i].day = soob.day;
+                        messages[j].login = messages[i].login;
+                        messages[i].login = soob.login;
+                        messages[j].text = messages[i].text;
+                        messages[i].text = soob.text;
+                    }
+                }
+            }
+
+            for (i = 0; i < kolichestvo_soobsch; i++)
+            {
+                textBox2.AppendText(messages[i].day + Environment.NewLine);
+                textBox2.AppendText("     " + messages[i].login + "  cказал(а):  ");
+                textBox2.AppendText(messages[i].text + Environment.NewLine);
+                //textBox2.Text = textBox2.Text + messages[i].day + Environment.NewLine;
+                //textBox2.Text = textBox2.Text + "     " + messages[i].login + "  cказал(а):  ";
+                //textBox2.Text = textBox2.Text + messages[i].text + Environment.NewLine;
+            }
+
+
+            podstroki = textBox2.Text.Split(new String[] { " ", "," }, StringSplitOptions.None);
+
+            for (i = 0; i < podstroki.Length; i++)
             {
                 if (bedMessages.Contains(podstroki[i]))
                 {
@@ -322,13 +340,15 @@ namespace WindowsFormsApplication1
                         antipm = antipm + "*";
                     }
 
-                    textBox1.Text = textBox1.Text.Replace(podstroki[i], antipm);
+                    podstroki[i] = antipm;
+                    //textBox2.Text = textBox2.Text.Replace(podstroki[i], antipm);
                 }
             }
         }
+
         private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
         {
-            string[] podstroki = textBox2.Text.Split(new String[] { " ", ",", Environment.NewLine }, StringSplitOptions.None);
+            string[] podstroki = textBox2.Text.Split(new String[] { " ", "," }, StringSplitOptions.None);
 
             for (int i = 0; i < podstroki.Length; i++)
             {
@@ -354,8 +374,14 @@ namespace WindowsFormsApplication1
             }
         }
 
-        private void button1_KeyPress(object sender, KeyPressEventArgs e)
+        private void button1_KeyPress(object sender, EventArgs e)
         {
+
+        }
+
+        private void button2_KeyPress(object sender, EventArgs e)
+        {
+           
         }
 
         private void fontDialog1_Apply(object sender, EventArgs e)
@@ -364,41 +390,8 @@ namespace WindowsFormsApplication1
 
         private void readFontFromFile()
         {
-            FileStream config = new FileStream("config.txt", FileMode.Open);
-            StreamReader reader2 = new StreamReader(config);
-
-            string stroka = reader2.ReadLine().Trim();
-            string[] view = stroka.Split(new Char[] { '$' });
-            config.Close();
-
-            if (view.Length > 4)
-            {
-                Font fontFormFile = new Font (view[0], (float)Convert.ToDouble(view[1]));
-                
-                if (view[2] == "True")
-                {
-                    fontFormFile = new Font (view[0], (float)Convert.ToDouble(view[1]), FontStyle.Italic);
-                }
-                else if (view[3] == "True")
-                {
-                    fontFormFile = new Font (view[0], (float)Convert.ToDouble(view[1]), FontStyle.Bold);
-                }
-
-                textBox1.Font = fontFormFile;
-                textBox2.Font = fontFormFile;
-                button1.Font = fontFormFile;
-                button2.Font = fontFormFile;
-                button3.Font = fontFormFile;
-
-                Color c1 = ColorTranslator.FromHtml(view[4]);
-
-                textBox1.ForeColor = c1;
-                textBox2.ForeColor = c1;
-                button1.ForeColor = c1;
-                button2.ForeColor = c1;
-                button3.ForeColor = c1;
-            }
         }
+
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -407,39 +400,31 @@ namespace WindowsFormsApplication1
             fontDialog1.Color = textBox1.ForeColor;
 
             if (fontDialog1.ShowDialog() != DialogResult.Cancel)
-            {                
-                ColorDialog MyDialog = new ColorDialog();
-                MyDialog.AllowFullOpen = false;
-                MyDialog.ShowHelp = true;
-                MyDialog.Color = textBox1.ForeColor;
-                
-                if (MyDialog.ShowDialog() == DialogResult.OK)
-                {
-                    textBox1.ForeColor = MyDialog.Color;
-                }
-                
+            {
                 textBox1.Font = fontDialog1.Font;
                 textBox2.Font = fontDialog1.Font;
-                button1.Font = fontDialog1.Font;
-                button2.Font = fontDialog1.Font;
-                button3.Font = fontDialog1.Font;
-                
+
+
                 textBox1.ForeColor = fontDialog1.Color;
                 textBox2.ForeColor = fontDialog1.Color;
+
+
                 button1.ForeColor = fontDialog1.Color;
                 button2.ForeColor = fontDialog1.Color;
                 button3.ForeColor = fontDialog1.Color;
 
+                button1.Font = fontDialog1.Font;
+                button2.Font = fontDialog1.Font;
+                button3.Font = fontDialog1.Font;
+
                 File.WriteAllText("config.txt", textBox1.Font.FontFamily.Name.ToString() +
-                    "$" + textBox1.Font.Size.ToString() + 
-                    "$" + textBox1.Font.Italic.ToString() +
-                    "$" + textBox1.Font.Bold.ToString() + 
-                    "$" + textBox1.ForeColor.ToArgb());
+                    "$" + textBox1.Font.Size.ToString() +
+                    "$" + textBox1.ForeColor);
             }
         }
 
         private void button3_Click(object sender, EventArgs e)
-        {        
+        {
             File.WriteAllText("AllMessages.txt", string.Empty);
             Process myProcess = Process.Start("cmd", "/C start /B get.exe peregovory.txt peregovory.txt");
             do
@@ -467,24 +452,7 @@ namespace WindowsFormsApplication1
             textBox2.Clear();
             Form2_Load(sender, e);
 
-            Process.Start("cmd", "/C start /B put.exe peregovory.txt peregovory.txt");
-
-
-            string[] podstroki = textBox2.Text.Split(new String[] { " ", ",", Environment.NewLine }, StringSplitOptions.None);
-
-            for (int i = 0; i < podstroki.Length; i++)
-            {
-                if (bedMessages.Contains(podstroki[i]))
-                {
-                    string antipm = "";
-                    for (int irep = 0; irep < podstroki[i].Length; irep++)
-                    {
-                        antipm = antipm + "*";
-                    }
-
-                    textBox2.Text = textBox2.Text.Replace(podstroki[i], antipm);
-                }
-            }
+            Process.Start("cmd", "/C start /B get.exe peregovory.txt peregovory.txt");
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -494,7 +462,7 @@ namespace WindowsFormsApplication1
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            string[] podstroki = textBox1.Text.Split(new String[] { " ", "," }, StringSplitOptions.None);
+            /*string[] podstroki = textBox1.Text.Split(new String[] { " ", "," }, StringSplitOptions.None);
             
             for (int i = 0; i < podstroki.Length; i++)
             {
@@ -508,26 +476,33 @@ namespace WindowsFormsApplication1
 
                     textBox1.Text = textBox1.Text.Replace(podstroki[i], antipm);
                 }
-            }
+            }*/
         }
 
         private void textBox1_KeyUp(object sender, KeyEventArgs e)
         {
         }
 
-        private void этоМатToolStripMenuItem_Click(object sender, EventArgs e)
+        private void убитьКотаToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
-        }
+            MessageBox.Show(textBox1.SelectedText);
+            str = textBox1.SelectedText;
 
-        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
-        {
-            bedMessages[kol_vo_bed_messages] = textBox2.SelectedText; kol_vo_bed_messages++;
-        }
+            for (int j = 0; j < kol_vo_bed_messages; j++)
+            {
+                if (str == bedMessages[j])
+                {
+                    for (int i = j; i < kol_vo_bed_messages - 1; i++)
+                    {
+                        bedMessages[i] = bedMessages[i + 1];
+                    }
 
-        private void pictureBox_Chat_Click(object sender, EventArgs e)
-        {
+                    kol_vo_bed_messages--;
+                }
+            }
 
+            textBox2_TextChanged(null, null);
         }
     }
 }
+
