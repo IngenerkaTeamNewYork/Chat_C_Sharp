@@ -12,7 +12,6 @@ using System.Windows.Forms;
 using System.Net;
 using System.Net.Sockets;
 
-
 namespace WindowsFormsApplication1
 {
     public struct Soobshenie
@@ -41,6 +40,7 @@ namespace WindowsFormsApplication1
         public const string rasd = "$~#~@*&";
         public string str = " ";
         public string str2 = " ";
+		public string subchat = "peregovory";
 
         public static DateTime GetNetworkTime()
         {
@@ -223,7 +223,7 @@ namespace WindowsFormsApplication1
 
             try
             {
-                file2 = new FileStream("peregovory.txt", FileMode.Open); //создаем файловый поток
+                file2 = new FileStream(subchat + ".txt", FileMode.Open); //создаем файловый поток
             }
             catch (System.IO.FileNotFoundException)
             {
@@ -233,7 +233,7 @@ namespace WindowsFormsApplication1
             }
 
             file2.Close();
-            file2 = new FileStream("peregovory.txt", FileMode.Open); //создаем файловый поток
+            file2 = new FileStream(subchat + ".txt", FileMode.Open); //создаем файловый поток
             StreamReader reader = new StreamReader(file2); // создаем «потоковый читатель» и связываем его с файловым потоком
 
             this.Height = 651;
@@ -297,12 +297,11 @@ namespace WindowsFormsApplication1
 
                 textBox2.AppendText(dateStr + Environment.NewLine + login + ":   " +
                     textBox1.Text + Environment.NewLine);
-                File.AppendAllText("peregovory.txt", Environment.NewLine + dateStr + rasd + login + rasd + textBox1.Text.Replace(Environment.NewLine, "%%%%"));
+                File.AppendAllText(subchat + ".txt", Environment.NewLine + dateStr + rasd + login + rasd + textBox1.Text.Replace(Environment.NewLine, "%%%%"));
                 File.AppendAllText("NewMessages.txt", dateStr + rasd + login + rasd + textBox1.Text.Replace(Environment.NewLine, "%%%%") + Environment.NewLine);
             }
 
             textBox1.Text = null;
-	    textBox2_TextChanged(null, null);
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -312,7 +311,7 @@ namespace WindowsFormsApplication1
 
             textBox2.Clear();
 
-            FileStream file2 = new FileStream("peregovory.txt", FileMode.Open); //создаем файловый поток
+            FileStream file2 = new FileStream(subchat + ".txt", FileMode.Open); //создаем файловый поток
             StreamReader reader = new StreamReader(file2); // создаем «потоковый читатель» и связываем его с файловым потоком
             
             i = 0;
@@ -534,7 +533,7 @@ namespace WindowsFormsApplication1
             while (reader.Peek() >= 0)
             {
                 string stroka_iz_faila = reader.ReadLine().Trim();
-                File.AppendAllText("peregovory.txt", Environment.NewLine + stroka_iz_faila);
+                File.AppendAllText(subchat + ".txt", Environment.NewLine + stroka_iz_faila);
             }
 
             reader.Close(); //закрываем поток
@@ -542,7 +541,7 @@ namespace WindowsFormsApplication1
             textBox2.Clear();
             Form2_Load(sender, e);
 
-            Process.Start("cmd", "/C start /B put.exe peregovory.txt peregovory.txt");
+            Process.Start("cmd", "/C start /B put.exe " + subchat + ".txt " + subchat + ".txt");
 
 
             string[] podstroki = textBox2.Text.Split(new String[] { " ", ",", Environment.NewLine }, StringSplitOptions.None);
@@ -562,9 +561,22 @@ namespace WindowsFormsApplication1
             }
         }
 
+        private void textBox3_Enter(object sender, EventArgs e)
+        {
+            subchat = textBox3.Text;
+            if (File.Exists(subchat + ".txt"))
+            {
+                textBox2.Text = File.ReadAllText(subchat + ".txt").Replace("%%%%", Environment.NewLine);
+            }
+            else
+            {
+                textBox2.Text = "";
+            }
+        }
+		
         private void button4_Click(object sender, EventArgs e)
         {
-            // Process.Start("put.exe", "peregovory.txt peregovory.txt");
+            // Process.Start("put.exe", subchat + ".txt " + subchat + ".txt"");
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
