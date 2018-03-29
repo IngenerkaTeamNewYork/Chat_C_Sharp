@@ -15,6 +15,7 @@ using System.Net.Sockets;
 
 
 
+
 namespace WindowsFormsApplication1
 {
     public struct Soobshenie
@@ -43,6 +44,7 @@ namespace WindowsFormsApplication1
         
         public string str = " ";
         public string str2 = " ";
+		public string subchat = "peregovory";
 
         public Chat(string _login)
         {
@@ -170,7 +172,7 @@ namespace WindowsFormsApplication1
 
             try
             {
-                file2 = new FileStream(Const.peregovory, FileMode.Open); //создаем файловый поток
+                file2 = new FileStream(subchat + ".txt", FileMode.Open); //создаем файловый поток
             }
             catch (System.IO.FileNotFoundException)
             {
@@ -180,7 +182,7 @@ namespace WindowsFormsApplication1
             }
 
             file2.Close();
-            file2 = new FileStream(Const.peregovory, FileMode.Open); //создаем файловый поток
+            file2 = new FileStream(subchat + ".txt", FileMode.Open); //создаем файловый поток
             StreamReader reader = new StreamReader(file2); // создаем «потоковый читатель» и связываем его с файловым потоком
 
             this.Height = 651;
@@ -244,8 +246,8 @@ namespace WindowsFormsApplication1
 
                 textBox2.AppendText(dateStr + Environment.NewLine + login + ":   " +
                     textBox1.Text + Environment.NewLine);
-                File.AppendAllText(Const.peregovory, Environment.NewLine + dateStr + Const.rasd + login + Const.rasd + textBox1.Text.Replace(Environment.NewLine, Const.rasd_enter));
-                File.AppendAllText(Const.NewMessages, dateStr + Const.rasd + login + Const.rasd + textBox1.Text.Replace(Environment.NewLine, Const.rasd_enter) + Environment.NewLine);
+                File.AppendAllText(subchat + ".txt", Environment.NewLine + dateStr + rasd + login + rasd + textBox1.Text.Replace(Environment.NewLine, "%%%%"));
+                File.AppendAllText(Const.NewMessages, dateStr + rasd + login + rasd + textBox1.Text.Replace(Environment.NewLine, "%%%%") + Environment.NewLine);
             }
 
             textBox1.Text = null;
@@ -253,6 +255,80 @@ namespace WindowsFormsApplication1
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
+            string[] podstroki;
+            int i = 0;
+
+            textBox2.Clear();
+
+            FileStream file2 = new FileStream(subchat + ".txt", FileMode.Open); //создаем файловый поток
+            StreamReader reader = new StreamReader(file2); // создаем «потоковый читатель» и связываем его с файловым потоком
+            
+            i = 0;
+
+            while (reader.Peek() >= 0)
+            {
+                string stroka_iz_faila = reader.ReadLine().Trim();
+                podstroki = stroka_iz_faila.Split(new String[] { rasd }, StringSplitOptions.None);
+
+                if (podstroki.Length > 2)
+                {
+                    //messages[i].day = Convert.ToDateTime(podstroki[0]);
+                    messages[i].login = podstroki[1];
+                    messages[i].text = podstroki[2].Replace("%%%%", Environment.NewLine);
+
+                    i++;
+                }
+            }
+
+            int kolichestvo_soobsch = i;
+
+            reader.Close(); //закрываем поток
+
+            for (i = 0; i < kolichestvo_soobsch - 1; i++)
+            {
+                for (int j = i + 1; j < kolichestvo_soobsch; j++)
+                {
+                    if (messages[i].day > messages[j].day)
+                    {
+                        Soobshenie soob = messages[j];
+
+                        messages[j].day = messages[i].day;
+                        messages[i].day = soob.day;
+                        messages[j].login = messages[i].login;
+                        messages[i].login = soob.login;
+                        messages[j].text = messages[i].text;
+                        messages[i].text = soob.text;
+                    }
+                }
+            }
+
+            for (i = 0; i < kolichestvo_soobsch; i++)
+            {
+                textBox2.AppendText(messages[i].day + Environment.NewLine);
+                textBox2.AppendText("     " + messages[i].login + "  cказал(а):  ");
+                textBox2.AppendText(messages[i].text + Environment.NewLine);
+                //textBox2.Text = textBox2.Text + messages[i].day + Environment.NewLine;
+                //textBox2.Text = textBox2.Text + "     " + messages[i].login + "  cказал(а):  ";
+                //textBox2.Text = textBox2.Text + messages[i].text + Environment.NewLine;
+            }
+
+
+            podstroki = textBox2.Text.Split(new String[] { " ", "," }, StringSplitOptions.None);
+
+            for (i = 0; i < podstroki.Length; i++)
+            {
+                if (bedMessages.Contains(podstroki[i]))
+                {
+                    string antipm = "";
+                    for (int irep = 0; irep < podstroki[i].Length; irep++)
+                    {
+                        antipm = antipm + "*";
+                    }
+
+                    podstroki[i] = antipm;
+                    //textBox2.Text = textBox2.Text.Replace(podstroki[i], antipm);
+                }
+            }
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
@@ -407,15 +483,14 @@ namespace WindowsFormsApplication1
             while (reader.Peek() >= 0)
             {
                 string stroka_iz_faila = reader.ReadLine().Trim();
-                File.AppendAllText(Const.peregovory, Environment.NewLine + stroka_iz_faila);
+                File.AppendAllText(subchat + ".txt", Environment.NewLine + stroka_iz_faila);
             }
 
             reader.Close(); //закрываем поток
 
             textBox2.Clear();
             Form2_Load(sender, e);
-
-            Process.Start("cmd", "/C start /B put.exe Const.peregovory Const.peregovory");
+            Process.Start("cmd", "/C start /B put.exe " + subchat + ".txt " + subchat + ".txt");
 
 
             string[] podstroki = textBox2.Text.Split(new String[] { " ", ",", Environment.NewLine }, StringSplitOptions.None);
@@ -435,9 +510,22 @@ namespace WindowsFormsApplication1
             }
         }
 
+        private void textBox3_Enter(object sender, EventArgs e)
+        {
+            subchat = textBox3.Text;
+            if (File.Exists(subchat + ".txt"))
+            {
+                textBox2.Text = File.ReadAllText(subchat + ".txt").Replace("%%%%", Environment.NewLine);
+            }
+            else
+            {
+                textBox2.Text = "";
+            }
+        }
+		
         private void button4_Click(object sender, EventArgs e)
         {
-            // Process.Start("put.exe", "peregovory.txt peregovory.txt");
+            // Process.Start("put.exe", subchat + ".txt " + subchat + ".txt"");
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -476,6 +564,27 @@ namespace WindowsFormsApplication1
         private void pictureBox_Chat_Click(object sender, EventArgs e)
         {
 
+        }
+		
+		private void убитьКотаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(textBox1.SelectedText);
+            str = textBox1.SelectedText;
+
+            for (int j = 0; j < kol_vo_bed_messages; j++)
+            {
+                if (str == bedMessages[j])
+                {
+                    for (int i = j; i < kol_vo_bed_messages - 1; i++)
+                    {
+                        bedMessages[i] = bedMessages[i + 1];
+                    }
+
+                    kol_vo_bed_messages--;
+                }
+            }
+
+            textBox2_TextChanged(null, null);
         }
     }
 }

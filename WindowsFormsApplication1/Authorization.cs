@@ -111,11 +111,12 @@ namespace WindowsFormsApplication1
             {
                 Chat chatForm = new Chat(LoginTextBox.Text);
                 chatForm.ShowDialog();
+			}
+
 	        if (savepass)
-    	        {
+    	      {
 	            File.WriteAllText(Const.saveduser, user);
   	        }
-            }
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
