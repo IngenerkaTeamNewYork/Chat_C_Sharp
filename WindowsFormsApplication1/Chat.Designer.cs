@@ -78,7 +78,7 @@ namespace WindowsFormsApplication1
             this.убитьКотаToolStripMenuItem.Name = "убитьКотаToolStripMenuItem";
             this.убитьКотаToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
             this.убитьКотаToolStripMenuItem.Text = "Удалить слово из словаря";
-            this.убитьКотаToolStripMenuItem.Click += new System.EventHandler(this.убитьКотаToolStripMenuItem_Click);
+            this.убитьКотаToolStripMenuItem.Click += new System.EventHandler(this.RemoveBadWordToolStripMenuItem_Click);
             // 
             // button1
             // 

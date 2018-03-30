@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
-//using System.Linq;
-using System.Text;
-//using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace WindowsFormsApplication1
@@ -37,15 +30,7 @@ namespace WindowsFormsApplication1
 
 
             File.WriteAllText("AllPolzovoteli.txt", string.Empty);
-            Process myProcess = Process.Start("get.exe", "password3.txt password3.txt");
-            do
-            {
-                if (!myProcess.HasExited)
-                {
-                    myProcess.Refresh();
-                }
-            }
-            while (!myProcess.WaitForExit(10000));
+            GetPut.Get("password3.txt");
 
             FileStream file2 = new FileStream("NewPolzovoteli.txt", FileMode.Open);
             StreamReader reader = new StreamReader(file2);
@@ -57,9 +42,9 @@ namespace WindowsFormsApplication1
             }
 
             reader.Close();
-            Process.Start("put.exe", "password3.txt password3.txt");
+            GetPut.Put("password3.txt");
 
- 
+
             file2 = new FileStream("password3.txt", FileMode.Open); 
             reader = new StreamReader(file2);
 
@@ -161,20 +146,6 @@ namespace WindowsFormsApplication1
             {
                 PPorolTextBox.Text = "";
             }
-        }
-
-        private void PPorolTextBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void LoginTextBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-        }
-
-        private void LoginTextBox_KeyUp(object sender, KeyEventArgs e)
-        {
-
         }
 
         private void LoginTextBox_KeyDown(object sender, KeyEventArgs e)
