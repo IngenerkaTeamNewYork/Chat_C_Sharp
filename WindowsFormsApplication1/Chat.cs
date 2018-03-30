@@ -153,6 +153,7 @@ namespace WindowsFormsApplication1
 
             try
             {
+                MessageBox.Show(Path.GetFullPath(subchat + ".txt"));
                 file2 = new FileStream(subchat + ".txt", FileMode.Open); //создаем файловый поток
             }
             catch (System.IO.FileNotFoundException)
