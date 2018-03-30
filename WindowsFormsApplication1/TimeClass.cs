@@ -5,9 +5,9 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Linq;
+//using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+//using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net;
 using System.Net.Sockets;
@@ -19,21 +19,21 @@ namespace WindowsFormsApplication1
         public static DateTime GetNetworkTime()
         {
             //default Windows time server
-           
+            const string ntpServer = "pool.ntp.org";
 
             // NTP message size - 16 bytes of the digest (RFC 2030)
-            var ntpData = new byte[48];
+            byte[] ntpData = new byte[48];
 
             //Setting the Leap Indicator, Version Number and Mode values
             ntpData[0] = 0x1B; //LI = 0 (no warning), VN = 3 (IPv4 only), Mode = 3 (Client Mode)
 
-            var addresses = Dns.GetHostEntry(Const.ntpServer).AddressList;
+            IPAddress[] addresses = Dns.GetHostEntry(ntpServer).AddressList;
 
             //The UDP port number assigned to NTP is 123
-            var ipEndPoint = new IPEndPoint(addresses[0], 123);
+            IPEndPoint ipEndPoint = new IPEndPoint(addresses[0], 123);
             //NTP uses UDP
 
-            using (var socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp))
+            using (Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp))
             {
                 socket.Connect(ipEndPoint);
 
@@ -59,10 +59,10 @@ namespace WindowsFormsApplication1
             intPart = SwapEndianness(intPart);
             fractPart = SwapEndianness(fractPart);
 
-            var milliseconds = (intPart * 1000) + ((fractPart * 1000) / 0x100000000L);
+            ulong milliseconds = (intPart * 1000) + ((fractPart * 1000) / 0x100000000L);
 
             //**UTC** time
-            var networkDateTime = (new DateTime(1900, 1, 1, 0, 0, 0, DateTimeKind.Utc)).AddMilliseconds((long)milliseconds);
+            DateTime networkDateTime = (new DateTime(1900, 1, 1, 0, 0, 0, DateTimeKind.Utc)).AddMilliseconds((long)milliseconds);
 
             return networkDateTime.ToLocalTime();
         }

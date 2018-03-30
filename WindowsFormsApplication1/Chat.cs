@@ -5,9 +5,9 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Linq;
+//using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+//using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net;
 using System.Net.Sockets;
@@ -42,65 +42,6 @@ namespace WindowsFormsApplication1
         public string str2 = " ";
 		public string subchat = "peregovory";
 
-        public static DateTime GetNetworkTime()
-        {
-            //default Windows time server
-            const string ntpServer = "pool.ntp.org";
-
-            // NTP message size - 16 bytes of the digest (RFC 2030)
-            var ntpData = new byte[48];
-
-            //Setting the Leap Indicator, Version Number and Mode values
-            ntpData[0] = 0x1B; //LI = 0 (no warning), VN = 3 (IPv4 only), Mode = 3 (Client Mode)
-
-            var addresses = Dns.GetHostEntry(ntpServer).AddressList;
-
-            //The UDP port number assigned to NTP is 123
-            var ipEndPoint = new IPEndPoint(addresses[0], 123);
-            //NTP uses UDP
-
-            using (var socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp))
-            {
-                socket.Connect(ipEndPoint);
-
-                //Stops code hang if NTP is blocked
-                socket.ReceiveTimeout = 3000;
-
-                socket.Send(ntpData);
-                socket.Receive(ntpData);
-                socket.Close();
-            }
-
-            //Offset to get to the "Transmit Timestamp" field (time at which the reply 
-            //departed the server for the client, in 64-bit timestamp format."
-            const byte serverReplyTime = 40;
-
-            //Get the seconds part
-            ulong intPart = BitConverter.ToUInt32(ntpData, serverReplyTime);
-
-            //Get the seconds fraction
-            ulong fractPart = BitConverter.ToUInt32(ntpData, serverReplyTime + 4);
-
-            //Convert From big-endian to little-endian
-            intPart = SwapEndianness(intPart);
-            fractPart = SwapEndianness(fractPart);
-
-            var milliseconds = (intPart * 1000) + ((fractPart * 1000) / 0x100000000L);
-
-            //**UTC** time
-            var networkDateTime = (new DateTime(1900, 1, 1, 0, 0, 0, DateTimeKind.Utc)).AddMilliseconds((long)milliseconds);
-
-            return networkDateTime.ToLocalTime();
-        }
-
-        // stackoverflow.com/a/3294698/162671
-        static uint SwapEndianness(ulong x)
-        {
-            return (uint)(((x & 0x000000ff) << 24) +
-                        ((x & 0x0000ff00) << 8) +
-                        ((x & 0x00ff0000) >> 8) +
-                        ((x & 0xff000000) >> 24));
-        }
         public Chat(string _login)
         {
             InitializeComponent();
@@ -109,13 +50,6 @@ namespace WindowsFormsApplication1
             saveFileDialog1.Filter = "Text files(*SaveFileDialog.txt)|*.txt|All files(*.*)|*.*";
             openFileDialog1.Filter = "Text files(*OpenFileDialog.txt)|*.txt|All files(*.*)|*.*";
         }
-
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
 
         private void Form2_Load(object sender, EventArgs e)
         {
@@ -217,23 +151,16 @@ namespace WindowsFormsApplication1
             bedMessages[kol_vo_bed_messages] = "Молодец"; kol_vo_bed_messages++;
             bedMessages[kol_vo_bed_messages] = "Щель"; kol_vo_bed_messages++;
 
-            bool sos = false;
-            //FileStream file2 = null;
-
-
             try
             {
                 file2 = new FileStream(subchat + ".txt", FileMode.Open); //создаем файловый поток
             }
             catch (System.IO.FileNotFoundException)
             {
-                sos = true;
                 textBox2.Text = "";
                 return;
             }
 
-            file2.Close();
-            file2 = new FileStream(subchat + ".txt", FileMode.Open); //создаем файловый поток
             StreamReader reader = new StreamReader(file2); // создаем «потоковый читатель» и связываем его с файловым потоком
 
             this.Height = 651;
@@ -291,7 +218,7 @@ namespace WindowsFormsApplication1
         {
             if (textBox1.Text.Trim() != "")
             {
-                DateTime thisDay = GetNetworkTime();
+                DateTime thisDay = MyTime.GetNetworkTime();
                 String dateStr = thisDay.ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz");
                 String dateStrfors = thisDay.ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz");
 
@@ -358,15 +285,13 @@ namespace WindowsFormsApplication1
                 textBox2.AppendText(messages[i].day + Environment.NewLine);
                 textBox2.AppendText("     " + messages[i].login + "  cказал(а):  ");
                 textBox2.AppendText(messages[i].text + Environment.NewLine);
-                //textBox2.Text = textBox2.Text + messages[i].day + Environment.NewLine;
-                //textBox2.Text = textBox2.Text + "     " + messages[i].login + "  cказал(а):  ";
-                //textBox2.Text = textBox2.Text + messages[i].text + Environment.NewLine;
             }
-
 
             podstroki = textBox2.Text.Split(new String[] { " ", "," }, StringSplitOptions.None);
 
-            for (i = 0; i < podstroki.Length; i++)
+            /* Народ, верните эти строки обратно. У Абрамова MVS 2005, который не знает слово Contains!!!
+             * 
+             * for (i = 0; i < podstroki.Length; i++)
             {
                 if (bedMessages.Contains(podstroki[i]))
                 {
@@ -377,9 +302,8 @@ namespace WindowsFormsApplication1
                     }
 
                     podstroki[i] = antipm;
-                    //textBox2.Text = textBox2.Text.Replace(podstroki[i], antipm);
                 }
-            }
+            }*/
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
@@ -388,6 +312,8 @@ namespace WindowsFormsApplication1
 
             for (int i = 0; i < podstroki.Length; i++)
             {
+                /* Народ, верните эти строки обратно. У Абрамова MVS 2005, который не знает слово Contains!!!
+                 * 
                 if (bedMessages.Contains(podstroki[i]))
                 {
                     string antipm = "";
@@ -398,6 +324,7 @@ namespace WindowsFormsApplication1
 
                     textBox1.Text = textBox1.Text.Replace(podstroki[i], antipm);
                 }
+                */ 
             }
         }
         private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
@@ -406,6 +333,8 @@ namespace WindowsFormsApplication1
 
             for (int i = 0; i < podstroki.Length; i++)
             {
+                /* Народ, верните эти строки обратно. У Абрамова MVS 2005, который не знает слово Contains!!!
+                 * 
                 if (bedMessages.Contains(podstroki[i]))
                 {
                     string antipm = "";
@@ -415,7 +344,7 @@ namespace WindowsFormsApplication1
                     }
 
                     textBox2.Text = textBox2.Text.Replace(podstroki[i], antipm);
-                }
+                }*/
             }
         }
 
@@ -548,6 +477,8 @@ namespace WindowsFormsApplication1
 
             for (int i = 0; i < podstroki.Length; i++)
             {
+                /* Народ, верните эти строки обратно. У Абрамова MVS 2005, который не знает слово Contains!!!
+                 * 
                 if (bedMessages.Contains(podstroki[i]))
                 {
                     string antipm = "";
@@ -557,7 +488,7 @@ namespace WindowsFormsApplication1
                     }
 
                     textBox2.Text = textBox2.Text.Replace(podstroki[i], antipm);
-                }
+                }*/
             }
         }
 
@@ -585,6 +516,8 @@ namespace WindowsFormsApplication1
             
             for (int i = 0; i < podstroki.Length; i++)
             {
+                /* Народ, верните эти строки обратно. У Абрамова MVS 2005, который не знает слово Contains!!!
+                 * 
                 if (bedMessages.Contains(podstroki[i]))
                 {
                     string antipm = "";
@@ -595,6 +528,7 @@ namespace WindowsFormsApplication1
 
                     textBox1.Text = textBox1.Text.Replace(podstroki[i], antipm);
                 }
+                */ 
             }
         }
 

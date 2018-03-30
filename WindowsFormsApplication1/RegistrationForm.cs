@@ -4,9 +4,9 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
+//using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+//using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace WindowsFormsApplication1
@@ -24,23 +24,6 @@ namespace WindowsFormsApplication1
             rf.ShowDialog();
         }
 
-        private void RegistrationForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox3_Enter(object sender, EventArgs e)
-        {
-            textBox3.Text = "";
-        }
-
-        private void textBox3_Leave(object sender, EventArgs e)
-        {
-            textBox3.Text = "";
-        }
-
-
-
         private void Reg_Log_Enter(object sender, EventArgs e)
         {
             if (loginTextBox.Text == "Введите логин")
@@ -55,21 +38,6 @@ namespace WindowsFormsApplication1
             {
                 loginTextBox.Text = "Введите логин";
             }
-        }
-
-        private void textBox6_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox5_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox4_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void ParolTextBox_Leave(object sender, EventArgs e)
@@ -157,7 +125,5 @@ namespace WindowsFormsApplication1
             if (e.KeyChar == (int)Keys.Space)
                 e.KeyChar = '\0';
         }
-    }
-
-       
+    }       
 }
