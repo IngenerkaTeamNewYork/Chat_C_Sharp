@@ -1,4 +1,6 @@
-﻿namespace WindowsFormsApplication1
+﻿using System;
+
+namespace WindowsFormsApplication1
 {
     partial class RegistrationForm
     {
@@ -62,6 +64,7 @@
             this.PotParolTextBox.Size = new System.Drawing.Size(100, 20);
             this.PotParolTextBox.TabIndex = 3;
             this.PotParolTextBox.Text = "Повторите пароль";
+            this.PotParolTextBox.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
             this.PotParolTextBox.Enter += new System.EventHandler(this.PotParolTextBox4_Enter);
             this.PotParolTextBox.Leave += new System.EventHandler(this.PotParolTextBox4_Leave);
             // 
@@ -73,6 +76,7 @@
             this.ParolTextBox.Size = new System.Drawing.Size(100, 20);
             this.ParolTextBox.TabIndex = 2;
             this.ParolTextBox.Text = "Введите пароль";
+            this.ParolTextBox.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
             this.ParolTextBox.Enter += new System.EventHandler(this.ParolTextBox_Enter);
             this.ParolTextBox.Leave += new System.EventHandler(this.ParolTextBox_Leave);
             // 
@@ -85,6 +89,7 @@
             this.loginTextBox.Size = new System.Drawing.Size(100, 20);
             this.loginTextBox.TabIndex = 1;
             this.loginTextBox.Text = "Введите логин";
+            this.loginTextBox.TextChanged += new System.EventHandler(this.textBox6_TextChanged);
             this.loginTextBox.Enter += new System.EventHandler(this.Reg_Log_Enter);
             this.loginTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Space);
             this.loginTextBox.Leave += new System.EventHandler(this.Reg_Log_Leave);
@@ -114,11 +119,14 @@
             this.Text = "Регистрация";
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
-        #endregion
-
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox PotParolTextBox;
@@ -126,4 +134,5 @@
         private System.Windows.Forms.TextBox loginTextBox;
         private System.Windows.Forms.LinkLabel linkLabel2;
     }
+    #endregion
 }

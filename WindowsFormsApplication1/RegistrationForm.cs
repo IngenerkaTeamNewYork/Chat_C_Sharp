@@ -125,5 +125,20 @@ namespace WindowsFormsApplication1
             if (e.KeyChar == (int)Keys.Space)
                 e.KeyChar = '\0';
         }
+
+        private void textBox6_TextChanged(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void textBox5_TextChanged(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }       
 }
