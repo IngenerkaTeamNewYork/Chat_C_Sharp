@@ -6,9 +6,9 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Linq;
+//using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+//using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net;
 using System.Net.Sockets;
@@ -54,13 +54,6 @@ namespace WindowsFormsApplication1
             saveFileDialog1.Filter = "Text files(*SaveFileDialog.txt)|*.txt|All files(*.*)|*.*";
             openFileDialog1.Filter = "Text files(*OpenFileDialog.txt)|*.txt|All files(*.*)|*.*";
         }
-
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
 
         private void Form2_Load(object sender, EventArgs e)
         {
@@ -166,23 +159,17 @@ namespace WindowsFormsApplication1
             bedMessages[kol_vo_bed_messages] = "Молодец"; kol_vo_bed_messages++;
             bedMessages[kol_vo_bed_messages] = "Щель"; kol_vo_bed_messages++;
 
-            bool sos = false;
-            //FileStream file2 = null;
-
-
             try
             {
+                MessageBox.Show(Path.GetFullPath(subchat + ".txt"));
                 file2 = new FileStream(subchat + ".txt", FileMode.Open); //создаем файловый поток
             }
             catch (System.IO.FileNotFoundException)
             {
-                sos = true;
                 textBox2.Text = "";
                 return;
             }
 
-            file2.Close();
-            file2 = new FileStream(subchat + ".txt", FileMode.Open); //создаем файловый поток
             StreamReader reader = new StreamReader(file2); // создаем «потоковый читатель» и связываем его с файловым потоком
 
             this.Height = 651;
@@ -307,15 +294,13 @@ namespace WindowsFormsApplication1
                 textBox2.AppendText(messages[i].day + Environment.NewLine);
                 textBox2.AppendText("     " + messages[i].login + "  cказал(а):  ");
                 textBox2.AppendText(messages[i].text + Environment.NewLine);
-                //textBox2.Text = textBox2.Text + messages[i].day + Environment.NewLine;
-                //textBox2.Text = textBox2.Text + "     " + messages[i].login + "  cказал(а):  ";
-                //textBox2.Text = textBox2.Text + messages[i].text + Environment.NewLine;
             }
-
 
             podstroki = textBox2.Text.Split(new String[] { " ", "," }, StringSplitOptions.None);
 
-            for (i = 0; i < podstroki.Length; i++)
+            /* Народ, верните эти строки обратно. У Абрамова MVS 2005, который не знает слово Contains!!!
+             * 
+             * for (i = 0; i < podstroki.Length; i++)
             {
                 if (bedMessages.Contains(podstroki[i]))
                 {
@@ -326,9 +311,8 @@ namespace WindowsFormsApplication1
                     }
 
                     podstroki[i] = antipm;
-                    //textBox2.Text = textBox2.Text.Replace(podstroki[i], antipm);
                 }
-            }
+            }*/
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
@@ -337,6 +321,8 @@ namespace WindowsFormsApplication1
 
             for (int i = 0; i < podstroki.Length; i++)
             {
+                /* Народ, верните эти строки обратно. У Абрамова MVS 2005, который не знает слово Contains!!!
+                 * 
                 if (bedMessages.Contains(podstroki[i]))
                 {
                     string antipm = "";
@@ -347,6 +333,7 @@ namespace WindowsFormsApplication1
 
                     textBox1.Text = textBox1.Text.Replace(podstroki[i], antipm);
                 }
+                */ 
             }
         }
         private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
@@ -355,6 +342,8 @@ namespace WindowsFormsApplication1
 
             for (int i = 0; i < podstroki.Length; i++)
             {
+                /* Народ, верните эти строки обратно. У Абрамова MVS 2005, который не знает слово Contains!!!
+                 * 
                 if (bedMessages.Contains(podstroki[i]))
                 {
                     string antipm = "";
@@ -364,7 +353,7 @@ namespace WindowsFormsApplication1
                     }
 
                     textBox2.Text = textBox2.Text.Replace(podstroki[i], antipm);
-                }
+                }*/
             }
         }
 
@@ -497,6 +486,8 @@ namespace WindowsFormsApplication1
 
             for (int i = 0; i < podstroki.Length; i++)
             {
+                /* Народ, верните эти строки обратно. У Абрамова MVS 2005, который не знает слово Contains!!!
+                 * 
                 if (bedMessages.Contains(podstroki[i]))
                 {
                     string antipm = "";
@@ -506,7 +497,7 @@ namespace WindowsFormsApplication1
                     }
 
                     textBox2.Text = textBox2.Text.Replace(podstroki[i], antipm);
-                }
+                }*/
             }
         }
 
@@ -534,6 +525,8 @@ namespace WindowsFormsApplication1
             
             for (int i = 0; i < podstroki.Length; i++)
             {
+                /* Народ, верните эти строки обратно. У Абрамова MVS 2005, который не знает слово Contains!!!
+                 * 
                 if (bedMessages.Contains(podstroki[i]))
                 {
                     string antipm = "";
@@ -544,6 +537,7 @@ namespace WindowsFormsApplication1
 
                     textBox1.Text = textBox1.Text.Replace(podstroki[i], antipm);
                 }
+                */ 
             }
         }
 
