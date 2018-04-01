@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,6 +12,9 @@ using System.Text;
 using System.Windows.Forms;
 using System.Net;
 using System.Net.Sockets;
+
+
+
 
 namespace WindowsFormsApplication1
 {
@@ -37,7 +41,7 @@ namespace WindowsFormsApplication1
         public static Polzovatel_view[] type = new Polzovatel_view[3];
 
         public string login;
-        public const string rasd = "$~#~@*&";
+        
         public string str = " ";
         public string str2 = " ";
 		public string subchat = "peregovory";
@@ -54,9 +58,13 @@ namespace WindowsFormsApplication1
         private void Form2_Load(object sender, EventArgs e)
         {
             ////////////////////////////////////////////////////////////////////////////////
-            
-            File.WriteAllText("Allmatt.txt", string.Empty);
-            Process myProcess = Process.Start("get.exe", "matt.txt matt.txt");
+            /*TimerCallback tm = new TimerCallback(button3_Click( sender, null));
+            // создаем таймер
+            Timer timer = new Timer(tm, null, 0, 2000);
+            */
+           // Timer t = new Timer(button3_Click(sender, null), null, 0, 2000);
+            File.WriteAllText(Const.Allmatt, string.Empty);
+            Process myProcess = Process.Start(Const.get, Const.matt);
             do
             {
                 if (!myProcess.HasExited)
@@ -66,13 +74,13 @@ namespace WindowsFormsApplication1
             }
             while (!myProcess.WaitForExit(10000));
 
-            FileStream file2 = new FileStream("matt1.txt", FileMode.Open);
+            FileStream file2 = new FileStream(Const.slovar, FileMode.Open);
             StreamReader reader1 = new StreamReader(file2);
 
             while (reader1.Peek() >= 0)
             {
                 string stroka_iz_faila = reader1.ReadLine().Trim();
-                File.AppendAllText("matt.txt", stroka_iz_faila + Environment.NewLine);
+                File.AppendAllText(Const.matt, stroka_iz_faila + Environment.NewLine);
             }
 
             reader1.Close();
@@ -171,13 +179,13 @@ namespace WindowsFormsApplication1
             while (reader.Peek() >= 0)
             {
                 string stroka_iz_faila = reader.ReadLine().Trim();
-                string[] podstroki = stroka_iz_faila.Split(new String[] { rasd }, StringSplitOptions.None);
+                string[] podstroki = stroka_iz_faila.Split(new String[] { Const.rasd }, StringSplitOptions.None);
 
                 if (podstroki.Length > 2)
                 {
                     messages[i].day = Convert.ToDateTime(podstroki[0]);
                     messages[i].login = podstroki[1];
-                    messages[i].text = podstroki[2].Replace("%%%%", Environment.NewLine);
+                    messages[i].text = podstroki[2].Replace(Const.rasd_enter, Environment.NewLine);
 
                     i++;
                 }
@@ -219,14 +227,14 @@ namespace WindowsFormsApplication1
         {
             if (textBox1.Text.Trim() != "")
             {
-                DateTime thisDay = MyTime.GetNetworkTime();
-                String dateStr = thisDay.ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz");
-                String dateStrfors = thisDay.ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz");
+                DateTime thisDay = Time.GetNetworkTime();
+                String dateStr = thisDay.ToString(Const.data);
+                String dateStrfors = thisDay.ToString(Const.data);
 
                 textBox2.AppendText(dateStr + Environment.NewLine + login + ":   " +
                     textBox1.Text + Environment.NewLine);
                 File.AppendAllText(subchat + ".txt", Environment.NewLine + dateStr + rasd + login + rasd + textBox1.Text.Replace(Environment.NewLine, "%%%%"));
-                File.AppendAllText("NewMessages.txt", dateStr + rasd + login + rasd + textBox1.Text.Replace(Environment.NewLine, "%%%%") + Environment.NewLine);
+                File.AppendAllText(Const.NewMessages, dateStr + rasd + login + rasd + textBox1.Text.Replace(Environment.NewLine, "%%%%") + Environment.NewLine);
             }
 
             textBox1.Text = null;
@@ -368,7 +376,7 @@ namespace WindowsFormsApplication1
 
         private void readFontFromFile()
         {
-            FileStream config = new FileStream("config.txt", FileMode.Open);
+            FileStream config = new FileStream(Const.config, FileMode.Open);
             StreamReader reader2 = new StreamReader(config);
 
             string stroka = reader2.ReadLine().Trim();
@@ -434,7 +442,7 @@ namespace WindowsFormsApplication1
                 button2.ForeColor = fontDialog1.Color;
                 button3.ForeColor = fontDialog1.Color;
 
-                File.WriteAllText("config.txt", textBox1.Font.FontFamily.Name.ToString() +
+                File.WriteAllText(Const.config, textBox1.Font.FontFamily.Name.ToString() +
                     "$" + textBox1.Font.Size.ToString() + 
                     "$" + textBox1.Font.Italic.ToString() +
                     "$" + textBox1.Font.Bold.ToString() + 
@@ -443,9 +451,10 @@ namespace WindowsFormsApplication1
         }
 
         private void button3_Click(object sender, EventArgs e)
-        {        
-            File.WriteAllText("AllMessages.txt", string.Empty);
-            Process myProcess = Process.Start("cmd", "/C start /B get.exe peregovory.txt peregovory.txt");
+        {
+           
+            File.WriteAllText(Const.AllMessages, string.Empty);
+            Process myProcess = Process.Start("cmd", "/C start /B get.exe Const.peregovory Const.peregovory");
             do
             {
                 if (!myProcess.HasExited)
@@ -457,7 +466,7 @@ namespace WindowsFormsApplication1
             while (!myProcess.WaitForExit(10000));
 
 
-            FileStream file2 = new FileStream("NewMessages.txt", FileMode.Open);
+            FileStream file2 = new FileStream(Const.NewMessages, FileMode.Open);
             StreamReader reader = new StreamReader(file2); // создаем «потоковый читатель» и связываем его с файловым потоком
 
             while (reader.Peek() >= 0)
@@ -470,7 +479,6 @@ namespace WindowsFormsApplication1
 
             textBox2.Clear();
             Form2_Load(sender, e);
-
             Process.Start("cmd", "/C start /B put.exe " + subchat + ".txt " + subchat + ".txt");
 
 

@@ -24,7 +24,7 @@ namespace WindowsFormsApplication1
         public static Polzovatel[] usery = new Polzovatel[500];
         public static int kolichestvo_userov;
         public static bool savepass = false;
-        public static string saveduser = File.ReadAllText("saveduser.txt");
+        public static string saveduser = File.ReadAllText(Const.saveduser);
 
         public LoginForm()
         {
@@ -33,11 +33,11 @@ namespace WindowsFormsApplication1
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            LoginTextBox.Text = File.ReadAllText("saveduser.txt");
+            LoginTextBox.Text = File.ReadAllText(Const.saveduser);
 
 
-            File.WriteAllText("AllPolzovoteli.txt", string.Empty);
-            Process myProcess = Process.Start("get.exe", "password3.txt password3.txt");
+            File.WriteAllText(Const.AllPolzovoteli, string.Empty);
+            Process myProcess = Process.Start(Const.get, Const.password3 /*Const.password3*/);
             do
             {
                 if (!myProcess.HasExited)
@@ -47,20 +47,20 @@ namespace WindowsFormsApplication1
             }
             while (!myProcess.WaitForExit(10000));
 
-            FileStream file2 = new FileStream("NewPolzovoteli.txt", FileMode.Open);
+            FileStream file2 = new FileStream(Const.NewPolzovoteli, FileMode.Open);
             StreamReader reader = new StreamReader(file2);
 
             while (reader.Peek() >= 0)
             {
                 string stroka_iz_faila = reader.ReadLine().Trim();
-                File.AppendAllText("password3.txt", stroka_iz_faila + Environment.NewLine);
+                File.AppendAllText(Const.password3, stroka_iz_faila + Environment.NewLine);
             }
 
             reader.Close();
-            Process.Start("put.exe", "password3.txt password3.txt");
+            Process.Start(Const.put, Const.password3/* password3.txt"*/);
 
  
-            file2 = new FileStream("password3.txt", FileMode.Open); 
+            file2 = new FileStream(Const.password3, FileMode.Open); 
             reader = new StreamReader(file2);
 
             int i = 0;
@@ -114,8 +114,8 @@ namespace WindowsFormsApplication1
 			}
 
 	        if (savepass)
-    	    {
-	            File.WriteAllText("saveduser.txt", user);
+    	      {
+	            File.WriteAllText(Const.saveduser, user);
   	        }
         }
 
@@ -200,7 +200,7 @@ namespace WindowsFormsApplication1
 
         private void button2_Click(object sender, EventArgs e)
         {
-            File.WriteAllText("saveduser.txt", "");
+            File.WriteAllText(Const.saveduser, "");
         }
     }
 }
