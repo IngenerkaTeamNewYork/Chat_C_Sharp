@@ -33,15 +33,14 @@
             this.LoginTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.pictureBox_Log = new System.Windows.Forms.PictureBox();
             this.savepassbox = new System.Windows.Forms.CheckBox();
             this.button2 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Log)).BeginInit();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(3, 80);
+            this.button1.Location = new System.Drawing.Point(2, 104);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 3;
@@ -87,7 +86,7 @@
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(51, 106);
+            this.linkLabel1.Location = new System.Drawing.Point(50, 130);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(72, 13);
             this.linkLabel1.TabIndex = 5;
@@ -95,18 +94,10 @@
             this.linkLabel1.Text = "Регистрация\r\n";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
-            // pictureBox_Log
-            // 
-            this.pictureBox_Log.Location = new System.Drawing.Point(-7, -7);
-            this.pictureBox_Log.Name = "pictureBox_Log";
-            this.pictureBox_Log.Size = new System.Drawing.Size(183, 137);
-            this.pictureBox_Log.TabIndex = 5;
-            this.pictureBox_Log.TabStop = false;
-            // 
             // savepassbox
             // 
             this.savepassbox.AutoSize = true;
-            this.savepassbox.Location = new System.Drawing.Point(84, 84);
+            this.savepassbox.Location = new System.Drawing.Point(83, 108);
             this.savepassbox.Name = "savepassbox";
             this.savepassbox.Size = new System.Drawing.Size(79, 17);
             this.savepassbox.TabIndex = 4;
@@ -126,11 +117,21 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(3, 80);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.textBox1.Size = new System.Drawing.Size(165, 20);
+            this.textBox1.TabIndex = 8;
+            this.textBox1.Text = "peregovory";
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(173, 123);
+            this.ClientSize = new System.Drawing.Size(170, 150);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.savepassbox);
             this.Controls.Add(this.LoginTextBox);
@@ -138,11 +139,9 @@
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.pictureBox_Log);
             this.Name = "LoginForm";
             this.Text = "Вход";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Log)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -155,8 +154,8 @@
         private System.Windows.Forms.TextBox LoginTextBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.LinkLabel linkLabel1;
-        private System.Windows.Forms.PictureBox pictureBox_Log;
         private System.Windows.Forms.CheckBox savepassbox;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }

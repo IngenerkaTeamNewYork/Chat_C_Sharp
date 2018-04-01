@@ -17,7 +17,15 @@ namespace WindowsFormsApplication1
             //Setting the Leap Indicator, Version Number and Mode values
             ntpData[0] = 0x1B; //LI = 0 (no warning), VN = 3 (IPv4 only), Mode = 3 (Client Mode)
 
-            IPAddress[] addresses = Dns.GetHostEntry(ntpServer).AddressList;
+            IPAddress[] addresses;
+            try
+            {
+                addresses = Dns.GetHostEntry(ntpServer).AddressList;
+            }
+            catch (SocketException)
+            {
+                return DateTime.Now;
+            }
 
             //The UDP port number assigned to NTP is 123
             IPEndPoint ipEndPoint = new IPEndPoint(addresses[0], 123);

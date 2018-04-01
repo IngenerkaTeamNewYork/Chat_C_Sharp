@@ -40,22 +40,27 @@ namespace WindowsFormsApplication1
             this.этоМатToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.pictureBox_Chat = new System.Windows.Forms.PictureBox();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.contextMenuStrip2.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Chat)).BeginInit();
             this.SuspendLayout();
             // 
             // textBox1
             // 
+            this.textBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.textBox1.ContextMenuStrip = this.contextMenuStrip2;
-            this.textBox1.Location = new System.Drawing.Point(268, 437);
+            this.textBox1.Location = new System.Drawing.Point(12, 438);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(250, 63);
@@ -63,7 +68,6 @@ namespace WindowsFormsApplication1
             this.textBox1.Tag = "";
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
-            this.textBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyUp);
             this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // contextMenuStrip2
@@ -71,37 +75,37 @@ namespace WindowsFormsApplication1
             this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.убитьКотаToolStripMenuItem});
             this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(220, 26);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(218, 26);
             // 
             // убитьКотаToolStripMenuItem
             // 
             this.убитьКотаToolStripMenuItem.Name = "убитьКотаToolStripMenuItem";
-            this.убитьКотаToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+            this.убитьКотаToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
             this.убитьКотаToolStripMenuItem.Text = "Удалить слово из словаря";
             this.убитьКотаToolStripMenuItem.Click += new System.EventHandler(this.RemoveBadWordToolStripMenuItem_Click);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(524, 437);
+            this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.button1.Location = new System.Drawing.Point(268, 438);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 63);
             this.button1.TabIndex = 2;
             this.button1.Text = "Отправить";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            this.button1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.button1_KeyPress);
             // 
             // textBox2
             // 
-            this.textBox2.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.textBox2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.textBox2.BackColor = System.Drawing.SystemColors.Control;
             this.textBox2.ContextMenuStrip = this.contextMenuStrip1;
-            this.textBox2.Location = new System.Drawing.Point(269, 12);
+            this.textBox2.Location = new System.Drawing.Point(12, 111);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
             this.textBox2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox2.Size = new System.Drawing.Size(323, 419);
+            this.textBox2.Size = new System.Drawing.Size(331, 321);
             this.textBox2.TabIndex = 0;
             this.textBox2.TabStop = false;
             // 
@@ -110,13 +114,13 @@ namespace WindowsFormsApplication1
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.этоМатToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(130, 26);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(120, 26);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // этоМатToolStripMenuItem
             // 
             this.этоМатToolStripMenuItem.Name = "этоМатToolStripMenuItem";
-            this.этоМатToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.этоМатToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
             this.этоМатToolStripMenuItem.Text = "Это мат!";
             this.этоМатToolStripMenuItem.Click += new System.EventHandler(this.этоМатToolStripMenuItem_Click);
             // 
@@ -124,22 +128,10 @@ namespace WindowsFormsApplication1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // pictureBox_Chat
-            // 
-            this.pictureBox_Chat.Location = new System.Drawing.Point(0, -3);
-            this.pictureBox_Chat.Name = "pictureBox_Chat";
-            this.pictureBox_Chat.Size = new System.Drawing.Size(605, 517);
-            this.pictureBox_Chat.TabIndex = 4;
-            this.pictureBox_Chat.TabStop = false;
-            this.pictureBox_Chat.Click += new System.EventHandler(this.pictureBox_Chat_Click);
-            // 
-            // fontDialog1
-            // 
-            this.fontDialog1.Apply += new System.EventHandler(this.fontDialog1_Apply);
-            // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(25, 22);
+            this.button2.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.button2.Location = new System.Drawing.Point(12, 12);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(87, 32);
             this.button2.TabIndex = 0;
@@ -150,9 +142,10 @@ namespace WindowsFormsApplication1
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(25, 60);
+            this.button3.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.button3.Location = new System.Drawing.Point(12, 50);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(198, 23);
+            this.button3.Size = new System.Drawing.Size(208, 23);
             this.button3.TabIndex = 6;
             this.button3.Text = "Обновить чат";
             this.button3.UseVisualStyleBackColor = true;
@@ -160,42 +153,98 @@ namespace WindowsFormsApplication1
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(72, 435);
+            this.textBox3.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.textBox3.Location = new System.Drawing.Point(171, 19);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(117, 20);
+            this.textBox3.Size = new System.Drawing.Size(104, 20);
             this.textBox3.TabIndex = 7;
             this.textBox3.Text = "peregovory";
-            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_Enter);
             // 
             // label1
             // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(13, 437);
+            this.label1.Location = new System.Drawing.Point(112, 22);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 13);
             this.label1.TabIndex = 8;
             this.label1.Text = "Подчат:";
             // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 10000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(233, 54);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(110, 17);
+            this.checkBox1.TabIndex = 9;
+            this.checkBox1.Text = "Автообновление";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(281, 15);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(62, 26);
+            this.button4.TabIndex = 10;
+            this.button4.Text = "Сменить";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(268, 77);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(52, 25);
+            this.button5.TabIndex = 11;
+            this.button5.Text = "Ок";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(162, 80);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(100, 20);
+            this.textBox4.TabIndex = 12;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(25, 83);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(134, 13);
+            this.label2.TabIndex = 13;
+            this.label2.Text = "Добавить пользователя:";
+            // 
             // Chat
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(605, 513);
+            this.ClientSize = new System.Drawing.Size(353, 513);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.button5);
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.pictureBox_Chat);
             this.Controls.Add(this.label1);
             this.Name = "Chat";
             this.Text = "Siemens A35";
             this.Load += new System.EventHandler(this.Form2_Load);
             this.contextMenuStrip2.ResumeLayout(false);
             this.contextMenuStrip1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Chat)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -208,7 +257,6 @@ namespace WindowsFormsApplication1
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.PictureBox pictureBox_Chat;
         private System.Windows.Forms.FontDialog fontDialog1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
@@ -219,5 +267,11 @@ namespace WindowsFormsApplication1
         private System.Windows.Forms.ToolStripMenuItem убитьКотаToolStripMenuItem;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.Label label2;
     }
 }

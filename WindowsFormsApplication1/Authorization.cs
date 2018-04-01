@@ -94,7 +94,15 @@ namespace WindowsFormsApplication1
             }
             else
             {
-                Chat chatForm = new Chat(LoginTextBox.Text);
+                if (!File.Exists(textBox1.Text + "-users.txt"))
+                {
+                    File.AppendAllLines(textBox1.Text + "-users.txt", new string[]{LoginTextBox.Text});
+                }
+                if (!File.Exists(textBox1.Text + ".txt"))
+                {
+                    File.WriteAllText(textBox1.Text + ".txt", "");
+                }
+                Chat chatForm = new Chat(LoginTextBox.Text, textBox1.Text);
                 chatForm.ShowDialog();
 			}
 

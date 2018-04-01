@@ -1,12 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
-//using System.Linq;
-using System.Text;
-//using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace WindowsFormsApplication1
@@ -112,11 +104,6 @@ namespace WindowsFormsApplication1
 
                 Chat chatForm = new Chat(loginTextBox.Text);
                 chatForm.ShowDialog();
-
-                /*Process test = new Process();
-                test.StartInfo.FileName = "cmd";
-                test.StartInfo.Arguments = @"/C ""echo testing | grep test""";
-                test.Start();*/
             };
         }
 
