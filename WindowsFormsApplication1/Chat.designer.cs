@@ -55,36 +55,36 @@ namespace WindowsFormsApplication1
             // textBox1
             // 
             this.textBox1.ContextMenuStrip = this.contextMenuStrip2;
-            this.textBox1.Location = new System.Drawing.Point(268, 437);
+            this.textBox1.Location = new System.Drawing.Point(269, 437);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(250, 63);
+            this.textBox1.Size = new System.Drawing.Size(244, 63);
             this.textBox1.TabIndex = 1;
             this.textBox1.Tag = "";
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
-            this.textBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyUp);
             this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            this.textBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyUp);
             // 
             // contextMenuStrip2
             // 
             this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.убитьКотаToolStripMenuItem});
             this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(220, 26);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(218, 26);
             // 
             // убитьКотаToolStripMenuItem
             // 
             this.убитьКотаToolStripMenuItem.Name = "убитьКотаToolStripMenuItem";
-            this.убитьКотаToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+            this.убитьКотаToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
             this.убитьКотаToolStripMenuItem.Text = "Удалить слово из словаря";
             this.убитьКотаToolStripMenuItem.Click += new System.EventHandler(this.убитьКотаToolStripMenuItem_Click);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(524, 437);
+            this.button1.Location = new System.Drawing.Point(512, 437);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 63);
+            this.button1.Size = new System.Drawing.Size(87, 63);
             this.button1.TabIndex = 2;
             this.button1.Text = "Отправить";
             this.button1.UseVisualStyleBackColor = true;
@@ -110,13 +110,13 @@ namespace WindowsFormsApplication1
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.этоМатToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(130, 26);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(120, 26);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // этоМатToolStripMenuItem
             // 
             this.этоМатToolStripMenuItem.Name = "этоМатToolStripMenuItem";
-            this.этоМатToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.этоМатToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
             this.этоМатToolStripMenuItem.Text = "Это мат!";
             this.этоМатToolStripMenuItem.Click += new System.EventHandler(this.этоМатToolStripMenuItem_Click);
             // 
@@ -141,7 +141,7 @@ namespace WindowsFormsApplication1
             // 
             this.button2.Location = new System.Drawing.Point(25, 22);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(87, 32);
+            this.button2.Size = new System.Drawing.Size(227, 212);
             this.button2.TabIndex = 0;
             this.button2.TabStop = false;
             this.button2.Text = "Для слепых";
@@ -150,9 +150,9 @@ namespace WindowsFormsApplication1
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(25, 60);
+            this.button3.Location = new System.Drawing.Point(25, 240);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(198, 23);
+            this.button3.Size = new System.Drawing.Size(227, 23);
             this.button3.TabIndex = 6;
             this.button3.Text = "Обновить чат";
             this.button3.UseVisualStyleBackColor = true;

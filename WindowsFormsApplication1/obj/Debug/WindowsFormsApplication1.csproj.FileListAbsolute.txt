@@ -1,0 +1,11 @@
+C:\Users\Алексей\Desktop\Алена\Chat_C_Sharp\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.LoginForm.resources
+C:\Users\Алексей\Desktop\Алена\Chat_C_Sharp\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Chat.resources
+C:\Users\Алексей\Desktop\Алена\Chat_C_Sharp\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Users\Алексей\Desktop\Алена\Chat_C_Sharp\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.RegistrationForm.resources
+C:\Users\Алексей\Desktop\Алена\Chat_C_Sharp\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csproj.GenerateResource.Cache
+C:\Users\Алексей\Desktop\Алена\Chat_C_Sharp\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csproj.CoreCompileInputs.cache
+C:\Users\Алексей\Desktop\Алена\Chat_C_Sharp\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe.config
+C:\Users\Алексей\Desktop\Алена\Chat_C_Sharp\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe
+C:\Users\Алексей\Desktop\Алена\Chat_C_Sharp\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
+C:\Users\Алексей\Desktop\Алена\Chat_C_Sharp\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
+C:\Users\Алексей\Desktop\Алена\Chat_C_Sharp\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb

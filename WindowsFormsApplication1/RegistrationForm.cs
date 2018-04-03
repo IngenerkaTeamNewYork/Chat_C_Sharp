@@ -85,6 +85,7 @@ namespace WindowsFormsApplication1
         {
             int kolich = LoginForm.kolichestvo_userov;
             bool uzhe_byl = false;
+            bool bug = false;
             for (int i = 0; i < kolich; i++)
             {
                 if (loginTextBox.Text == LoginForm.usery[i].login)
@@ -99,10 +100,28 @@ namespace WindowsFormsApplication1
                     MessageBox.Show("Пароль занят!");
                     uzhe_byl = true;
                     break;
-                }                
+                }      
+                if (loginTextBox.Text == "Введите логин" || ParolTextBox.Text == "Введите пароль")
+                {
+                    MessageBox.Show("Данные введи!");
+                    bug = true;
+                    break;
+                }
+                if (PotParolTextBox.Text == "Повторите пароль")
+                {
+                    MessageBox.Show("Пароль повтори!");
+                    bug = true;
+                    break;
+                }
+                if (ParolTextBox.Text != PotParolTextBox.Text)
+                {
+                    MessageBox.Show("Пароли не совпадают!");
+                    bug = true;
+                    break;
+                }
             }
 
-            if (!uzhe_byl)
+            if (!uzhe_byl && !bug)
             {
                 string filename = "password3.txt";
                 System.IO.File.AppendAllText(filename, Environment.NewLine + loginTextBox.Text + " " + ParolTextBox.Text);
@@ -124,6 +143,12 @@ namespace WindowsFormsApplication1
         {
             if (e.KeyChar == (int)Keys.Space)
                 e.KeyChar = '\0';
+        }
+
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            LoginForm rf = new LoginForm();
+            rf.ShowDialog();
         }
     }       
 }
