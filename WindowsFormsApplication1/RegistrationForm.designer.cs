@@ -98,10 +98,11 @@
             this.linkLabel2.TabIndex = 5;
             this.linkLabel2.TabStop = true;
             this.linkLabel2.Text = "Войти";
+            this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
             // 
             // RegistrationForm
             // 
-            this.ClientSize = new System.Drawing.Size(204, 174);
+            this.ClientSize = new System.Drawing.Size(204, 175);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.loginTextBox);
             this.Controls.Add(this.ParolTextBox);
