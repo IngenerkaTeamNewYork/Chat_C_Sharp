@@ -43,7 +43,7 @@ namespace WindowsFormsApplication1
                 socket.Close();
             }
 
-            //Offset to get to the "Transmit Timestamp" field (time at which the reply 
+            //Offset to get to the "Transmit Timestamp" field (time at which the reply
             //departed the server for the client, in 64-bit timestamp format."
             const byte serverReplyTime = 40;
 

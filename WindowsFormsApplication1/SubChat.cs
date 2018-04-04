@@ -9,8 +9,6 @@ namespace WindowsFormsApplication1
 {
     namespace ChatProcessing
     {
-        
-
         public class Soobshenie : IComparable
         {
             public String login;
@@ -39,7 +37,8 @@ namespace WindowsFormsApplication1
                 try
                 {
                     usersallowed = new List<String>(File.ReadAllLines(subchatname + "-users.txt"));
-                } catch (FileNotFoundException)
+                }
+                catch (FileNotFoundException)
                 {
                     usersallowed = new List<String> { "" };
                 }
@@ -72,8 +71,7 @@ namespace WindowsFormsApplication1
                 }
                 List<Soobshenie> messages = new List<Soobshenie>();
                 File.WriteAllText(subchatname + ".txt", File.ReadAllText(subchatname + ".txt").Trim(new char[] { '\r', '\n' }));
-                FileStream file2;
-                file2 = new FileStream(subchatname + ".txt", FileMode.Open); //создаем файловый поток
+                FileStream file2 = new FileStream(subchatname + ".txt", FileMode.Open); //создаем файловый поток
                 StreamReader reader = new StreamReader(file2); // создаем «потоковый читатель» и связываем его с файловым потоком
 
                 int i = 0;
@@ -100,5 +98,4 @@ namespace WindowsFormsApplication1
             }
         }
     }
-    
 }
