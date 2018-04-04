@@ -9,7 +9,7 @@ namespace WindowsFormsApplication1
     {
         public string login;
         public string password;
-    };
+    }
 
     public partial class LoginForm : Form
     {

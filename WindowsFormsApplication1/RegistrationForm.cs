@@ -62,7 +62,6 @@ namespace WindowsFormsApplication1
             {
                 PotParolTextBox.Text = "";
             }
-
         }
 
         private void ParolTextBox_Enter(object sender, EventArgs e)
