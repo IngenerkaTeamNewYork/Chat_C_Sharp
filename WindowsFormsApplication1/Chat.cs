@@ -7,32 +7,30 @@ using System.IO;
 using System.Windows.Forms;
 using System.Linq;
 
-
 namespace WindowsFormsApplication1
 {
     public partial class Chat : Form
     {
         public bool deleteMat = true;
 
-        public static List<String> SwearWords = new List<string>(new string[]{ });
+        public static List<String> SwearWords = new List<string>(new string[] { });
 
-        private static List<ChatProcessing.Soobshenie> messages;
-        private ChatProcessing.Polzovatel_view user2;
-        private static ChatProcessing.Polzovatel_view[] type = new ChatProcessing.Polzovatel_view[3];
+        private static List<Soobshenie> messages;
+        private static Polzovatel_view[] type = new Polzovatel_view[3];
 
         public string login;
         public const string rasd = "$~#~@*&";
-	public string subchat = "peregovory";
+        public string subchat = "peregovory";
 
-        public Chat(string _login, String _subchat="peregovory")
+        public Chat(string _login, String _subchat = "peregovory")
         {
             InitializeComponent();
             login = _login;
             subchat = _subchat;
             textBox3.Text = subchat;
-	    
-	    comboBox1.Items.Clear();
-	    for (int i = 0; i < LoginForm.kolichestvo_userov; i++ )
+
+            comboBox1.Items.Clear();
+            for (int i = 0; i < LoginForm.kolichestvo_userov; i++)
             {
                 comboBox1.Items.Add(LoginForm.usery[i].login);
             }
@@ -41,8 +39,7 @@ namespace WindowsFormsApplication1
             openFileDialog1.Filter = "Text files(*OpenFileDialog.txt)|*.txt|All files(*.*)|*.*";
         }
 
-        
-        public void read_of_list()
+        public void ReadList()
         {
             FileStream file2 = new FileStream("словарь мат.txt", FileMode.Open);
             StreamReader reader = new StreamReader(file2); // создаем «потоковый читатель» и связываем его с файловым потоком
@@ -56,9 +53,9 @@ namespace WindowsFormsApplication1
             reader.Close(); //закрываем поток
         }
 
-        private void badWords(ref TextBox tb)
+        private void BadWords(ref TextBox tb)
         {
-            read_of_list();
+            ReadList();
             if (!deleteMat)
             {
                 return;
@@ -72,9 +69,9 @@ namespace WindowsFormsApplication1
                 {
                     if (str.ToUpper() == podstroki[i].ToUpper())
                     {
-	                string antipm = String.Concat(Enumerable.Repeat("*", podstroki[i].Length));
-    	                tb.Text = tb.Text.Replace(podstroki[i], antipm);
-	            }
+                        string antipm = String.Concat(Enumerable.Repeat("*", podstroki[i].Length));
+                        tb.Text = tb.Text.Replace(podstroki[i], antipm);
+                    }
                 }
             }
         }
@@ -83,27 +80,28 @@ namespace WindowsFormsApplication1
         {
             ////////////////////////////////////////////////////////////////////////////////
 
-            messages = new List<ChatProcessing.Soobshenie>();
+            messages = new List<Soobshenie>();
             File.WriteAllText("Allmatt.txt", string.Empty);
             GetPut.Get("matt.txt");
 
             File.WriteAllText("matt1.txt", File.ReadAllText("matt.txt"));
             try
             {
-                ChatProcessing.SubChat dsad = new ChatProcessing.SubChat(subchat);
+                SubChat dsad = new SubChat(subchat);
                 messages = dsad.LoadChat(login);
                 textBox2.Text = dsad.PrintChat(login, messages);
-            } catch (UnauthorizedAccessException err)
+            }
+            catch (UnauthorizedAccessException err)
             {
                 MessageBox.Show(err.ToString());
                 this.Close();
                 return;
             }
 
-            readFontFromFile();
+            ReadFontFromFile();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
             if (textBox1.Text.Trim() != "")
             {
@@ -119,7 +117,7 @@ namespace WindowsFormsApplication1
             textBox1.Text = "";
         }
 
-        private void textBox2_TextChanged(object sender, EventArgs e)
+        private void TextBox2_TextChanged(object sender, EventArgs e)
         {
             string[] podstroki;
             int i = 0;
@@ -128,7 +126,7 @@ namespace WindowsFormsApplication1
 
             FileStream file2 = new FileStream(subchat + ".txt", FileMode.Open); //создаем файловый поток
             StreamReader reader = new StreamReader(file2); // создаем «потоковый читатель» и связываем его с файловым потоком
-            
+
             i = 0;
 
             while (reader.Peek() >= 0)
@@ -139,10 +137,12 @@ namespace WindowsFormsApplication1
                 if (podstroki.Length > 2)
                 {
                     //messages[i].day = Convert.ToDateTime(podstroki[0]);
-                    ChatProcessing.Soobshenie temp = new ChatProcessing.Soobshenie();
-                    temp.login = podstroki[1];
-                    temp.text = podstroki[2].Replace("%%%%", Environment.NewLine);
-                    messages.Add(temp);
+
+                    messages.Add(new Soobshenie
+                    {
+                        login = podstroki[1],
+                        text = podstroki[2].Replace("%%%%", Environment.NewLine)
+                    });
                     i++;
                 }
             }
@@ -162,24 +162,24 @@ namespace WindowsFormsApplication1
 
             podstroki = textBox2.Text.Split(new String[] { " ", "," }, StringSplitOptions.None);
 
-            badWords(ref textBox2);
+            BadWords(ref textBox2);
         }
 
-        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        private void TextBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            badWords(ref textBox1);
+            BadWords(ref textBox1);
         }
 
-        private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        private void TextBox1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Shift && e.KeyCode == Keys.Enter)
             {
                 e.SuppressKeyPress = true;
-                button1_Click(sender, e);
+                Button1_Click(sender, e);
             }
         }
 
-        private void readFontFromFile()
+        private void ReadFontFromFile()
         {
             FileStream config = new FileStream("config.txt", FileMode.Open);
             StreamReader reader2 = new StreamReader(config);
@@ -190,15 +190,15 @@ namespace WindowsFormsApplication1
 
             if (view.Length > 4)
             {
-                Font fontFormFile = new Font (view[0], (float)Convert.ToDouble(view[1]));
-                
+                Font fontFormFile = new Font(view[0], (float)Convert.ToDouble(view[1]));
+
                 if (view[2] == "True")
                 {
-                    fontFormFile = new Font (view[0], (float)Convert.ToDouble(view[1]), FontStyle.Italic);
+                    fontFormFile = new Font(view[0], (float)Convert.ToDouble(view[1]), FontStyle.Italic);
                 }
                 else if (view[3] == "True")
                 {
-                    fontFormFile = new Font (view[0], (float)Convert.ToDouble(view[1]), FontStyle.Bold);
+                    fontFormFile = new Font(view[0], (float)Convert.ToDouble(view[1]), FontStyle.Bold);
                 }
 
                 textBox1.Font = fontFormFile;
@@ -217,30 +217,32 @@ namespace WindowsFormsApplication1
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void Button2_Click(object sender, EventArgs e)
         {
             fontDialog1.ShowColor = true;
             fontDialog1.Font = textBox1.Font;
             fontDialog1.Color = textBox1.ForeColor;
 
             if (fontDialog1.ShowDialog() != DialogResult.Cancel)
-            {                
-                ColorDialog MyDialog = new ColorDialog();
-                MyDialog.AllowFullOpen = false;
-                MyDialog.ShowHelp = true;
-                MyDialog.Color = textBox1.ForeColor;
-                
+            {
+                ColorDialog MyDialog = new ColorDialog
+                {
+                    AllowFullOpen = false,
+                    ShowHelp = true,
+                    Color = textBox1.ForeColor
+                };
+
                 if (MyDialog.ShowDialog() == DialogResult.OK)
                 {
                     textBox1.ForeColor = MyDialog.Color;
                 }
-                
+
                 textBox1.Font = fontDialog1.Font;
                 textBox2.Font = fontDialog1.Font;
                 button1.Font = fontDialog1.Font;
                 button2.Font = fontDialog1.Font;
                 button3.Font = fontDialog1.Font;
-                
+
                 textBox1.ForeColor = fontDialog1.Color;
                 textBox2.ForeColor = fontDialog1.Color;
                 button1.ForeColor = fontDialog1.Color;
@@ -248,18 +250,17 @@ namespace WindowsFormsApplication1
                 button3.ForeColor = fontDialog1.Color;
 
                 File.WriteAllText("config.txt", textBox1.Font.FontFamily.Name.ToString() +
-                    "$" + textBox1.Font.Size.ToString() + 
+                    "$" + textBox1.Font.Size.ToString() +
                     "$" + textBox1.Font.Italic.ToString() +
-                    "$" + textBox1.Font.Bold.ToString() + 
+                    "$" + textBox1.Font.Bold.ToString() +
                     "$" + textBox1.ForeColor.ToArgb());
             }
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {        
+        private void Button3_Click(object sender, EventArgs e)
+        {
             File.WriteAllText("AllMessages.txt", string.Empty);
             GetPut.Get(subchat + ".txt");
-                
 
             FileStream file2 = new FileStream("NewMessages.txt", FileMode.Open);
             StreamReader reader = new StreamReader(file2); // создаем «потоковый читатель» и связываем его с файловым потоком
@@ -277,20 +278,20 @@ namespace WindowsFormsApplication1
 
             GetPut.Put(subchat + ".txt");
 
-            badWords(ref textBox2);
+            BadWords(ref textBox2);
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void TextBox1_TextChanged(object sender, EventArgs e)
         {
-            badWords(ref textBox1);
+            BadWords(ref textBox1);
         }
 
-        private void этоМатToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ThisisswearwordToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SwearWords.Add(textBox2.SelectedText);
         }
 
-        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        private void ContextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
             SwearWords.Add(textBox2.SelectedText);
             FileStream file2 = new FileStream("словарь мат.txt", FileMode.Open);
@@ -304,28 +305,28 @@ namespace WindowsFormsApplication1
 
             reader.Close(); //закрываем поток
         }
-		
-	private void RemoveBadWordToolStripMenuItem_Click(object sender, EventArgs e)
+
+        private void RemoveBadWordToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show(textBox1.SelectedText);
             SwearWords.Remove(textBox1.SelectedText);
 
-            textBox2_TextChanged(null, null);
+            TextBox2_TextChanged(null, null);
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void Timer1_Tick(object sender, EventArgs e)
         {
             if (checkBox1.Checked)
             {
                 GetPut.Get(subchat + ".txt");
-                ChatProcessing.SubChat dsad = new ChatProcessing.SubChat(subchat);
+                SubChat dsad = new SubChat(subchat);
                 messages = dsad.LoadChat(login);
                 textBox2.Text = dsad.PrintChat(login, messages);
                 GetPut.Put(subchat + "-users.txt");
             }
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void Button4_Click(object sender, EventArgs e)
         {
             subchat = textBox3.Text;
 
@@ -340,12 +341,12 @@ namespace WindowsFormsApplication1
             }
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void Button5_Click(object sender, EventArgs e)
         {
-            File.AppendAllLines(subchat + "-users.txt", new String[] { textBox4.Text });
+            File.AppendAllLines(subchat + "-users.txt", new String[] { comboBox1.Text });
         }
 
-        private void button6_Click(object sender, EventArgs e)
+        private void Button6_Click(object sender, EventArgs e)
         {
             deleteMat = !deleteMat;
             if (!deleteMat)

@@ -10,7 +10,7 @@ namespace WindowsFormsApplication1
             InitializeComponent();
         }
 
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             LoginForm rf = new LoginForm();
             rf.ShowDialog();
@@ -73,7 +73,7 @@ namespace WindowsFormsApplication1
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void Button2_Click(object sender, EventArgs e)
         {
             int kolich = LoginForm.kolichestvo_userov;
             bool uzhe_byl = false;
@@ -83,13 +83,11 @@ namespace WindowsFormsApplication1
                 MessageBox.Show("Данные!");
                 uzhe_byl = true;
             }
-
             else if (PotParolTextBox.Text == "Повторите пароль")
             {
                 MessageBox.Show("Повтори пароль!");
                 uzhe_byl = true;
             }
-
             else if (ParolTextBox.Text != PotParolTextBox.Text)
             {
                 MessageBox.Show("Пароли не совпадают!!!");
@@ -105,16 +103,13 @@ namespace WindowsFormsApplication1
                         uzhe_byl = true;
                         break;
                     }
-
                     else if (ParolTextBox.Text == LoginForm.usery[i].password)
                     {
                         MessageBox.Show("Пароль занят!");
                         uzhe_byl = true;
                         break;
                     }
-
                 }
-
 
                 if (!uzhe_byl)
                 {
@@ -126,7 +121,7 @@ namespace WindowsFormsApplication1
 
                     Chat chatForm = new Chat(loginTextBox.Text);
                     chatForm.ShowDialog();
-                };
+                }
             }
         }
 
@@ -135,26 +130,10 @@ namespace WindowsFormsApplication1
             if (e.KeyChar == (int)Keys.Space)
                 e.KeyChar = '\0';
         }
-
-        private void textBox6_TextChanged(object sender, EventArgs e)
-        {
-            //throw new NotImplementedException();
-        }
-
-        private void textBox5_TextChanged(object sender, EventArgs e)
-        {
-            //throw new NotImplementedException();
-        }
-
-        private void textBox4_TextChanged(object sender, EventArgs e)
-        {
-            //throw new NotImplementedException();
-        }
-
-        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void LinkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             LoginForm loginForm = new LoginForm();
             loginForm.ShowDialog();
         }
-    }       
+    }
 }

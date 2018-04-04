@@ -10,7 +10,7 @@ namespace WindowsFormsApplication1
         public string login;
         public string password;
     };
-                        
+
     public partial class LoginForm : Form
     {
         public Polzovatel user1;
@@ -28,7 +28,6 @@ namespace WindowsFormsApplication1
         {
             LoginTextBox.Text = File.ReadAllText("saveduser.txt");
 
-
             File.WriteAllText("AllPolzovoteli.txt", string.Empty);
             GetPut.Get("password3.txt");
 
@@ -44,8 +43,7 @@ namespace WindowsFormsApplication1
             reader.Close();
             GetPut.Put("password3.txt");
 
-
-            file2 = new FileStream("password3.txt", FileMode.Open); 
+            file2 = new FileStream("password3.txt", FileMode.Open);
             reader = new StreamReader(file2);
 
             int i = 0;
@@ -54,7 +52,7 @@ namespace WindowsFormsApplication1
                 string stroka_iz_faila = reader.ReadLine().Trim();
                 string[] podstroki = stroka_iz_faila.Split(new Char[] { ' ' });
                 usery[i].login = podstroki[0];
-                usery[i].password = podstroki[1];  
+                usery[i].password = podstroki[1];
                 i++;
             }
 
@@ -62,7 +60,7 @@ namespace WindowsFormsApplication1
             reader.Close();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
             user1.password = PPorolTextBox.Text;
             PPorolTextBox.PasswordChar = '*';
@@ -112,15 +110,10 @@ namespace WindowsFormsApplication1
   	        }
         }
 
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {            
-            RegistrationForm rf = new RegistrationForm();
-            rf.ShowDialog();            
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
+        private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-
+            RegistrationForm rf = new RegistrationForm();
+            rf.ShowDialog();
         }
 
         private void LoginTextBox_Leave(object sender, EventArgs e)
@@ -140,7 +133,7 @@ namespace WindowsFormsApplication1
             }
         }
 
-        private void textBox1_Leave(object sender, EventArgs e)
+        private void TextBox1_Leave(object sender, EventArgs e)
         {
             if (PPorolTextBox.Text == "")
             {
@@ -160,7 +153,7 @@ namespace WindowsFormsApplication1
         {
             if (e.KeyCode == Keys.Enter)
             {
-                button1_Click(sender, null);
+                Button1_Click(sender, null);
             }
         }
 
@@ -168,16 +161,16 @@ namespace WindowsFormsApplication1
         {
             if (e.KeyCode == Keys.Enter)
             {
-                button1_Click(sender, null);
+                Button1_Click(sender, null);
             }
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        private void CheckBox1_CheckedChanged(object sender, EventArgs e)
         {
-            savepass = (bool)(savepassbox.Checked);
+            savepass = savepassbox.Checked;
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void Button2_Click(object sender, EventArgs e)
         {
             File.WriteAllText("saveduser.txt", "");
         }
