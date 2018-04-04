@@ -1,215 +1,81 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-//using System.Linq;
-using System.Text;
-//using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Net;
-using System.Net.Sockets;
+using System.Linq;
+
 
 namespace WindowsFormsApplication1
 {
-    public struct Soobshenie
-    {
-        public string login;
-        public string text;
-        public DateTime day;
-    };
-
-    public struct Polzovatel_view
-    {
-        public string shrift;
-        public string color;
-    };
-
     public partial class Chat : Form
     {
-        public static int kol_vo_bed_messages = 0;
-        public static String[] bedMessages = new string[500];
+        public static List<String> SwearWords = new List<string>(new string[]{ "Сцуко", "Антон", "Мирон",
+            "Стас", "Эдик", "Денис", "Предаст", "Медиатор", "Педиатр", "Педогог", "Юра",
+            "Педсовет", "Кедр", "Курва", "Лох", "Санкт", "Дурак", "Мудрак", "Ниггер",
+            "Навальный", "Кретин", "Бандерлог", "Феномен", "Кусудама", "Куй", "Псина",
+            "Мудак", "Йобайт", "Днище", "Уху есть", "Уху ели", "Апчхуй", "От сосиски",
+            "Сосиска", "Промискуитет", "Голубой", "Е брат", "Епархия", "Ша", "болда",
+            "Синий", "Переобуться", "Сумка", "Конь", "Путь Анна", "Путный", "Публичный",
+            "Приватный", "Паразит", "Прости тут", "Менуэт", "Молодец", "Щель"});
 
-        public static Soobshenie[] messages = new Soobshenie[15016];
-        public Polzovatel_view user2;
-        public static Polzovatel_view[] type = new Polzovatel_view[3];
+        private static List<ChatProcessing.Soobshenie> messages;
+        private ChatProcessing.Polzovatel_view user2;
+        private static ChatProcessing.Polzovatel_view[] type = new ChatProcessing.Polzovatel_view[3];
 
         public string login;
         public const string rasd = "$~#~@*&";
-        public string str = " ";
-        public string str2 = " ";
 		public string subchat = "peregovory";
 
-        public Chat(string _login)
+        public Chat(string _login, String _subchat="peregovory")
         {
             InitializeComponent();
             login = _login;
+            subchat = _subchat;
 
             saveFileDialog1.Filter = "Text files(*SaveFileDialog.txt)|*.txt|All files(*.*)|*.*";
             openFileDialog1.Filter = "Text files(*OpenFileDialog.txt)|*.txt|All files(*.*)|*.*";
         }
 
+        
+
+
+        private void badWords()
+        {
+            string[] podstroki = textBox2.Text.Split(new String[] { " ", ",", Environment.NewLine }, StringSplitOptions.None);
+
+            for (int i = 0; i < podstroki.Length; i++)
+            {
+                if (SwearWords.Contains(podstroki[i]))
+                {
+                    string antipm = String.Concat(Enumerable.Repeat("*", podstroki[i].Length)); //  in .NET 3.5: String.Concat(Enumerable.Repeat("Hello", 4).ToArray())
+
+                    textBox2.Text = textBox2.Text.Replace(podstroki[i], antipm);
+                }
+            }
+        }
+
         private void Form2_Load(object sender, EventArgs e)
         {
             ////////////////////////////////////////////////////////////////////////////////
-            
+
+            messages = new List<ChatProcessing.Soobshenie>();
             File.WriteAllText("Allmatt.txt", string.Empty);
-            Process myProcess = Process.Start("get.exe", "matt.txt matt.txt");
-            do
-            {
-                if (!myProcess.HasExited)
-                {
-                    myProcess.Refresh();
-                }
-            }
-            while (!myProcess.WaitForExit(10000));
+            GetPut.Get("matt.txt");
 
-            FileStream file2 = new FileStream("matt1.txt", FileMode.Open);
-            StreamReader reader1 = new StreamReader(file2);
-
-            while (reader1.Peek() >= 0)
-            {
-                string stroka_iz_faila = reader1.ReadLine().Trim();
-                File.AppendAllText("matt.txt", stroka_iz_faila + Environment.NewLine);
-            }
-
-            reader1.Close();
-            /*
-            Process.Start("put.exe", "password3.txt password3.txt");
-
- 
-            file2 = new FileStream("password3.txt", FileMode.Open); 
-            reader = new StreamReader(file2);
-
-            int i = 0;
-            while (reader.Peek() >= 0)
-            {
-                string stroka_iz_faila = reader.ReadLine().Trim();
-                string[] podstroki = stroka_iz_faila.Split(new Char[] { ' ' });
-                usery[i].login = podstroki[0];
-                usery[i].password = podstroki[1];  
-                i++;
-            }
-
-            kolichestvo_userov = i;
-            reader.Close();
-             */
-            ////////////////////////////////////////////////////////////////////////////////
-            bedMessages[kol_vo_bed_messages] = "Сцуко"; kol_vo_bed_messages++;
-            bedMessages[kol_vo_bed_messages] = "Антон"; kol_vo_bed_messages++;
-            bedMessages[kol_vo_bed_messages] = "Мирон"; kol_vo_bed_messages++;
-            bedMessages[kol_vo_bed_messages] = "Стас"; kol_vo_bed_messages++;
-            bedMessages[kol_vo_bed_messages] = "Эдик"; kol_vo_bed_messages++;
-            bedMessages[kol_vo_bed_messages] = "Денис"; kol_vo_bed_messages++;
-            bedMessages[kol_vo_bed_messages] = "Предаст"; kol_vo_bed_messages++;
-            bedMessages[kol_vo_bed_messages] = "Медиатор"; kol_vo_bed_messages++;
-            bedMessages[kol_vo_bed_messages] = "Педиатр"; kol_vo_bed_messages++;
-            bedMessages[kol_vo_bed_messages] = "Педогог"; kol_vo_bed_messages++;
-            bedMessages[kol_vo_bed_messages] = "Юра"; kol_vo_bed_messages++;
-            bedMessages[kol_vo_bed_messages] = "Педсовет"; kol_vo_bed_messages++;
-            bedMessages[kol_vo_bed_messages] = "Кедр"; kol_vo_bed_messages++;
-            bedMessages[kol_vo_bed_messages] = "Курва"; kol_vo_bed_messages++;
-            bedMessages[kol_vo_bed_messages] = "Лох"; kol_vo_bed_messages++;
-            bedMessages[kol_vo_bed_messages] = "Санкт"; kol_vo_bed_messages++;
-            bedMessages[kol_vo_bed_messages] = "Дурак"; kol_vo_bed_messages++;
-            bedMessages[kol_vo_bed_messages] = "Мудрак"; kol_vo_bed_messages++;
-            bedMessages[kol_vo_bed_messages] = "Ниггер"; kol_vo_bed_messages++;
-            bedMessages[kol_vo_bed_messages] = "Навальный"; kol_vo_bed_messages++;
-            bedMessages[kol_vo_bed_messages] = "Кретин"; kol_vo_bed_messages++;
-            bedMessages[kol_vo_bed_messages] = "Бандерлог"; kol_vo_bed_messages++;
-            bedMessages[kol_vo_bed_messages] = "Феномен"; kol_vo_bed_messages++;
-            bedMessages[kol_vo_bed_messages] = "Кусудама"; kol_vo_bed_messages++;
-            bedMessages[kol_vo_bed_messages] = "Куй"; kol_vo_bed_messages++;
-            bedMessages[kol_vo_bed_messages] = "Псина"; kol_vo_bed_messages++;
-            bedMessages[kol_vo_bed_messages] = "Мудак"; kol_vo_bed_messages++;
-            bedMessages[kol_vo_bed_messages] = "Йобайт"; kol_vo_bed_messages++;
-            bedMessages[kol_vo_bed_messages] = "Днище"; kol_vo_bed_messages++;
-            bedMessages[kol_vo_bed_messages] = "Уху есть"; kol_vo_bed_messages++;
-            bedMessages[kol_vo_bed_messages] = "Уху ели"; kol_vo_bed_messages++;
-            bedMessages[kol_vo_bed_messages] = "Апчхуй"; kol_vo_bed_messages++;
-            bedMessages[kol_vo_bed_messages] = "От сосиски"; kol_vo_bed_messages++;
-            bedMessages[kol_vo_bed_messages] = "Сосиска"; kol_vo_bed_messages++;
-            bedMessages[kol_vo_bed_messages] = "Промискуитет"; kol_vo_bed_messages++;
-            bedMessages[kol_vo_bed_messages] = "Голубой"; kol_vo_bed_messages++;
-            bedMessages[kol_vo_bed_messages] = "Е брат"; kol_vo_bed_messages++;
-            bedMessages[kol_vo_bed_messages] = "Епархия"; kol_vo_bed_messages++;
-            bedMessages[kol_vo_bed_messages] = "Ша"; kol_vo_bed_messages++;
-            bedMessages[kol_vo_bed_messages] = "болда"; kol_vo_bed_messages++;
-            bedMessages[kol_vo_bed_messages] = "Синий"; kol_vo_bed_messages++;
-            bedMessages[kol_vo_bed_messages] = "Переобуться"; kol_vo_bed_messages++;
-            bedMessages[kol_vo_bed_messages] = "Сумка"; kol_vo_bed_messages++;
-            bedMessages[kol_vo_bed_messages] = "Конь"; kol_vo_bed_messages++;
-            bedMessages[kol_vo_bed_messages] = "Путь Анна"; kol_vo_bed_messages++;
-            bedMessages[kol_vo_bed_messages] = "Путный"; kol_vo_bed_messages++;
-            bedMessages[kol_vo_bed_messages] = "Публичный"; kol_vo_bed_messages++;
-            bedMessages[kol_vo_bed_messages] = "Приватный"; kol_vo_bed_messages++;
-            bedMessages[kol_vo_bed_messages] = "Паразит"; kol_vo_bed_messages++;
-            bedMessages[kol_vo_bed_messages] = "Прости тут"; kol_vo_bed_messages++;
-            bedMessages[kol_vo_bed_messages] = "Менуэт"; kol_vo_bed_messages++;
-            bedMessages[kol_vo_bed_messages] = "Молодец"; kol_vo_bed_messages++;
-            bedMessages[kol_vo_bed_messages] = "Щель"; kol_vo_bed_messages++;
-
+            File.WriteAllText("matt1.txt", File.ReadAllText("matt.txt"));
             try
             {
-                MessageBox.Show(Path.GetFullPath(subchat + ".txt"));
-                file2 = new FileStream(subchat + ".txt", FileMode.Open); //создаем файловый поток
-            }
-            catch (System.IO.FileNotFoundException)
+                ChatProcessing.SubChat dsad = new ChatProcessing.SubChat(subchat);
+                messages = dsad.LoadChat(login);
+                textBox2.Text = dsad.PrintChat(login, messages);
+            } catch (UnauthorizedAccessException err)
             {
-                textBox2.Text = "";
+                MessageBox.Show(err.ToString());
+                this.Close();
                 return;
-            }
-
-            StreamReader reader = new StreamReader(file2); // создаем «потоковый читатель» и связываем его с файловым потоком
-
-            this.Height = 651;
-            this.Width = 630;
-
-            int i = 0;
-            while (reader.Peek() >= 0)
-            {
-                string stroka_iz_faila = reader.ReadLine().Trim();
-                string[] podstroki = stroka_iz_faila.Split(new String[] { rasd }, StringSplitOptions.None);
-
-                if (podstroki.Length > 2)
-                {
-                    messages[i].day = Convert.ToDateTime(podstroki[0]);
-                    messages[i].login = podstroki[1];
-                    messages[i].text = podstroki[2].Replace("%%%%", Environment.NewLine);
-
-                    i++;
-                }
-            }
-
-            int kolichestvo_soobsch = i;
-
-            reader.Close(); //закрываем поток
-
-            for (i = 0; i < kolichestvo_soobsch - 1; i++)
-            {
-                for (int j = i + 1; j < kolichestvo_soobsch; j++)
-                {
-                    if (messages[i].day > messages[j].day)
-                    {
-                        Soobshenie soob = messages[j];
-
-                        messages[j].day = messages[i].day;
-                        messages[i].day = soob.day;
-                        messages[j].login = messages[i].login;
-                        messages[i].login = soob.login;
-                        messages[j].text = messages[i].text;
-                        messages[i].text = soob.text;
-                    }
-                }
-            }
-
-            for (i = 0; i < kolichestvo_soobsch; i++)
-            {
-                textBox2.Text = textBox2.Text + messages[i].day + Environment.NewLine;
-                textBox2.Text = textBox2.Text + "     " + messages[i].login + "  сказал(а):  ";
-                textBox2.Text = textBox2.Text + messages[i].text + Environment.NewLine;
             }
 
             readFontFromFile();
@@ -221,15 +87,14 @@ namespace WindowsFormsApplication1
             {
                 DateTime thisDay = MyTime.GetNetworkTime();
                 String dateStr = thisDay.ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz");
-                String dateStrfors = thisDay.ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz");
 
                 textBox2.AppendText(dateStr + Environment.NewLine + login + ":   " +
                     textBox1.Text + Environment.NewLine);
-                File.AppendAllText(subchat + ".txt", Environment.NewLine + dateStr + rasd + login + rasd + textBox1.Text.Replace(Environment.NewLine, "%%%%"));
+                File.AppendAllText(subchat + ".txt", dateStr + rasd + login + rasd + textBox1.Text.Replace(Environment.NewLine, "%%%%"));
                 File.AppendAllText("NewMessages.txt", dateStr + rasd + login + rasd + textBox1.Text.Replace(Environment.NewLine, "%%%%") + Environment.NewLine);
             }
 
-            textBox1.Text = null;
+            textBox1.Text = "";
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -252,9 +117,10 @@ namespace WindowsFormsApplication1
                 if (podstroki.Length > 2)
                 {
                     //messages[i].day = Convert.ToDateTime(podstroki[0]);
-                    messages[i].login = podstroki[1];
-                    messages[i].text = podstroki[2].Replace("%%%%", Environment.NewLine);
-
+                    ChatProcessing.Soobshenie temp = new ChatProcessing.Soobshenie();
+                    temp.login = podstroki[1];
+                    temp.text = podstroki[2].Replace("%%%%", Environment.NewLine);
+                    messages.Add(temp);
                     i++;
                 }
             }
@@ -263,23 +129,7 @@ namespace WindowsFormsApplication1
 
             reader.Close(); //закрываем поток
 
-            for (i = 0; i < kolichestvo_soobsch - 1; i++)
-            {
-                for (int j = i + 1; j < kolichestvo_soobsch; j++)
-                {
-                    if (messages[i].day > messages[j].day)
-                    {
-                        Soobshenie soob = messages[j];
-
-                        messages[j].day = messages[i].day;
-                        messages[i].day = soob.day;
-                        messages[j].login = messages[i].login;
-                        messages[i].login = soob.login;
-                        messages[j].text = messages[i].text;
-                        messages[i].text = soob.text;
-                    }
-                }
-            }
+            messages.Sort();
 
             for (i = 0; i < kolichestvo_soobsch; i++)
             {
@@ -290,63 +140,12 @@ namespace WindowsFormsApplication1
 
             podstroki = textBox2.Text.Split(new String[] { " ", "," }, StringSplitOptions.None);
 
-            /* Народ, верните эти строки обратно. У Абрамова MVS 2005, который не знает слово Contains!!!
-             * 
-             * for (i = 0; i < podstroki.Length; i++)
-            {
-                if (bedMessages.Contains(podstroki[i]))
-                {
-                    string antipm = "";
-                    for (int irep = 0; irep < podstroki[i].Length; irep++)
-                    {
-                        antipm = antipm + "*";
-                    }
-
-                    podstroki[i] = antipm;
-                }
-            }*/
+            badWords();
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            string[] podstroki = textBox1.Text.Split(new String[] { " ", ",", Environment.NewLine }, StringSplitOptions.None);
-
-            for (int i = 0; i < podstroki.Length; i++)
-            {
-                /* Народ, верните эти строки обратно. У Абрамова MVS 2005, который не знает слово Contains!!!
-                 * 
-                if (bedMessages.Contains(podstroki[i]))
-                {
-                    string antipm = "";
-                    for (int irep = 0; irep < podstroki[i].Length; irep++)
-                    {
-                        antipm = antipm + "*";
-                    }
-
-                    textBox1.Text = textBox1.Text.Replace(podstroki[i], antipm);
-                }
-                */ 
-            }
-        }
-        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            string[] podstroki = textBox2.Text.Split(new String[] { " ", ",", Environment.NewLine }, StringSplitOptions.None);
-
-            for (int i = 0; i < podstroki.Length; i++)
-            {
-                /* Народ, верните эти строки обратно. У Абрамова MVS 2005, который не знает слово Contains!!!
-                 * 
-                if (bedMessages.Contains(podstroki[i]))
-                {
-                    string antipm = "";
-                    for (int irep = 0; irep < podstroki[i].Length; irep++)
-                    {
-                        antipm = antipm + "*";
-                    }
-
-                    textBox2.Text = textBox2.Text.Replace(podstroki[i], antipm);
-                }*/
-            }
+            badWords();
         }
 
         private void textBox1_KeyDown(object sender, KeyEventArgs e)
@@ -356,14 +155,6 @@ namespace WindowsFormsApplication1
                 e.SuppressKeyPress = true;
                 button1_Click(sender, e);
             }
-        }
-
-        private void button1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-        }
-
-        private void fontDialog1_Apply(object sender, EventArgs e)
-        {
         }
 
         private void readFontFromFile()
@@ -445,17 +236,8 @@ namespace WindowsFormsApplication1
         private void button3_Click(object sender, EventArgs e)
         {        
             File.WriteAllText("AllMessages.txt", string.Empty);
-            Process myProcess = Process.Start("cmd", "/C start /B get.exe peregovory.txt peregovory.txt");
-            do
-            {
-                if (!myProcess.HasExited)
-                {
-                    // Refresh the current process property values.
-                    myProcess.Refresh();
-                }
-            }
-            while (!myProcess.WaitForExit(10000));
-
+            GetPut.Get(subchat + ".txt");
+                
 
             FileStream file2 = new FileStream("NewMessages.txt", FileMode.Open);
             StreamReader reader = new StreamReader(file2); // создаем «потоковый читатель» и связываем его с файловым потоком
@@ -471,31 +253,50 @@ namespace WindowsFormsApplication1
             textBox2.Clear();
             Form2_Load(sender, e);
 
-            Process.Start("cmd", "/C start /B put.exe " + subchat + ".txt " + subchat + ".txt");
+            GetPut.Put(subchat + ".txt");
 
+            badWords();
+        }
 
-            string[] podstroki = textBox2.Text.Split(new String[] { " ", ",", Environment.NewLine }, StringSplitOptions.None);
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            badWords();
+        }
 
-            for (int i = 0; i < podstroki.Length; i++)
+        private void этоМатToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SwearWords.Add(textBox2.SelectedText);
+        }
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+            SwearWords.Add(textBox2.SelectedText);
+        }
+		
+		private void RemoveBadWordToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(textBox1.SelectedText);
+            SwearWords.Remove(textBox1.SelectedText);
+
+            textBox2_TextChanged(null, null);
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
             {
-                /* Народ, верните эти строки обратно. У Абрамова MVS 2005, который не знает слово Contains!!!
-                 * 
-                if (bedMessages.Contains(podstroki[i]))
-                {
-                    string antipm = "";
-                    for (int irep = 0; irep < podstroki[i].Length; irep++)
-                    {
-                        antipm = antipm + "*";
-                    }
-
-                    textBox2.Text = textBox2.Text.Replace(podstroki[i], antipm);
-                }*/
+                GetPut.Get(subchat + ".txt");
+                ChatProcessing.SubChat dsad = new ChatProcessing.SubChat(subchat);
+                messages = dsad.LoadChat(login);
+                textBox2.Text = dsad.PrintChat(login, messages);
+                GetPut.Put(subchat + "-users.txt");
             }
         }
 
-        private void textBox3_Enter(object sender, EventArgs e)
+        private void button4_Click(object sender, EventArgs e)
         {
             subchat = textBox3.Text;
+
             if (File.Exists(subchat + ".txt"))
             {
                 textBox2.Text = File.ReadAllText(subchat + ".txt").Replace("%%%%", Environment.NewLine);
@@ -503,74 +304,13 @@ namespace WindowsFormsApplication1
             else
             {
                 textBox2.Text = "";
-            }
-        }
-		
-        private void button4_Click(object sender, EventArgs e)
-        {
-            // Process.Start("put.exe", subchat + ".txt " + subchat + ".txt"");
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            string[] podstroki = textBox1.Text.Split(new String[] { " ", "," }, StringSplitOptions.None);
-            
-            for (int i = 0; i < podstroki.Length; i++)
-            {
-                /* Народ, верните эти строки обратно. У Абрамова MVS 2005, который не знает слово Contains!!!
-                 * 
-                if (bedMessages.Contains(podstroki[i]))
-                {
-                    string antipm = "";
-                    for (int irep = 0; irep < podstroki[i].Length; irep++)
-                    {
-                        antipm = antipm + "*";
-                    }
-
-                    textBox1.Text = textBox1.Text.Replace(podstroki[i], antipm);
-                }
-                */ 
+                File.AppendAllLines(subchat + "-users.txt", new String[] { login });
             }
         }
 
-        private void textBox1_KeyUp(object sender, KeyEventArgs e)
+        private void button5_Click(object sender, EventArgs e)
         {
-        }
-
-        private void этоМатToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
-        {
-            bedMessages[kol_vo_bed_messages] = textBox2.SelectedText; kol_vo_bed_messages++;
-        }
-
-        private void pictureBox_Chat_Click(object sender, EventArgs e)
-        {
-
-        }
-		
-		private void убитьКотаToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show(textBox1.SelectedText);
-            str = textBox1.SelectedText;
-
-            for (int j = 0; j < kol_vo_bed_messages; j++)
-            {
-                if (str == bedMessages[j])
-                {
-                    for (int i = j; i < kol_vo_bed_messages - 1; i++)
-                    {
-                        bedMessages[i] = bedMessages[i + 1];
-                    }
-
-                    kol_vo_bed_messages--;
-                }
-            }
-
-            textBox2_TextChanged(null, null);
+            File.AppendAllLines(subchat + "-users.txt", new String[] { textBox4.Text });
         }
     }
 }
