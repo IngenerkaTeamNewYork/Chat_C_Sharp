@@ -22,13 +22,20 @@ namespace WindowsFormsApplication1
 
         public string login;
         public const string rasd = "$~#~@*&";
-		public string subchat = "peregovory";
+	public string subchat = "peregovory";
 
         public Chat(string _login, String _subchat="peregovory")
         {
             InitializeComponent();
             login = _login;
             subchat = _subchat;
+            textBox3.Text = subchat;
+	    
+	    comboBox1.Items.Clear();
+	    for (int i = 0; i < LoginForm.kolichestvo_userov; i++ )
+            {
+                comboBox1.Items.Add(LoginForm.usery[i].login);
+            }
 
             saveFileDialog1.Filter = "Text files(*SaveFileDialog.txt)|*.txt|All files(*.*)|*.*";
             openFileDialog1.Filter = "Text files(*OpenFileDialog.txt)|*.txt|All files(*.*)|*.*";
@@ -48,6 +55,7 @@ namespace WindowsFormsApplication1
 
             reader.Close(); //закрываем поток
         }
+
         private void badWords(ref TextBox tb)
         {
             read_of_list();
@@ -55,15 +63,18 @@ namespace WindowsFormsApplication1
             {
                 return;
             }
+
             string[] podstroki = tb.Text.Split(new String[] { " ", ",", Environment.NewLine }, StringSplitOptions.None);
 
             for (int i = 0; i < podstroki.Length; i++)
             {
-                if (SwearWords.Contains(podstroki[i]))
+                foreach (String str in SwearWords)
                 {
-                    string antipm = String.Concat(Enumerable.Repeat("*", podstroki[i].Length)); //  in .NET 3.5: String.Concat(Enumerable.Repeat("Hello", 4).ToArray())
-
-                    tb.Text = tb.Text.Replace(podstroki[i], antipm);
+                    if (str.ToUpper() == podstroki[i].ToUpper())
+                    {
+	                string antipm = String.Concat(Enumerable.Repeat("*", podstroki[i].Length));
+    	                tb.Text = tb.Text.Replace(podstroki[i], antipm);
+	            }
                 }
             }
         }
@@ -294,7 +305,7 @@ namespace WindowsFormsApplication1
             reader.Close(); //закрываем поток
         }
 		
-		private void RemoveBadWordToolStripMenuItem_Click(object sender, EventArgs e)
+	private void RemoveBadWordToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show(textBox1.SelectedText);
             SwearWords.Remove(textBox1.SelectedText);

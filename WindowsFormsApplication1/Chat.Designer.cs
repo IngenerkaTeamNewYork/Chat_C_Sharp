@@ -223,6 +223,19 @@ namespace WindowsFormsApplication1
             this.label2.TabIndex = 13;
             this.label2.Text = "Добавить пользователя:";
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "quwinner",
+            "22222",
+            "11111"});
+            this.comboBox1.Location = new System.Drawing.Point(162, 77);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(100, 21);
+            this.comboBox1.TabIndex = 14;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
             // Chat
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -230,6 +243,7 @@ namespace WindowsFormsApplication1
             this.ClientSize = new System.Drawing.Size(353, 513);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.checkBox1);
@@ -273,5 +287,6 @@ namespace WindowsFormsApplication1
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
