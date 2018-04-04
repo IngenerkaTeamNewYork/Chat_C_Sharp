@@ -12,14 +12,9 @@ namespace WindowsFormsApplication1
 {
     public partial class Chat : Form
     {
-        public static List<String> SwearWords = new List<string>(new string[]{ "Сцуко", "Антон", "Мирон",
-            "Стас", "Эдик", "Денис", "Предаст", "Медиатор", "Педиатр", "Педогог", "Юра",
-            "Педсовет", "Кедр", "Курва", "Лох", "Санкт", "Дурак", "Мудрак", "Ниггер",
-            "Навальный", "Кретин", "Бандерлог", "Феномен", "Кусудама", "Куй", "Псина",
-            "Мудак", "Йобайт", "Днище", "Уху есть", "Уху ели", "Апчхуй", "От сосиски",
-            "Сосиска", "Промискуитет", "Голубой", "Е брат", "Епархия", "Ша", "болда",
-            "Синий", "Переобуться", "Сумка", "Конь", "Путь Анна", "Путный", "Публичный",
-            "Приватный", "Паразит", "Прости тут", "Менуэт", "Молодец", "Щель"});
+        public bool deleteMat = true;
+
+        public static List<String> SwearWords = new List<string>(new string[]{ });
 
         private static List<ChatProcessing.Soobshenie> messages;
         private ChatProcessing.Polzovatel_view user2;
@@ -40,11 +35,27 @@ namespace WindowsFormsApplication1
         }
 
         
-
-
-        private void badWords()
+        public void read_of_list()
         {
-            string[] podstroki = textBox2.Text.Split(new String[] { " ", ",", Environment.NewLine }, StringSplitOptions.None);
+            FileStream file2 = new FileStream("словарь мат.txt", FileMode.Open);
+            StreamReader reader = new StreamReader(file2); // создаем «потоковый читатель» и связываем его с файловым потоком
+
+            while (reader.Peek() >= 0)
+            {
+                string stroka_iz_faila = reader.ReadLine().Trim();
+                SwearWords.Add(stroka_iz_faila);
+            }
+
+            reader.Close(); //закрываем поток
+        }
+        private void badWords(ref TextBox tb)
+        {
+            read_of_list();
+            if (!deleteMat)
+            {
+                return;
+            }
+            string[] podstroki = tb.Text.Split(new String[] { " ", ",", Environment.NewLine }, StringSplitOptions.None);
 
             for (int i = 0; i < podstroki.Length; i++)
             {
@@ -52,7 +63,7 @@ namespace WindowsFormsApplication1
                 {
                     string antipm = String.Concat(Enumerable.Repeat("*", podstroki[i].Length)); //  in .NET 3.5: String.Concat(Enumerable.Repeat("Hello", 4).ToArray())
 
-                    textBox2.Text = textBox2.Text.Replace(podstroki[i], antipm);
+                    tb.Text = tb.Text.Replace(podstroki[i], antipm);
                 }
             }
         }
@@ -140,12 +151,12 @@ namespace WindowsFormsApplication1
 
             podstroki = textBox2.Text.Split(new String[] { " ", "," }, StringSplitOptions.None);
 
-            badWords();
+            badWords(ref textBox2);
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            badWords();
+            badWords(ref textBox1);
         }
 
         private void textBox1_KeyDown(object sender, KeyEventArgs e)
@@ -255,12 +266,12 @@ namespace WindowsFormsApplication1
 
             GetPut.Put(subchat + ".txt");
 
-            badWords();
+            badWords(ref textBox2);
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            badWords();
+            badWords(ref textBox1);
         }
 
         private void этоМатToolStripMenuItem_Click(object sender, EventArgs e)
@@ -271,6 +282,16 @@ namespace WindowsFormsApplication1
         private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
             SwearWords.Add(textBox2.SelectedText);
+            FileStream file2 = new FileStream("словарь мат.txt", FileMode.Open);
+            StreamReader reader = new StreamReader(file2); // создаем «потоковый читатель» и связываем его с файловым потоком
+
+            while (reader.Peek() >= 0)
+            {
+                string stroka_iz_faila = reader.ReadLine().Trim();
+                File.AppendAllText("словарь мат", Environment.NewLine + textBox2.SelectedText);
+            }
+
+            reader.Close(); //закрываем поток
         }
 		
 		private void RemoveBadWordToolStripMenuItem_Click(object sender, EventArgs e)
@@ -311,6 +332,19 @@ namespace WindowsFormsApplication1
         private void button5_Click(object sender, EventArgs e)
         {
             File.AppendAllLines(subchat + "-users.txt", new String[] { textBox4.Text });
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            deleteMat = !deleteMat;
+            if (!deleteMat)
+            {
+                button6.Text = "Вернуть зазвездывание";
+            }
+            else
+            {
+                button6.Text = "Убрать зазвездывание";
+            }
         }
     }
 }
