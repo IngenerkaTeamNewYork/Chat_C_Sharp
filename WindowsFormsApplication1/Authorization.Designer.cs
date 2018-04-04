@@ -68,7 +68,7 @@
             this.LoginTextBox.Size = new System.Drawing.Size(165, 20);
             this.LoginTextBox.TabIndex = 1;
             this.LoginTextBox.Text = "Логин";
-            this.LoginTextBox.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.LoginTextBox.TextChanged += new System.EventHandler(this.TextBox2_TextChanged);
             this.LoginTextBox.Enter += new System.EventHandler(this.LoginTextBox_Enter);
             this.LoginTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LoginTextBox_KeyDown);
             this.LoginTextBox.Leave += new System.EventHandler(this.LoginTextBox_Leave);
