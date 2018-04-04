@@ -28,7 +28,6 @@ namespace WindowsFormsApplication1
         {
             LoginTextBox.Text = File.ReadAllText("saveduser.txt");
 
-
             File.WriteAllText("AllPolzovoteli.txt", string.Empty);
             GetPut.Get("password3.txt");
 
@@ -43,7 +42,6 @@ namespace WindowsFormsApplication1
 
             reader.Close();
             GetPut.Put("password3.txt");
-
 
             file2 = new FileStream("password3.txt", FileMode.Open);
             reader = new StreamReader(file2);

@@ -7,7 +7,6 @@ using System.IO;
 using System.Windows.Forms;
 using System.Linq;
 
-
 namespace WindowsFormsApplication1
 {
     public partial class Chat : Form
@@ -16,8 +15,8 @@ namespace WindowsFormsApplication1
 
         public static List<String> SwearWords = new List<string>(new string[] { });
 
-        private static List<ChatProcessing.Soobshenie> messages;
-        private static ChatProcessing.Polzovatel_view[] type = new ChatProcessing.Polzovatel_view[3];
+        private static List<Soobshenie> messages;
+        private static Polzovatel_view[] type = new Polzovatel_view[3];
 
         public string login;
         public const string rasd = "$~#~@*&";
@@ -39,7 +38,6 @@ namespace WindowsFormsApplication1
             saveFileDialog1.Filter = "Text files(*SaveFileDialog.txt)|*.txt|All files(*.*)|*.*";
             openFileDialog1.Filter = "Text files(*OpenFileDialog.txt)|*.txt|All files(*.*)|*.*";
         }
-
 
         public void ReadList()
         {
@@ -82,14 +80,14 @@ namespace WindowsFormsApplication1
         {
             ////////////////////////////////////////////////////////////////////////////////
 
-            messages = new List<ChatProcessing.Soobshenie>();
+            messages = new List<Soobshenie>();
             File.WriteAllText("Allmatt.txt", string.Empty);
             GetPut.Get("matt.txt");
 
             File.WriteAllText("matt1.txt", File.ReadAllText("matt.txt"));
             try
             {
-                ChatProcessing.SubChat dsad = new ChatProcessing.SubChat(subchat);
+                SubChat dsad = new SubChat(subchat);
                 messages = dsad.LoadChat(login);
                 textBox2.Text = dsad.PrintChat(login, messages);
             }
@@ -140,7 +138,7 @@ namespace WindowsFormsApplication1
                 {
                     //messages[i].day = Convert.ToDateTime(podstroki[0]);
 
-                    messages.Add(new ChatProcessing.Soobshenie
+                    messages.Add(new Soobshenie
                     {
                         login = podstroki[1],
                         text = podstroki[2].Replace("%%%%", Environment.NewLine)
@@ -264,7 +262,6 @@ namespace WindowsFormsApplication1
             File.WriteAllText("AllMessages.txt", string.Empty);
             GetPut.Get(subchat + ".txt");
 
-
             FileStream file2 = new FileStream("NewMessages.txt", FileMode.Open);
             StreamReader reader = new StreamReader(file2); // создаем «потоковый читатель» и связываем его с файловым потоком
 
@@ -322,7 +319,7 @@ namespace WindowsFormsApplication1
             if (checkBox1.Checked)
             {
                 GetPut.Get(subchat + ".txt");
-                ChatProcessing.SubChat dsad = new ChatProcessing.SubChat(subchat);
+                SubChat dsad = new SubChat(subchat);
                 messages = dsad.LoadChat(login);
                 textBox2.Text = dsad.PrintChat(login, messages);
                 GetPut.Put(subchat + "-users.txt");

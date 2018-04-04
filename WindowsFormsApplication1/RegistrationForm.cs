@@ -83,13 +83,11 @@ namespace WindowsFormsApplication1
                 MessageBox.Show("Данные!");
                 uzhe_byl = true;
             }
-
             else if (PotParolTextBox.Text == "Повторите пароль")
             {
                 MessageBox.Show("Повтори пароль!");
                 uzhe_byl = true;
             }
-
             else if (ParolTextBox.Text != PotParolTextBox.Text)
             {
                 MessageBox.Show("Пароли не совпадают!!!");
@@ -105,16 +103,13 @@ namespace WindowsFormsApplication1
                         uzhe_byl = true;
                         break;
                     }
-
                     else if (ParolTextBox.Text == LoginForm.usery[i].password)
                     {
                         MessageBox.Show("Пароль занят!");
                         uzhe_byl = true;
                         break;
                     }
-
                 }
-
 
                 if (!uzhe_byl)
                 {
@@ -126,7 +121,7 @@ namespace WindowsFormsApplication1
 
                     Chat chatForm = new Chat(loginTextBox.Text);
                     chatForm.ShowDialog();
-                };
+                }
             }
         }
 

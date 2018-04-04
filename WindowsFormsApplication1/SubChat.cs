@@ -2,100 +2,77 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WindowsFormsApplication1
 {
-    namespace ChatProcessing
+    public class SubChat
     {
-        public class Soobshenie : IComparable
+        public List<String> usersallowed;
+        public String subchatname;
+        public SubChat(String subchatname)
         {
-            public String login;
-            public String text;
-            public DateTime day;
-            public int CompareTo(object obj)
+            this.subchatname = subchatname;
+            try
             {
-                Soobshenie othermessage = obj as Soobshenie;
-                return this.day.CompareTo(othermessage.day);
+                usersallowed = new List<String>(File.ReadAllLines(subchatname + "-users.txt"));
             }
-        };
+            catch (FileNotFoundException)
+            {
+                usersallowed = new List<String> { "" };
+            }
+        }
 
-        public struct Polzovatel_view
+        public String PrintChat(String user, List<Soobshenie> messages)
         {
-            public String shrift;
-            public String color;
-        };
+            if (!usersallowed.Contains(user))
+            {
+                throw new UnauthorizedAccessException();
+            }
 
-        public class SubChat
+            String text = "";
+
+            messages.Sort();
+
+            for (int i = 0; i < messages.Count(); i++)
+            {
+                text += messages[i].day + Environment.NewLine;
+                text += "     " + messages[i].login + "  сказал(а):  ";
+                text += messages[i].text + Environment.NewLine;
+            }
+            return text;
+        }
+        public List<Soobshenie> LoadChat(String user)
         {
-            public List<String> usersallowed;
-            public String subchatname;
-            public SubChat(String subchatname)
+            if (!usersallowed.Contains(user))
             {
-                this.subchatname = subchatname;
-                try
+                throw new UnauthorizedAccessException();
+            }
+            List<Soobshenie> messages = new List<Soobshenie>();
+            File.WriteAllText(subchatname + ".txt", File.ReadAllText(subchatname + ".txt").Trim(new char[] { '\r', '\n' }));
+            FileStream file2 = new FileStream(subchatname + ".txt", FileMode.Open); //создаем файловый поток
+            StreamReader reader = new StreamReader(file2); // создаем «потоковый читатель» и связываем его с файловым потоком
+
+            int i = 0;
+            while (reader.Peek() >= 0)
+            {
+                string stroka_iz_faila = reader.ReadLine().Trim();
+                List<String> SubLines = new List<String>(stroka_iz_faila.Split(new String[] { "$~#~@*&" }, StringSplitOptions.None));
+
+                if (SubLines.Count == 3)
                 {
-                    usersallowed = new List<String>(File.ReadAllLines(subchatname + "-users.txt"));
+                    messages.Add(new Soobshenie());
+                    messages[i].day = Convert.ToDateTime(SubLines[0]);
+                    messages[i].login = SubLines[1];
+                    messages[i].text = SubLines[2].Replace("%%%%", Environment.NewLine);
+                    i++;
                 }
-                catch (FileNotFoundException)
+                else
                 {
-                    usersallowed = new List<String> { "" };
+                    throw new Exception("Malformed subchat.");
                 }
             }
-
-            public String PrintChat(String user, List<Soobshenie> messages)
-            {
-                if (!usersallowed.Contains(user))
-                {
-                    throw new UnauthorizedAccessException();
-                }
-
-                String text = "";
-
-                messages.Sort();
-
-                for (int i = 0; i < messages.Count(); i++)
-                {
-                    text += messages[i].day + Environment.NewLine;
-                    text += "     " + messages[i].login + "  сказал(а):  ";
-                    text += messages[i].text + Environment.NewLine;
-                }
-                return text;
-            }
-            public List<Soobshenie> LoadChat(String user)
-            {
-                if (!usersallowed.Contains(user))
-                {
-                    throw new UnauthorizedAccessException();
-                }
-                List<Soobshenie> messages = new List<Soobshenie>();
-                File.WriteAllText(subchatname + ".txt", File.ReadAllText(subchatname + ".txt").Trim(new char[] { '\r', '\n' }));
-                FileStream file2 = new FileStream(subchatname + ".txt", FileMode.Open); //создаем файловый поток
-                StreamReader reader = new StreamReader(file2); // создаем «потоковый читатель» и связываем его с файловым потоком
-
-                int i = 0;
-                while (reader.Peek() >= 0)
-                {
-                    string stroka_iz_faila = reader.ReadLine().Trim();
-                    List<String> SubLines = new List<String>(stroka_iz_faila.Split(new String[] { "$~#~@*&" }, StringSplitOptions.None));
-
-                    if (SubLines.Count == 3)
-                    {
-                        messages.Add(new Soobshenie());
-                        messages[i].day = Convert.ToDateTime(SubLines[0]);
-                        messages[i].login = SubLines[1];
-                        messages[i].text = SubLines[2].Replace("%%%%", Environment.NewLine);
-                        i++;
-                    }
-                    else
-                    {
-                        throw new Exception("Malformed subchat.");
-                    }
-                }
-                reader.Close(); //закрываем поток
-                return messages;
-            }
+            reader.Close(); //закрываем поток
+            return messages;
         }
     }
 }
