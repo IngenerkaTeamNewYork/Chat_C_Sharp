@@ -30,7 +30,7 @@ namespace WindowsFormsApplication1
 
 
             File.WriteAllText("AllPolzovoteli.txt", string.Empty);
-            GetPut.Get("password3.txt");
+            GetPut.Get("password5.txt");
 
             FileStream file2 = new FileStream("NewPolzovoteli.txt", FileMode.Open);
             StreamReader reader = new StreamReader(file2);
@@ -38,14 +38,14 @@ namespace WindowsFormsApplication1
             while (reader.Peek() >= 0)
             {
                 string stroka_iz_faila = reader.ReadLine().Trim();
-                File.AppendAllText("password3.txt", stroka_iz_faila + Environment.NewLine);
+                File.AppendAllText("password5.txt", stroka_iz_faila + Environment.NewLine);
             }
 
             reader.Close();
-            GetPut.Put("password3.txt");
+            GetPut.Put("password5.txt");
 
 
-            file2 = new FileStream("password3.txt", FileMode.Open); 
+            file2 = new FileStream("password5.txt", FileMode.Open); 
             reader = new StreamReader(file2);
 
             int i = 0;
