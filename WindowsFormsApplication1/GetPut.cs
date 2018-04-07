@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 
 namespace WindowsFormsApplication1
@@ -14,19 +14,6 @@ namespace WindowsFormsApplication1
                 CreateNoWindow = true,
                 Arguments = "/S /C start /B " + exe + " " + param1 + " " + param2
             };
-
-            Process.Start(startInfo);
-
-            Process myProcess = Process.Start(startInfo);
-            do
-            {
-                if (!myProcess.HasExited)
-                {
-                    // Refresh the current process property values.
-                    myProcess.Refresh();
-                }
-            }
-            while (!myProcess.WaitForExit(10000));
         }
         public static void Get(String filenameserv, String filenamelocal=null)
         {

@@ -35,9 +35,16 @@ namespace WindowsFormsApplication1
 
             for (int i = 0; i < messages.Count(); i++)
             {
-                text += messages[i].day + Environment.NewLine;
-                text += "     " + messages[i].login + "  сказал(а):  ";
-                text += messages[i].text + Environment.NewLine;
+                if (messages[i].text.Split(new char[]{' '})[0] != "&^&") {
+                    text += messages[i].day + Environment.NewLine;
+                    text += "     " + messages[i].login + "  сказал(а):  ";
+                    text += messages[i].text + Environment.NewLine;
+                } else
+                {
+                    text += messages[i].day + Environment.NewLine;
+                    text += "     " + messages[i].login + "  сказал(а):  ";
+                    text += " -== Ссылка на файл " + messages[i].text.Split(new char[] { ' ' })[1] + " ==-" + Environment.NewLine;
+                }
             }
             return text;
         }
@@ -56,7 +63,7 @@ namespace WindowsFormsApplication1
             while (reader.Peek() >= 0)
             {
                 string stroka_iz_faila = reader.ReadLine().Trim();
-                List<String> SubLines = new List<String>(stroka_iz_faila.Split(new String[] { "$~#~@*&" }, StringSplitOptions.None));
+                List<String> SubLines = new List<String>(stroka_iz_faila.Split(new String[] { "#" }, StringSplitOptions.None));
 
                 if (SubLines.Count == 3)
                 {
