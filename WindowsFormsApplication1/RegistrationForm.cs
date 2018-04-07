@@ -157,10 +157,5 @@ namespace WindowsFormsApplication1
             LoginForm rm = new LoginForm();
             rm.Show();
         }
-
-
-   
-
-
     }
 }

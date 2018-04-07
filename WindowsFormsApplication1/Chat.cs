@@ -82,8 +82,6 @@ namespace WindowsFormsApplication1
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            ////////////////////////////////////////////////////////////////////////////////
-
             messages = new List<Soobshenie>();
             File.WriteAllText("Allmatt.txt", string.Empty);
             GetPut.Get("matt.txt");
@@ -116,7 +114,6 @@ namespace WindowsFormsApplication1
                 File.AppendAllText("NewMessages.txt", dateStr + rasd + login + rasd + textBox1.Text.Replace(Environment.NewLine, "%%%%") + Environment.NewLine);
                 textBox2.AppendText(dateStr + Environment.NewLine + login + ":   " +
                     textBox1.Text + Environment.NewLine);
-                
             }
 
             textBox1.Text = "";
@@ -292,11 +289,6 @@ namespace WindowsFormsApplication1
             BadWords(ref textBox1);
         }
 
-        private void ThisisswearwordToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-          
-        }
-
         private void RemoveBadWordToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show(textBox1.SelectedText);
@@ -337,11 +329,6 @@ namespace WindowsFormsApplication1
             File.AppendAllLines(subchat + "-users.txt", new String[] { comboBox1.Text });
         }
 
-        private void Button6_Click(object sender, EventArgs e)
-        {
-            
-        }
-
         private void button6_Click_1(object sender, EventArgs e)
         {
             deleteMat = !deleteMat;
@@ -362,11 +349,8 @@ namespace WindowsFormsApplication1
                 return;
             }
 
-
             SwearWords.Add(textBox2.SelectedText);
             File.AppendAllText("словарь мат.txt", Environment.NewLine + textBox2.SelectedText);
         }
-
-             
     }
 }
