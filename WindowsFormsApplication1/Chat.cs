@@ -24,7 +24,6 @@ namespace WindowsFormsApplication1
 
         public Chat(string _login, String _subchat = "peregovory")
         {
-            ReadList();
             InitializeComponent();
             login = _login;
             subchat = _subchat;
@@ -56,6 +55,7 @@ namespace WindowsFormsApplication1
 
         private void BadWords(ref TextBox tb)
         {
+            ReadList();
             if (!deleteMat)
             {
                 return;
@@ -67,9 +67,7 @@ namespace WindowsFormsApplication1
             {
                 foreach (String str in SwearWords)
                 {
-                    if (!String.IsNullOrEmpty(str) &&
-                        !String.IsNullOrEmpty(podstroki[i]) && 
-                        str.ToUpper() == podstroki[i].ToUpper())
+                    if (str.ToUpper() == podstroki[i].ToUpper())
                     {
                         string antipm = String.Concat(Enumerable.Repeat("*", podstroki[i].Length));
                         tb.Text = tb.Text.Replace(podstroki[i], antipm);
@@ -358,6 +356,28 @@ namespace WindowsFormsApplication1
             else
             {
                 button6.Text = "Убрать зазвездывание";
+            }
+        }
+
+        private void button6_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox3_Enter(object sender, EventArgs e)
+            ////////////////////////////
+            ////////////////////////////
+            ////////////////////////////
+        {
+            
+        }
+
+        private void textBox3_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                Button4_Click(sender, e);
             }
         }
     }

@@ -7,17 +7,7 @@ namespace WindowsFormsApplication1
     {
         private static void Base(String exe, String param1, String param2)
         {
-            var startInfo = new ProcessStartInfo
-            {
-                FileName = "cmd",  // Путь к приложению
-                UseShellExecute = false,
-                CreateNoWindow = true,
-                Arguments = "/S /C start /B " + exe + " " + param1 + " " + param2
-            };
-
-            Process.Start(startInfo);
-
-            Process myProcess = Process.Start(startInfo);
+            Process myProcess = Process.Start("cmd", "/C start /B " + exe + " " + param1 + " " + param2);
             do
             {
                 if (!myProcess.HasExited)
