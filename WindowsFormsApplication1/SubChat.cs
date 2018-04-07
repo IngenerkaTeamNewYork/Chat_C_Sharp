@@ -68,7 +68,7 @@ namespace WindowsFormsApplication1
                 }
                 else
                 {
-                    throw new Exception("Malformed subchat.");
+                    //throw new Exception("Malformed subchat.");
                 }
             }
             reader.Close(); //закрываем поток

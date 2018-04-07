@@ -160,6 +160,8 @@ namespace WindowsFormsApplication1
             this.textBox3.Size = new System.Drawing.Size(104, 20);
             this.textBox3.TabIndex = 7;
             this.textBox3.Text = "peregovory";
+            this.textBox3.Enter += new System.EventHandler(this.textBox3_Enter);
+            this.textBox3.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox3_KeyDown);
             // 
             // label1
             // 
@@ -231,8 +233,9 @@ namespace WindowsFormsApplication1
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(122, 23);
             this.button6.TabIndex = 15;
-            this.button6.Text = "у меня есть ягуар";
+            this.button6.Text = "button6";
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click_1);
             // 
             // Chat
             // 
