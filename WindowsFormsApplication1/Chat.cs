@@ -24,6 +24,7 @@ namespace WindowsFormsApplication1
 
         public Chat(string _login, String _subchat = "peregovory")
         {
+            ReadList();
             InitializeComponent();
             login = _login;
             subchat = _subchat;
@@ -55,7 +56,6 @@ namespace WindowsFormsApplication1
 
         private void BadWords(ref TextBox tb)
         {
-            ReadList();
             if (!deleteMat)
             {
                 return;
@@ -67,7 +67,9 @@ namespace WindowsFormsApplication1
             {
                 foreach (String str in SwearWords)
                 {
-                    if (str.ToUpper() == podstroki[i].ToUpper())
+                    if (!String.IsNullOrEmpty(str) &&
+                        !String.IsNullOrEmpty(podstroki[i]) && 
+                        str.ToUpper() == podstroki[i].ToUpper())
                     {
                         string antipm = String.Concat(Enumerable.Repeat("*", podstroki[i].Length));
                         tb.Text = tb.Text.Replace(podstroki[i], antipm);
