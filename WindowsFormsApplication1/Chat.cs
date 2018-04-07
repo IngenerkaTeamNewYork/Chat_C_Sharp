@@ -24,8 +24,8 @@ namespace WindowsFormsApplication1
 
         public Chat(string _login, String _subchat = "peregovory")
         {
-            ReadList();
             InitializeComponent();
+            ReadList();
             login = _login;
             subchat = _subchat;
             textBox3.Text = subchat;
@@ -45,6 +45,7 @@ namespace WindowsFormsApplication1
             FileStream file2 = new FileStream("словарь мат.txt", FileMode.Open);
             StreamReader reader = new StreamReader(file2); // создаем «потоковый читатель» и связываем его с файловым потоком
 
+            SwearWords.Clear();
             while (reader.Peek() >= 0)
             {
                 string stroka_iz_faila = reader.ReadLine().Trim();
@@ -52,6 +53,7 @@ namespace WindowsFormsApplication1
             }
 
             reader.Close(); //закрываем поток
+            file2.Close();
         }
 
         private void BadWords(ref TextBox tb)
@@ -80,8 +82,6 @@ namespace WindowsFormsApplication1
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            ////////////////////////////////////////////////////////////////////////////////
-
             messages = new List<Soobshenie>();
             File.WriteAllText("Allmatt.txt", string.Empty);
             GetPut.Get("matt.txt");
@@ -110,10 +110,10 @@ namespace WindowsFormsApplication1
                 DateTime thisDay = MyTime.GetNetworkTime();
                 String dateStr = thisDay.ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz");
 
-                textBox2.AppendText(dateStr + Environment.NewLine + login + ":   " +
-                    textBox1.Text + Environment.NewLine);
                 File.AppendAllText(subchat + ".txt", dateStr + rasd + login + rasd + textBox1.Text.Replace(Environment.NewLine, "%%%%"));
                 File.AppendAllText("NewMessages.txt", dateStr + rasd + login + rasd + textBox1.Text.Replace(Environment.NewLine, "%%%%") + Environment.NewLine);
+                textBox2.AppendText(dateStr + Environment.NewLine + login + ":   " +
+                    textBox1.Text + Environment.NewLine);
             }
 
             textBox1.Text = "";
@@ -170,6 +170,7 @@ namespace WindowsFormsApplication1
         private void TextBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             BadWords(ref textBox1);
+            BadWords(ref textBox2);
         }
 
         private void TextBox1_KeyDown(object sender, KeyEventArgs e)
@@ -288,26 +289,6 @@ namespace WindowsFormsApplication1
             BadWords(ref textBox1);
         }
 
-        private void ThisisswearwordToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SwearWords.Add(textBox2.SelectedText);
-        }
-
-        private void ContextMenuStrip1_Opening(object sender, CancelEventArgs e)
-        {
-            SwearWords.Add(textBox2.SelectedText);
-            FileStream file2 = new FileStream("словарь мат.txt", FileMode.Open);
-            StreamReader reader = new StreamReader(file2); // создаем «потоковый читатель» и связываем его с файловым потоком
-
-            while (reader.Peek() >= 0)
-            {
-                string stroka_iz_faila = reader.ReadLine().Trim();
-                File.AppendAllText("словарь мат", Environment.NewLine + textBox2.SelectedText);
-            }
-
-            reader.Close(); //закрываем поток
-        }
-
         private void RemoveBadWordToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show(textBox1.SelectedText);
@@ -348,7 +329,7 @@ namespace WindowsFormsApplication1
             File.AppendAllLines(subchat + "-users.txt", new String[] { comboBox1.Text });
         }
 
-        private void Button6_Click(object sender, EventArgs e)
+        private void button6_Click_1(object sender, EventArgs e)
         {
             deleteMat = !deleteMat;
             if (!deleteMat)
@@ -359,6 +340,17 @@ namespace WindowsFormsApplication1
             {
                 button6.Text = "Убрать зазвездывание";
             }
+        }
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+            if (String.IsNullOrEmpty(textBox2.SelectedText))
+            {
+                return;
+            }
+
+            SwearWords.Add(textBox2.SelectedText);
+            File.AppendAllText("словарь мат.txt", Environment.NewLine + textBox2.SelectedText);
         }
     }
 }

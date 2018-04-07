@@ -116,14 +116,12 @@ namespace WindowsFormsApplication1
             this.этоМатToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(120, 26);
-            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.ContextMenuStrip1_Opening);
             // 
             // этоМатToolStripMenuItem
             // 
             this.этоМатToolStripMenuItem.Name = "этоМатToolStripMenuItem";
             this.этоМатToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
             this.этоМатToolStripMenuItem.Text = "Это мат!";
-            this.этоМатToolStripMenuItem.Click += new System.EventHandler(this.ThisisswearwordToolStripMenuItem_Click);
             // 
             // openFileDialog1
             // 
