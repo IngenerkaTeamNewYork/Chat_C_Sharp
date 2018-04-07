@@ -136,8 +136,6 @@ namespace WindowsFormsApplication1
 
                 if (podstroki.Length > 2)
                 {
-                    //messages[i].day = Convert.ToDateTime(podstroki[0]);
-
                     messages.Add(new Soobshenie
                     {
                         login = podstroki[1],
