@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Forms;
 
 namespace WindowsFormsApplication1
@@ -29,6 +30,21 @@ namespace WindowsFormsApplication1
             if (loginTextBox.Text == "")
             {
                 loginTextBox.Text = "Введите логин";
+            }
+        }
+
+        private void ABC_Leave (object sender, EventArgs e)
+        {
+            if (textBox1.Text == "")
+            {
+                textBox1.Text = "peregovory";
+            }
+        }
+        private void ABC_Enter(object sender, EventArgs e)
+        {
+            if (textBox1.Text == "peregovory")
+            {
+                textBox1.Text = "";
             }
         }
 
@@ -79,12 +95,12 @@ namespace WindowsFormsApplication1
 
             if (ParolTextBox.Text == "Введите пароль" || loginTextBox.Text == "Введите логин")
             {
-                MessageBox.Show("Данные!");
-                uzhe_byl = true;
+               MessageBox.Show("Данные!");
+               uzhe_byl = true;
             }
             else if (PotParolTextBox.Text == "Повторите пароль")
             {
-                MessageBox.Show("Повтори пароль!");
+                MessageBox.Show("Повтори пароль!!!");
                 uzhe_byl = true;
             }
             else if (ParolTextBox.Text != PotParolTextBox.Text)
@@ -117,7 +133,8 @@ namespace WindowsFormsApplication1
                     LoginForm.usery[kolich].login = loginTextBox.Text;
                     LoginForm.usery[kolich].password = ParolTextBox.Text;
                     LoginForm.kolichestvo_userov++;
-
+                    File.AppendAllLines(textBox1.Text + "-users.txt", new String[] { loginTextBox.Text });
+                   
                     Chat chatForm = new Chat(loginTextBox.Text);
                     chatForm.ShowDialog();
                 }
@@ -134,5 +151,16 @@ namespace WindowsFormsApplication1
             LoginForm loginForm = new LoginForm();
             loginForm.ShowDialog();
         }
+
+        private void linkLabel2_LinkClicked_1(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            LoginForm rm = new LoginForm();
+            rm.Show();
+        }
+
+
+   
+
+
     }
 }
