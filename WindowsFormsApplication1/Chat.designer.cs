@@ -1,4 +1,4 @@
-Ôªøusing System;
+using System;
 
 namespace WindowsFormsApplication1
 {
@@ -33,11 +33,11 @@ namespace WindowsFormsApplication1
             this.components = new System.ComponentModel.Container();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.—É–±–∏—Ç—å–ö–æ—Ç–∞ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Û·ËÚ¸ ÓÚ‡ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.button1 = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.—ç—Ç–æ–ú–∞—ÇToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.˝ÚÓÃ‡ÚToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
@@ -74,16 +74,16 @@ namespace WindowsFormsApplication1
             // contextMenuStrip2
             // 
             this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.—É–±–∏—Ç—å–ö–æ—Ç–∞ToolStripMenuItem});
+            this.Û·ËÚ¸ ÓÚ‡ToolStripMenuItem});
             this.contextMenuStrip2.Name = "contextMenuStrip2";
             this.contextMenuStrip2.Size = new System.Drawing.Size(218, 26);
             // 
-            // —É–±–∏—Ç—å–ö–æ—Ç–∞ToolStripMenuItem
+            // Û·ËÚ¸ ÓÚ‡ToolStripMenuItem
             // 
-            this.—É–±–∏—Ç—å–ö–æ—Ç–∞ToolStripMenuItem.Name = "—É–±–∏—Ç—å–ö–æ—Ç–∞ToolStripMenuItem";
-            this.—É–±–∏—Ç—å–ö–æ—Ç–∞ToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
-            this.—É–±–∏—Ç—å–ö–æ—Ç–∞ToolStripMenuItem.Text = "–£–¥–∞–ª–∏—Ç—å —Å–ª–æ–≤–æ –∏–∑ —Å–ª–æ–≤–∞—Ä—è";
-            this.—É–±–∏—Ç—å–ö–æ—Ç–∞ToolStripMenuItem.Click += new System.EventHandler(this.RemoveBadWordToolStripMenuItem_Click);
+            this.Û·ËÚ¸ ÓÚ‡ToolStripMenuItem.Name = "Û·ËÚ¸ ÓÚ‡ToolStripMenuItem";
+            this.Û·ËÚ¸ ÓÚ‡ToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.Û·ËÚ¸ ÓÚ‡ToolStripMenuItem.Text = "”‰‡ÎËÚ¸ ÒÎÓ‚Ó ËÁ ÒÎÓ‚‡ˇ";
+            this.Û·ËÚ¸ ÓÚ‡ToolStripMenuItem.Click += new System.EventHandler(this.RemoveBadWordToolStripMenuItem_Click);
             // 
             // button1
             // 
@@ -92,7 +92,7 @@ namespace WindowsFormsApplication1
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 63);
             this.button1.TabIndex = 2;
-            this.button1.Text = "–û—Ç–ø—Ä–∞–≤–∏—Ç—å";
+            this.button1.Text = "ŒÚÔ‡‚ËÚ¸";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
@@ -113,17 +113,17 @@ namespace WindowsFormsApplication1
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.—ç—Ç–æ–ú–∞—ÇToolStripMenuItem});
+            this.˝ÚÓÃ‡ÚToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(120, 26);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.ContextMenuStrip1_Opening);
             // 
-            // —ç—Ç–æ–ú–∞—ÇToolStripMenuItem
+            // ˝ÚÓÃ‡ÚToolStripMenuItem
             // 
-            this.—ç—Ç–æ–ú–∞—ÇToolStripMenuItem.Name = "—ç—Ç–æ–ú–∞—ÇToolStripMenuItem";
-            this.—ç—Ç–æ–ú–∞—ÇToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
-            this.—ç—Ç–æ–ú–∞—ÇToolStripMenuItem.Text = "–≠—Ç–æ –º–∞—Ç!";
-            this.—ç—Ç–æ–ú–∞—ÇToolStripMenuItem.Click += new System.EventHandler(this.ThisisswearwordToolStripMenuItem_Click);
+            this.˝ÚÓÃ‡ÚToolStripMenuItem.Name = "˝ÚÓÃ‡ÚToolStripMenuItem";
+            this.˝ÚÓÃ‡ÚToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+            this.˝ÚÓÃ‡ÚToolStripMenuItem.Text = "›ÚÓ Ï‡Ú!";
+            this.˝ÚÓÃ‡ÚToolStripMenuItem.Click += new System.EventHandler(this.ThisisswearwordToolStripMenuItem_Click);
             // 
             // openFileDialog1
             // 
@@ -137,7 +137,7 @@ namespace WindowsFormsApplication1
             this.button2.Size = new System.Drawing.Size(87, 32);
             this.button2.TabIndex = 0;
             this.button2.TabStop = false;
-            this.button2.Text = "–î–ª—è —Å–ª–µ–ø—ã—Ö";
+            this.button2.Text = "ƒÎˇ ÒÎÂÔ˚ı";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
@@ -148,7 +148,7 @@ namespace WindowsFormsApplication1
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(208, 23);
             this.button3.TabIndex = 6;
-            this.button3.Text = "–û–±–Ω–æ–≤–∏—Ç—å —á–∞—Ç";
+            this.button3.Text = "Œ·ÌÓ‚ËÚ¸ ˜‡Ú";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.Button3_Click);
             // 
@@ -160,6 +160,7 @@ namespace WindowsFormsApplication1
             this.textBox3.Size = new System.Drawing.Size(104, 20);
             this.textBox3.TabIndex = 7;
             this.textBox3.Text = "peregovory";
+            this.textBox3.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox3_KeyDown);
             // 
             // label1
             // 
@@ -170,7 +171,7 @@ namespace WindowsFormsApplication1
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 13);
             this.label1.TabIndex = 8;
-            this.label1.Text = "–ü–æ–¥—á–∞—Ç:";
+            this.label1.Text = "œÓ‰˜‡Ú:";
             // 
             // timer1
             // 
@@ -185,7 +186,7 @@ namespace WindowsFormsApplication1
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(110, 17);
             this.checkBox1.TabIndex = 9;
-            this.checkBox1.Text = "–ê–≤—Ç–æ–æ–±–Ω–æ–≤–ª–µ–Ω–∏–µ";
+            this.checkBox1.Text = "¿‚ÚÓÓ·ÌÓ‚ÎÂÌËÂ";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // button4
@@ -194,7 +195,7 @@ namespace WindowsFormsApplication1
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(62, 26);
             this.button4.TabIndex = 10;
-            this.button4.Text = "–°–º–µ–Ω–∏—Ç—å";
+            this.button4.Text = "—ÏÂÌËÚ¸";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.Button4_Click);
             // 
@@ -204,7 +205,7 @@ namespace WindowsFormsApplication1
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(52, 25);
             this.button5.TabIndex = 11;
-            this.button5.Text = "–û–∫";
+            this.button5.Text = "ŒÍ";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.Button5_Click);
             // 
@@ -215,7 +216,7 @@ namespace WindowsFormsApplication1
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(134, 13);
             this.label2.TabIndex = 13;
-            this.label2.Text = "–î–æ–±–∞–≤–∏—Ç—å –ø–æ–ª—å–∑–æ–≤–∞—Ç–µ–ª—è:";
+            this.label2.Text = "ƒÓ·‡‚ËÚ¸ ÔÓÎ¸ÁÓ‚‡ÚÂÎˇ:";
             // 
             // comboBox1
             // 
@@ -231,7 +232,7 @@ namespace WindowsFormsApplication1
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(122, 23);
             this.button6.TabIndex = 15;
-            this.button6.Text = "—É –º–µ–Ω—è –µ—Å—Ç—å —è–≥—É–∞—Ä";
+            this.button6.Text = "Û ÏÂÌˇ ÂÒÚ¸ ˇ„Û‡";
             this.button6.UseVisualStyleBackColor = true;
             // 
             // Chat
@@ -274,9 +275,9 @@ namespace WindowsFormsApplication1
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem —ç—Ç–æ–ú–∞—ÇToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ˝ÚÓÃ‡ÚToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
-        private System.Windows.Forms.ToolStripMenuItem —É–±–∏—Ç—å–ö–æ—Ç–∞ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem Û·ËÚ¸ ÓÚ‡ToolStripMenuItem;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Timer timer1;
