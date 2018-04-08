@@ -43,7 +43,7 @@ namespace WindowsFormsApplication1
                 else
                 {
                     text += messages[i].day + Environment.NewLine;
-                    text += "     " + messages[i].login + "  сказал(а):  ";
+                    text += "     " + messages[i].login + "  отправил(а):  ";
                     text += " -== Ссылка на файл " + messages[i].text.Split(new char[] { ' ' })[1] + " ==-" + Environment.NewLine;
                 }
             }
