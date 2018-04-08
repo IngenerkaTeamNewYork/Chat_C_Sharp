@@ -343,6 +343,15 @@ namespace WindowsFormsApplication1
             }
         }
 
+        private void textBox3_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                Button4_Click(sender, e);
+            }
+        }
+
         private void Button5_Click(object sender, EventArgs e)
         {
             File.AppendAllLines(subchat + "-users.txt", new String[] { comboBox1.Text });
