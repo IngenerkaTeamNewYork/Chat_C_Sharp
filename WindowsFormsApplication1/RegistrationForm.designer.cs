@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 
 namespace WindowsFormsApplication1
 {
@@ -33,6 +34,7 @@ namespace WindowsFormsApplication1
             this.button2 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.PotParolTextBox = new System.Windows.Forms.TextBox();
+            this.SubChatTextBox = new System.Windows.Forms.TextBox();
             this.ParolTextBox = new System.Windows.Forms.TextBox();
             this.loginTextBox = new System.Windows.Forms.TextBox();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
@@ -66,6 +68,17 @@ namespace WindowsFormsApplication1
             this.PotParolTextBox.Text = "Повторите пароль";
             this.PotParolTextBox.Enter += new System.EventHandler(this.PotParolTextBox4_Enter);
             this.PotParolTextBox.Leave += new System.EventHandler(this.PotParolTextBox4_Leave);
+            //
+            // SubChatTextBox
+            //
+            this.SubChatTextBox.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.SubChatTextBox.Location = new System.Drawing.Point(51, 127);
+            this.SubChatTextBox.Name = "SubChatTextBox";
+            this.SubChatTextBox.Size = new System.Drawing.Size(100, 20);
+            this.SubChatTextBox.TabIndex = 6;
+            this.SubChatTextBox.Text = "peregovory";
+            this.SubChatTextBox.Enter += new System.EventHandler(this.ABC_Enter);
+            this.SubChatTextBox.Leave += new System.EventHandler(this.ABC_Leave);
             //
             // ParolTextBox
             //
@@ -106,6 +119,7 @@ namespace WindowsFormsApplication1
             this.ClientSize = new System.Drawing.Size(204, 174);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.loginTextBox);
+            this.Controls.Add(this.SubChatTextBox);
             this.Controls.Add(this.ParolTextBox);
             this.Controls.Add(this.PotParolTextBox);
             this.Controls.Add(this.button2);
@@ -127,6 +141,7 @@ namespace WindowsFormsApplication1
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox PotParolTextBox;
+        private TextBox SubChatTextBox;
         private System.Windows.Forms.TextBox ParolTextBox;
         private System.Windows.Forms.TextBox loginTextBox;
         private System.Windows.Forms.LinkLabel linkLabel2;

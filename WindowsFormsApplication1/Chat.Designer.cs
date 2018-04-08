@@ -181,7 +181,8 @@ namespace WindowsFormsApplication1
             this.textBox3.Size = new System.Drawing.Size(104, 20);
             this.textBox3.TabIndex = 7;
             this.textBox3.Text = "peregovory";
-            // 
+            this.textBox3.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox3_KeyDown);
+            //
             // label1
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;

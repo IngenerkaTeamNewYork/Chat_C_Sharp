@@ -122,7 +122,8 @@ namespace WindowsFormsApplication1
 
                 textBox2.AppendText(dateStr + Environment.NewLine + login + ":   " +
                     textBox1.Text + Environment.NewLine);
-                File.AppendAllText(subchat + ".txt", dateStr + rasd + login + rasd + textBox1.Text.Replace(Environment.NewLine, "%%%%") + Environment.NewLine);
+                File.AppendAllText(subchat + ".txt", dateStr + rasd + login + rasd + textBox1.Text.Replace(Environment.NewLine, "%%%%"));
+                File.AppendAllText("NewMessages.txt", dateStr + rasd + login + rasd + textBox1.Text.Replace(Environment.NewLine, "%%%%") + Environment.NewLine);
             }
 
             textBox1.Text = "";
@@ -179,6 +180,7 @@ namespace WindowsFormsApplication1
         private void TextBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             BadWords(ref textBox1);
+            BadWords(ref textBox2);
         }
 
         private void TextBox1_KeyDown(object sender, KeyEventArgs e)
@@ -299,7 +301,13 @@ namespace WindowsFormsApplication1
 
         private void ThisisswearwordToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (String.IsNullOrEmpty(textBox2.SelectedText))
+            {
+                return;
+            }
+
             SwearWords.Add(textBox2.SelectedText);
+            File.AppendAllText("словарь мат.txt", Environment.NewLine + textBox2.SelectedText);
         }
 
         private void ContextMenuStrip1_Opening(object sender, CancelEventArgs e)
@@ -352,6 +360,15 @@ namespace WindowsFormsApplication1
             }
         }
 
+        private void textBox3_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                Button4_Click(sender, e);
+            }
+        }
+
         private void Button5_Click(object sender, EventArgs e)
         {
             File.AppendAllLines(subchat + "-users.txt", new String[] { comboBox1.Text });
@@ -369,7 +386,7 @@ namespace WindowsFormsApplication1
                 button6.Text = "Убрать зазвездывание";
             }
         }
-
+		
         private void button7_Click(object sender, EventArgs e)
         {
             GetPut.Get(textBox4.Text);

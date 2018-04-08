@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using System.IO;
 using System.Windows.Forms;
 
 namespace WindowsFormsApplication1
@@ -29,6 +30,22 @@ namespace WindowsFormsApplication1
             if (loginTextBox.Text == "")
             {
                 loginTextBox.Text = "Введите логин";
+            }
+        }
+        
+        private void ABC_Leave (object sender, EventArgs e)
+        {
+            if (SubChatTextBox.Text == "")
+            {
+                SubChatTextBox.Text = "peregovory";
+            }
+        }
+
+        private void ABC_Enter(object sender, EventArgs e)
+        {
+            if (SubChatTextBox.Text == "peregovory")
+            {
+                SubChatTextBox.Text = "";
             }
         }
 
@@ -116,6 +133,7 @@ namespace WindowsFormsApplication1
                     System.IO.File.AppendAllText(filename, Environment.NewLine + loginTextBox.Text + " " + ParolTextBox.Text);
                     LoginForm.usery[kolich].login = loginTextBox.Text;
                     LoginForm.usery[kolich].password = ParolTextBox.Text;
+                    File.AppendAllLines(SubChatTextBox.Text + "-users.txt", new String[] { loginTextBox.Text });
                     LoginForm.kolichestvo_userov++;
 
                     Chat chatForm = new Chat(loginTextBox.Text);
@@ -129,6 +147,7 @@ namespace WindowsFormsApplication1
             if (e.KeyChar == (int)Keys.Space)
                 e.KeyChar = '\0';
         }
+
         private void LinkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             LoginForm loginForm = new LoginForm();
