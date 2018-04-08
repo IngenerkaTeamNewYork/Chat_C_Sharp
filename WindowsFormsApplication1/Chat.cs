@@ -170,6 +170,7 @@ namespace WindowsFormsApplication1
         private void TextBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             BadWords(ref textBox1);
+            BadWords(ref textBox2);
         }
 
         private void TextBox1_KeyDown(object sender, KeyEventArgs e)
@@ -290,7 +291,13 @@ namespace WindowsFormsApplication1
 
         private void ThisisswearwordToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (String.IsNullOrEmpty(textBox2.SelectedText))
+            {
+                return;
+            }
+
             SwearWords.Add(textBox2.SelectedText);
+            File.AppendAllText("словарь мат.txt", Environment.NewLine + textBox2.SelectedText);
         }
 
         private void ContextMenuStrip1_Opening(object sender, CancelEventArgs e)
