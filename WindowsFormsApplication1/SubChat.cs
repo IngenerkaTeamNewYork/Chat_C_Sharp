@@ -39,7 +39,8 @@ namespace WindowsFormsApplication1
                     text += messages[i].day + Environment.NewLine;
                     text += "     " + messages[i].login + "  сказал(а):  ";
                     text += messages[i].text + Environment.NewLine;
-                } else
+                } 
+                else
                 {
                     text += messages[i].day + Environment.NewLine;
                     text += "     " + messages[i].login + "  сказал(а):  ";
