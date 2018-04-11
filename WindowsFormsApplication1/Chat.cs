@@ -22,6 +22,8 @@ namespace WindowsFormsApplication1
         public const string rasd = "$~#~@*&";
         public string subchat = "peregovory";
 
+        
+
         public Chat(string _login, String _subchat = "peregovory")
         {
             ReadList();
@@ -30,12 +32,17 @@ namespace WindowsFormsApplication1
             subchat = _subchat;
             textBox3.Text = subchat;
 
+            string[] file = File.ReadAllLines(subchat + "-users.txt");
+
             comboBox1.Items.Clear();
             for (int i = 0; i < LoginForm.kolichestvo_userov; i++)
             {
                 comboBox1.Items.Add(LoginForm.usery[i].login);
             }
-
+            foreach (String s in file)
+            {
+                comboBox1.Items.Remove(s);
+            }
             saveFileDialog1.Filter = "Text files(*SaveFileDialog.txt)|*.txt|All files(*.*)|*.*";
             openFileDialog1.Filter = "Text files(*OpenFileDialog.txt)|*.txt|All files(*.*)|*.*";
         }
@@ -96,7 +103,7 @@ namespace WindowsFormsApplication1
             catch (UnauthorizedAccessException err)
             {
                 MessageBox.Show(err.ToString());
-                this.Close();
+                Close();
                 return;
             }
 
