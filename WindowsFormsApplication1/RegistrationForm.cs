@@ -33,7 +33,7 @@ namespace WindowsFormsApplication1
             }
         }
         
-        private void ABC_Leave (object sender, EventArgs e)
+        private void ABC_Leave(object sender, EventArgs e)
         {
             if (textBox1.Text == "")
             {
@@ -130,7 +130,7 @@ namespace WindowsFormsApplication1
                 if (!uzhe_byl)
                 {
                     string filename = "password3.txt";
-                    System.IO.File.AppendAllText(filename, Environment.NewLine + loginTextBox.Text + " " + ParolTextBox.Text);
+                    File.AppendAllText(filename, Environment.NewLine + loginTextBox.Text + " " + ParolTextBox.Text);
                     LoginForm.usery[kolich].login = loginTextBox.Text;
                     LoginForm.usery[kolich].password = ParolTextBox.Text;
                     File.AppendAllLines(textBox1.Text + "-users.txt", new String[] { loginTextBox.Text });
