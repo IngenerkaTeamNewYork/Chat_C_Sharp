@@ -26,8 +26,8 @@ namespace WindowsFormsApplication1
             InitializeComponent();
             if (File.ReadAllText("savedparol.txt") == "Пароль") 
             {
-            savepassbox.Checked = false;
-            savepass = false;
+                savepassbox.Checked = false;
+                savepass = false;
             }
             else
             {
@@ -115,15 +115,16 @@ namespace WindowsFormsApplication1
                 }
                 Chat chatForm = new Chat(LoginTextBox.Text, textBox1.Text);
                 chatForm.ShowDialog();
-			}
+			      }
 
-	        if (savepass)
-    	    {
-	            File.WriteAllText("saveduser.txt", user);
+	          if (savepass)
+    	      {
+	              File.WriteAllText("saveduser.txt", user);
                 File.WriteAllText("savedparol.txt", password);
   	        }
             else
             {
+                File.WriteAllText("saveduser.txt", user);
                 File.WriteAllText("savedparol.txt", "Пароль");
             }
         }
@@ -186,6 +187,12 @@ namespace WindowsFormsApplication1
         private void CheckBox1_CheckedChanged(object sender, EventArgs e)
         {
             savepass = savepassbox.Checked;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Admin adm = new Admin();
+            adm.ShowDialog();
         }
     }
 }
