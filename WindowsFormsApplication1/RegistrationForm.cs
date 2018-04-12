@@ -162,5 +162,9 @@ namespace WindowsFormsApplication1
             loginForm.ShowDialog();
         }
 
+        private void loginTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
