@@ -35,17 +35,17 @@ namespace WindowsFormsApplication1
         
         private void ABC_Leave(object sender, EventArgs e)
         {
-            if (textBox1.Text == "")
+            if (SubChatTextBox.Text == "")
             {
-                textBox1.Text = "peregovory";
+                SubChatTextBox.Text = "peregovory";
             }
         }
 
         private void ABC_Enter(object sender, EventArgs e)
         {
-            if (textBox1.Text == "peregovory")
+            if (SubChatTextBox.Text == "peregovory")
             {
-                textBox1.Text = "";
+                SubChatTextBox.Text = "";
             }
         }
 
@@ -133,10 +133,18 @@ namespace WindowsFormsApplication1
                     File.AppendAllText(filename, Environment.NewLine + loginTextBox.Text + " " + ParolTextBox.Text);
                     LoginForm.usery[kolich].login = loginTextBox.Text;
                     LoginForm.usery[kolich].password = ParolTextBox.Text;
-                    File.AppendAllLines(textBox1.Text + "-users.txt", new String[] { loginTextBox.Text });
+                    if (!File.Exists(SubChatTextBox.Text + "-users.txt"))
+                    {
+                        File.AppendAllLines(SubChatTextBox.Text + "-users.txt", new String[] { loginTextBox.Text });
+                    }
+                    if (!File.Exists(SubChatTextBox.Text + ".txt"))
+                    {
+                        File.WriteAllText(SubChatTextBox.Text + ".txt", "");
+                    }
+                    
                     LoginForm.kolichestvo_userov++;
 
-                    Chat chatForm = new Chat(loginTextBox.Text);
+                    Chat chatForm = new Chat(loginTextBox.Text, SubChatTextBox.Text);
                     chatForm.ShowDialog();
                 }
             }
@@ -153,5 +161,6 @@ namespace WindowsFormsApplication1
             LoginForm loginForm = new LoginForm();
             loginForm.ShowDialog();
         }
+
     }
 }
