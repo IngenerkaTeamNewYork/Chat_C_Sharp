@@ -1,6 +1,11 @@
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace WindowsFormsApplication1
 {
@@ -10,6 +15,13 @@ namespace WindowsFormsApplication1
         {
             InitializeComponent();
         }
+        public struct Polzovatel
+        {
+            public string one;
+        }
+        public static Polzovatel[] kol_vo = new Polzovatel[5];
+        // public static List<String> list_of_chat = new List<string>(new string[] { });
+        string[] file = File.ReadAllLines("чаты.txt");
 
         private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -32,7 +44,7 @@ namespace WindowsFormsApplication1
                 loginTextBox.Text = "Введите логин";
             }
         }
-        
+
         private void ABC_Leave(object sender, EventArgs e)
         {
             if (SubChatTextBox.Text == "")
@@ -48,6 +60,23 @@ namespace WindowsFormsApplication1
                 SubChatTextBox.Text = "";
             }
         }
+
+        public void ReadList()
+        {
+            FileStream file2 = new FileStream("чаты.txt", FileMode.Open);
+            StreamReader reader = new StreamReader(file2); // создаем «потоковый читатель» и связываем его с файловым потоком
+            int i = 0;
+            while (reader.Peek() >= 0)
+            {
+                string stroka_iz_faila = reader.ReadLine().Trim();
+                string[] list = stroka_iz_faila.Split(new Char[] { ' ' });
+                kol_vo[i].one = list[0];
+                i++;
+            }
+
+            reader.Close(); //закрываем поток
+        }
+
 
         private void ParolTextBox_Leave(object sender, EventArgs e)
         {
@@ -83,7 +112,7 @@ namespace WindowsFormsApplication1
 
         private void ParolTextBox_Enter(object sender, EventArgs e)
         {
-            if(ParolTextBox.Text == "Введите пароль")
+            if (ParolTextBox.Text == "Введите пароль")
             {
                 ParolTextBox.Text = "";
             }
@@ -133,22 +162,50 @@ namespace WindowsFormsApplication1
                     File.AppendAllText(filename, Environment.NewLine + loginTextBox.Text + " " + ParolTextBox.Text);
                     LoginForm.usery[kolich].login = loginTextBox.Text;
                     LoginForm.usery[kolich].password = ParolTextBox.Text;
-                    if (!File.Exists(SubChatTextBox.Text + "-users.txt"))
-                    {
-                        File.AppendAllLines(SubChatTextBox.Text + "-users.txt", new String[] { loginTextBox.Text });
-                    }
-                    if (!File.Exists(SubChatTextBox.Text + ".txt"))
-                    {
-                        File.WriteAllText(SubChatTextBox.Text + ".txt", "");
-                    }
                     
+                    string Text_of_Chat = "";
+
+                   int index = 0;
+                    //choice_of_chat.Items.AddRange(new string [] { "peregovory", "peregovory2", "your" });
+                    choice_of_chat.Items[0] = "peregovory"; index++;
+                    choice_of_chat.Items[1] = "peregovory2"; index++;
+                    choice_of_chat.Items[2] = "your"; index++;
+
+                    for (int i = 0; i<5; i++)
+                    {
+                        choice_of_chat.Items.Remove(choice_of_chat.Items[i]);
+                        if (choice_of_chat.Text == "your")
+                        {
+                            MessageBox.Show("Введите название вашего чата в графу ниже");
+                            if (!File.Exists(SubChatTextBox.Text + "-users.txt"))
+                            {
+                                File.AppendAllLines(SubChatTextBox.Text + "-users.txt", new String[] { loginTextBox.Text });
+                            }
+                            if (!File.Exists(SubChatTextBox.Text + ".txt"))
+                            {
+                                File.WriteAllText(SubChatTextBox.Text + ".txt", "");
+                            }
+                            Text_of_Chat = SubChatTextBox.Text;
+                        }
+                        else
+                        {
+                            File.AppendAllLines(choice_of_chat.Text + "-users.txt", new String[] { loginTextBox.Text });
+                            Text_of_Chat = choice_of_chat.Text;
+                        }
+                    }
+
+
+                    
+                    
+
                     LoginForm.kolichestvo_userov++;
 
-                    Chat chatForm = new Chat(loginTextBox.Text, SubChatTextBox.Text);
+                    Chat chatForm = new Chat(loginTextBox.Text, Text_of_Chat);
                     chatForm.ShowDialog();
                 }
             }
         }
+
 
         private void Space(object sender, KeyPressEventArgs e)
         {
@@ -161,10 +218,10 @@ namespace WindowsFormsApplication1
             LoginForm loginForm = new LoginForm();
             loginForm.ShowDialog();
         }
-
-        private void loginTextBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }
+
+
+
+        
+    
