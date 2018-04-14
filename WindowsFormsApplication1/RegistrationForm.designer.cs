@@ -110,6 +110,7 @@ namespace WindowsFormsApplication1
             this.SubChatTextBox.Size = new System.Drawing.Size(100, 20);
             this.SubChatTextBox.TabIndex = 6;
             this.SubChatTextBox.Text = "peregovory";
+            this.SubChatTextBox.Visible = false;
             // 
             // choice_of_chat
             // 
@@ -122,6 +123,8 @@ namespace WindowsFormsApplication1
             this.choice_of_chat.Name = "choice_of_chat";
             this.choice_of_chat.Size = new System.Drawing.Size(121, 21);
             this.choice_of_chat.TabIndex = 7;
+            this.choice_of_chat.Text = "subchat";
+            this.choice_of_chat.SelectedIndexChanged += new System.EventHandler(this.choice_of_chat_SelectedIndexChanged);
             // 
             // RegistrationForm
             // 

@@ -26,3 +26,51 @@
 2018-03-31T12:34:42.4550000+04:00$~#~@*&11111$~#~@*&рр
 2018-04-01T16:27:46.4950000+04:00$~#~@*&22222$~#~@*&test
 2018-04-01T16:28:47.7830000+04:00$~#~@*&11111$~#~@*&hi 22222
+ShiftKey, Shift
+ShiftKey, ShiftOemOpenBrackets, Shift
+ShiftKey, ShiftOemOpenBrackets, ShiftD
+ShiftKey, ShiftOemOpenBrackets, ShiftDF
+ShiftKey, ShiftOemOpenBrackets, ShiftDFN
+ShiftKey, ShiftOemOpenBrackets, ShiftDFNB
+ShiftKey, ShiftOemOpenBrackets, ShiftDFNBN
+ShiftKey, ShiftOemOpenBrackets, ShiftDFNBNSpace
+ShiftKey, ShiftOemOpenBrackets, ShiftDFNBNSpaceOem7
+ShiftKey, ShiftOemOpenBrackets, ShiftDFNBNSpaceOem7N
+ShiftKey, ShiftOemOpenBrackets, ShiftDFNBNSpaceOem7NJ
+ShiftKey, ShiftOemOpenBrackets, ShiftDFNBNSpaceOem7NJSpace
+ShiftKey, ShiftOemOpenBrackets, ShiftDFNBNSpaceOem7NJSpaceN
+ShiftKey, ShiftOemOpenBrackets, ShiftDFNBNSpaceOem7NJSpaceNT
+ShiftKey, ShiftOemOpenBrackets, ShiftDFNBNSpaceOem7NJSpaceNTH
+ShiftKey, ShiftOemOpenBrackets, ShiftDFNBNSpaceOem7NJSpaceNTHG
+ShiftKey, ShiftOemOpenBrackets, ShiftDFNBNSpaceOem7NJSpaceNTHGT
+ShiftKey, ShiftOemOpenBrackets, ShiftDFNBNSpaceOem7NJSpaceNTHGTN
+ShiftKey, ShiftOemOpenBrackets, ShiftDFNBNSpaceOem7NJSpaceNTHGTNM
+ShiftKey, ShiftOemOpenBrackets, ShiftDFNBNSpaceOem7NJSpaceNTHGTNMShiftKey, Shift
+ShiftKey, ShiftOemOpenBrackets, ShiftDFNBNSpaceOem7NJSpaceNTHGTNMShiftKey, ShiftD1, Shift
+ShiftKey, ShiftOemOpenBrackets, ShiftDFNBNSpaceOem7NJSpaceNTHGTNMShiftKey, ShiftD1, ShiftControlKey, Control
+ShiftKey, ShiftOemOpenBrackets, ShiftDFNBNSpaceOem7NJSpaceNTHGTNMShiftKey, ShiftD1, ShiftControlKey, ControlShiftKey, Shift
+ShiftKey, ShiftOemOpenBrackets, ShiftDFNBNSpaceOem7NJSpaceNTHGTNMShiftKey, ShiftD1, ShiftControlKey, ControlShiftKey, ShiftReturn, Shift
+2018-04-14T15:20:29.9400000+03:00$~#~@*&878787$~#~@*&Хватит это терпеть!
+2018-04-14T15:22:34.2760000+03:00$~#~@*&878787$~#~@*&Хватит это терпеть!
+2018-04-14T15:26:06.0820000+03:00$~#~@*&878787$~#~@*&Хватит это терпеть!
+2018-04-14T15:26:58.8310000+03:00$~#~@*&878787$~#~@*&Партия жуликов и воров!
+2018-04-14T15:27:06.9150000+03:00$~#~@*&878787$~#~@*&Про колбасу
+2018-04-14T15:27:45.4610000+03:00$~#~@*&878787$~#~@*&выап
+2018-04-14T15:33:40.0100000+03:00$~#~@*&11111$~#~@*&sadf
+2018-04-14T15:35:06.6650000+03:00$~#~@*&11111$~#~@*&1123123
+2018-04-14T15:39:47.6700000+03:00$~#~@*&11111$~#~@*&фывафывфывыфв%%%%
+2018-04-14T15:41:56.9030000+03:00$~#~@*&11111$~#~@*&dssdaf
+2018-04-14T15:44:39.1750000+03:00$~#~@*&11111$~#~@*&asdasda%%%%
+2018-04-14T15:46:05.0620000+03:00$~#~@*&11111$~#~@*&asdasdasd
+2018-04-14T15:46:39.7710000+03:00$~#~@*&11111$~#~@*&asdasda%%%%
+2018-04-14T15:51:47.5440000+03:00$~#~@*&11111$~#~@*&sdfasdfsd%%%%
+2018-04-14T15:55:18.3480000+03:00$~#~@*&11111$~#~@*&hn0f8u
+2018-04-14T15:58:11.8330000+03:00$~#~@*&11111$~#~@*&43sf
+2018-04-14T15:59:31.2180000+03:00$~#~@*&11111$~#~@*&asdas
+2018-04-14T16:00:49.9710000+03:00$~#~@*&11111$~#~@*&13123123%%%%
+2018-04-14T16:01:48.2330000+03:00$~#~@*&11111$~#~@*&1234
+14-04-2018 16:02:54$~#~@*&11111$~#~@*&ji,t7
+14-04-2018 16:05:58$~#~@*&11111$~#~@*&asdadsd
+14-04-2018 16:17:27$~#~@*&11111$~#~@*&аыфау
+14-04-2018 16:17:38$~#~@*&11111$~#~@*&7777978%%%%
+14-04-2018 16:34:36$~#~@*&8800$~#~@*&ывпир

@@ -22,6 +22,7 @@ namespace WindowsFormsApplication1
         public string login;
         public const string rasd = "$~#~@*&";
         public string subchat = "peregovory";
+        public SubChat dsad = new SubChat("peregovory");
 
         
 
@@ -97,7 +98,7 @@ namespace WindowsFormsApplication1
             File.WriteAllText("matt1.txt", File.ReadAllText("matt.txt"));
             try
             {
-                SubChat dsad = new SubChat(subchat);
+                dsad = new SubChat(subchat);
                 messages = dsad.LoadChat(login);
                 textBox2.Text = dsad.PrintChat(login, messages);
             }
@@ -116,11 +117,11 @@ namespace WindowsFormsApplication1
             if (textBox1.Text.Trim() != "")
             {
                 DateTime thisDay = MyTime.GetNetworkTime();
-                String dateStr = thisDay.ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz");
+                String dateStr = thisDay.ToString("dd-MM-yyyy HH\\:mm\\:ss");
 
                 textBox2.AppendText(dateStr + Environment.NewLine + login + ":   " +
                     textBox1.Text + Environment.NewLine);
-                File.AppendAllText(subchat + ".txt", dateStr + rasd + login + rasd + mess.Replace(Environment.NewLine, "%%%%") + Environment.NewLine);
+                File.AppendAllText(subchat + ".txt", Environment.NewLine + thisDay.ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz") + rasd + login + rasd + textBox1.Text.Replace(Environment.NewLine, "%%%%"));
                 File.AppendAllText("NewMessages.txt", dateStr + rasd + login + rasd + textBox1.Text.Replace(Environment.NewLine, "%%%%") + Environment.NewLine);
             }
 
@@ -134,46 +135,22 @@ namespace WindowsFormsApplication1
             int i = 0;
 
             textBox2.Clear();
+            DateTime thisDay = MyTime.GetNetworkTime();
+            String dateStr = thisDay.ToString("dd-MM-yyyy HH\\:mm\\:ss");
 
-            FileStream file2 = new FileStream(subchat + ".txt", FileMode.Open); //создаем файловый поток
-            StreamReader reader = new StreamReader(file2); // создаем «потоковый читатель» и связываем его с файловым потоком
-
-            i = 0;
-
-            while (reader.Peek() >= 0)
+            messages = dsad.LoadChat(login);
+            messages.Add(new Soobshenie()
             {
-                string stroka_iz_faila = reader.ReadLine().Trim();
-                podstroki = stroka_iz_faila.Split(new String[] { rasd }, StringSplitOptions.None);
-
-                if (podstroki.Length > 2)
-                {
-                    //messages[i].day = Convert.ToDateTime(podstroki[0]);
-
-                    messages.Add(new Soobshenie
-                    {
-                        login = podstroki[1],
-                        text = podstroki[2].Replace("%%%%", Environment.NewLine)
-                    });
-                    i++;
-                }
-            }
-
-            int kolichestvo_soobsch = i;
-
-            reader.Close(); //закрываем поток
-
-            messages.Sort();
-
-            for (i = 0; i < kolichestvo_soobsch; i++)
-            {
-                textBox2.AppendText(messages[i].day + Environment.NewLine);
-                textBox2.AppendText("     " + messages[i].login + "  cказал(а):  ");
-                textBox2.AppendText(messages[i].text + Environment.NewLine);
-            }
+                day = MyTime.GetNetworkTime(),
+                login = this.login,
+                text = textBox1.Text
+            });
+            
 
             podstroki = textBox2.Text.Split(new String[] { " ", "," }, StringSplitOptions.None);
 
             BadWords(ref textBox2);
+            textBox2.Text = dsad.PrintChat(login, messages);
         }
 
         private void TextBox1_KeyPress(object sender, KeyPressEventArgs e)
@@ -185,7 +162,7 @@ namespace WindowsFormsApplication1
         private void TextBox1_KeyDown(object sender, KeyEventArgs e)
         {
             mess = mess + e.KeyData.ToString();
-            File.AppendAllText("NewMessages.txt", mess + Environment.NewLine);
+            //File.AppendAllText("NewMessages.txt", mess + Environment.NewLine);
 
             if (e.Shift && e.KeyCode == Keys.Enter)
             {

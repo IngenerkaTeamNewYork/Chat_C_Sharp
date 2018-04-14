@@ -11,3 +11,15 @@ C:\Users\Алексей\Desktop\Алена\54\Chat_C_Sharp\WindowsFormsApplicati
 C:\Users\Алексей\Desktop\Алена\54\Chat_C_Sharp\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
 C:\Users\Алексей\Desktop\Алена\54\Chat_C_Sharp\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
 C:\Users\Алексей\Desktop\Алена\54\Chat_C_Sharp\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csprojResolveAssemblyReference.cache
+E:\j,h\Chat_C_Sharp\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe.config
+E:\j,h\Chat_C_Sharp\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
+E:\j,h\Chat_C_Sharp\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
+E:\j,h\Chat_C_Sharp\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe
+E:\j,h\Chat_C_Sharp\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
+E:\j,h\Chat_C_Sharp\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csprojResolveAssemblyReference.cache
+E:\j,h\Chat_C_Sharp\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Admin.resources
+E:\j,h\Chat_C_Sharp\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.LoginForm.resources
+E:\j,h\Chat_C_Sharp\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Chat.resources
+E:\j,h\Chat_C_Sharp\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+E:\j,h\Chat_C_Sharp\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.RegistrationForm.resources
+E:\j,h\Chat_C_Sharp\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csproj.GenerateResource.Cache

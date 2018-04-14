@@ -50,7 +50,7 @@ namespace WindowsFormsApplication1
             while (reader.Peek() >= 0)
             {
                 string stroka_iz_faila = reader.ReadLine().Trim();
-                File.AppendAllText("password3.txt", stroka_iz_faila + Environment.NewLine);
+                File.AppendAllText("password3.txt", Environment.NewLine + stroka_iz_faila);
             }
 
             reader.Close();
