@@ -1,1 +1,1 @@
-Microsoft Sans Serif$14.25$Color [WindowText]
+Microsoft Sans Serif$9$False$False$-16777216

@@ -132,7 +132,7 @@ namespace WindowsFormsApplication1
         private void TextBox2_TextChanged(object sender, EventArgs e)
         {
             string[] podstroki;
-            int i = 0;
+           // int i = 0;
 
             textBox2.Clear();
             DateTime thisDay = MyTime.GetNetworkTime();
@@ -350,20 +350,23 @@ namespace WindowsFormsApplication1
 
         private void Button6_Click(object sender, EventArgs e)
         {
-            deleteMat = !deleteMat;
-            if (!deleteMat)
-            {
-                button6.Text = "Вернуть зазвездывание";
-            }
-            else
-            {
-                button6.Text = "Убрать зазвездывание";
-                SubChat dsad = new SubChat(subchat);
-                messages = dsad.LoadChat(login);
-                textBox2.Text = dsad.PrintChat(login, messages);
-            }
         }
 
-  
+        private void button6_Click_1(object sender, EventArgs e)
+        {
+                deleteMat = !deleteMat;
+                if (!deleteMat)
+                {
+                    button6.Text = "Вернуть зазвездывание";
+                }
+                else
+                {
+                    button6.Text = "Убрать зазвездывание";
+                    SubChat dsad = new SubChat(subchat);
+                    messages = dsad.LoadChat(login);
+                    textBox2.Text = dsad.PrintChat(login, messages);
+                }
+            
+        }
     }
 }
