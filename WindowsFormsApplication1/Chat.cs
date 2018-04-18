@@ -48,6 +48,16 @@ namespace WindowsFormsApplication1
             openFileDialog1.Filter = "Text files(*OpenFileDialog.txt)|*.txt|All files(*.*)|*.*";
         }
 
+        public void SendFileLink(String file)
+        {
+            messages.Add(new Soobshenie
+            {
+                login = this.login,
+                text = "&^& " + file,
+                day = MyTime.GetNetworkTime()
+            });
+        }
+
         public void ReadList()
         {
             FileStream file2 = new FileStream("словарь мат.txt", FileMode.Open);
@@ -119,8 +129,9 @@ namespace WindowsFormsApplication1
                 String dateStr = thisDay.ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz");
 
                 textBox2.AppendText(dateStr + Environment.NewLine + login + ":   " +
+
                     textBox1.Text + Environment.NewLine);
-                File.AppendAllText(subchat + ".txt", dateStr + rasd + login + rasd + mess.Replace(Environment.NewLine, "%%%%") + Environment.NewLine);
+                File.AppendAllText(subchat + ".txt", dateStr + rasd + login + rasd + textBox1.Text.Replace(Environment.NewLine, "%%%%"));
                 File.AppendAllText("NewMessages.txt", dateStr + rasd + login + rasd + textBox1.Text.Replace(Environment.NewLine, "%%%%") + Environment.NewLine);
             }
 
@@ -387,5 +398,14 @@ namespace WindowsFormsApplication1
             }
         }
 
+        private void button7_Click(object sender, EventArgs e)
+        {
+            GetPut.Get(textBox4.Text);
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            GetPut.Put(textBox5.Text);
+        }
     }
 }

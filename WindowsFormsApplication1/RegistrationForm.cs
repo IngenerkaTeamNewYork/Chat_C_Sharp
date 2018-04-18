@@ -133,6 +133,7 @@ namespace WindowsFormsApplication1
                     File.AppendAllText(filename, Environment.NewLine + loginTextBox.Text + " " + ParolTextBox.Text);
                     LoginForm.usery[kolich].login = loginTextBox.Text;
                     LoginForm.usery[kolich].password = ParolTextBox.Text;
+
                     if (!File.Exists(SubChatTextBox.Text + "-users.txt"))
                     {
                         File.AppendAllLines(SubChatTextBox.Text + "-users.txt", new String[] { loginTextBox.Text });
@@ -141,7 +142,7 @@ namespace WindowsFormsApplication1
                     {
                         File.WriteAllText(SubChatTextBox.Text + ".txt", "");
                     }
-                    
+
                     LoginForm.kolichestvo_userov++;
 
                     Chat chatForm = new Chat(loginTextBox.Text, SubChatTextBox.Text);

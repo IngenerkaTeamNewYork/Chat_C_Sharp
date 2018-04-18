@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 
 namespace WindowsFormsApplication1
 {
@@ -141,6 +142,7 @@ namespace WindowsFormsApplication1
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox PotParolTextBox;
+        private TextBox SubChatTextBox;
         private System.Windows.Forms.TextBox ParolTextBox;
         private System.Windows.Forms.TextBox loginTextBox;
         private System.Windows.Forms.LinkLabel linkLabel2;
