@@ -85,7 +85,7 @@
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(50, 130);
+            this.linkLabel1.Location = new System.Drawing.Point(12, 130);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(72, 13);
             this.linkLabel1.TabIndex = 5;
@@ -112,14 +112,14 @@
             this.textBox1.Size = new System.Drawing.Size(165, 20);
             this.textBox1.TabIndex = 8;
             this.textBox1.Text = "peregovory";
-            //
+            // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(128, 128);
+            this.button3.Location = new System.Drawing.Point(107, 124);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(40, 24);
+            this.button3.Size = new System.Drawing.Size(61, 24);
             this.button3.TabIndex = 9;
-            this.button3.Text = "Адм";
+            this.button3.Text = "Админ";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -127,7 +127,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(170, 150);
+            this.ClientSize = new System.Drawing.Size(171, 150);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.savepassbox);

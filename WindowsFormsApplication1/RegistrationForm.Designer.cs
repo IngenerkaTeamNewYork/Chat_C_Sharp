@@ -38,12 +38,12 @@ namespace WindowsFormsApplication1
             this.ParolTextBox = new System.Windows.Forms.TextBox();
             this.loginTextBox = new System.Windows.Forms.TextBox();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.choice_of_chat = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(40, 123);
+            this.button2.Location = new System.Drawing.Point(39, 177);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(123, 23);
             this.button2.TabIndex = 4;
@@ -108,24 +108,41 @@ namespace WindowsFormsApplication1
             // linkLabel2
             // 
             this.linkLabel2.AutoSize = true;
-            this.linkLabel2.Location = new System.Drawing.Point(81, 149);
+            this.linkLabel2.Location = new System.Drawing.Point(83, 203);
             this.linkLabel2.Name = "linkLabel2";
             this.linkLabel2.Size = new System.Drawing.Size(37, 13);
             this.linkLabel2.TabIndex = 5;
             this.linkLabel2.TabStop = true;
             this.linkLabel2.Text = "Войти";
             // 
-            // textBox1
+            // SubChatTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(13, 97);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(32, 20);
-            this.textBox1.TabIndex = 6;
+            this.SubChatTextBox.Location = new System.Drawing.Point(51, 150);
+            this.SubChatTextBox.Name = "SubChatTextBox";
+            this.SubChatTextBox.Size = new System.Drawing.Size(100, 20);
+            this.SubChatTextBox.TabIndex = 6;
+            this.SubChatTextBox.Text = "peregovory";
+            this.SubChatTextBox.Visible = false;
+            // 
+            // choice_of_chat
+            // 
+            this.choice_of_chat.FormattingEnabled = true;
+            this.choice_of_chat.Items.AddRange(new object[] {
+            "peregovory",
+            "peregovory2",
+            "your"});
+            this.choice_of_chat.Location = new System.Drawing.Point(39, 123);
+            this.choice_of_chat.Name = "choice_of_chat";
+            this.choice_of_chat.Size = new System.Drawing.Size(121, 21);
+            this.choice_of_chat.TabIndex = 7;
+            this.choice_of_chat.Text = "subchat";
+            this.choice_of_chat.SelectedIndexChanged += new System.EventHandler(this.choice_of_chat_SelectedIndexChanged);
             // 
             // RegistrationForm
             // 
-            this.ClientSize = new System.Drawing.Size(204, 174);
-            this.Controls.Add(this.textBox1);
+            this.ClientSize = new System.Drawing.Size(204, 225);
+            this.Controls.Add(this.choice_of_chat);
+            this.Controls.Add(this.SubChatTextBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.loginTextBox);
             this.Controls.Add(this.SubChatTextBox);
@@ -133,7 +150,7 @@ namespace WindowsFormsApplication1
             this.Controls.Add(this.PotParolTextBox);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.linkLabel2);
-            this.MaximumSize = new System.Drawing.Size(240, 220);
+            this.MaximumSize = new System.Drawing.Size(240, 280);
             this.MinimumSize = new System.Drawing.Size(220, 213);
             this.Name = "RegistrationForm";
             this.Text = "Регистрация";
@@ -151,11 +168,11 @@ namespace WindowsFormsApplication1
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox PotParolTextBox;
-        private TextBox SubChatTextBox;
         private System.Windows.Forms.TextBox ParolTextBox;
         private System.Windows.Forms.TextBox loginTextBox;
         private System.Windows.Forms.LinkLabel linkLabel2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox SubChatTextBox;
+        private System.Windows.Forms.ComboBox choice_of_chat;
     }
     #endregion
 }

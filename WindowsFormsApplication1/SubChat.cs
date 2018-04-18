@@ -18,6 +18,7 @@ namespace WindowsFormsApplication1
             }
             catch (FileNotFoundException)
             {
+                //FIXME купить пирожком
                 usersallowed = new List<String> { "" };
             }
         }
@@ -64,9 +65,9 @@ namespace WindowsFormsApplication1
             while (reader.Peek() >= 0)
             {
                 string stroka_iz_faila = reader.ReadLine().Trim();
-                List<String> SubLines = new List<String>(stroka_iz_faila.Split(new String[] { "#" }, StringSplitOptions.None));
+                List<String> SubLines = new List<String>(stroka_iz_faila.Split(new String[] { "$~#~@*&" }, StringSplitOptions.None));
 
-                if (SubLines.Count == 3)
+                if (SubLines.Count >= 3)
                 {
                     messages.Add(new Soobshenie());
                     messages[i].day = Convert.ToDateTime(SubLines[0]);
@@ -76,7 +77,7 @@ namespace WindowsFormsApplication1
                 }
                 else
                 {
-                    throw new Exception("Malformed subchat.");
+                    //throw new Exception("Malformed subchat.");
                 }
             }
             reader.Close(); //закрываем поток

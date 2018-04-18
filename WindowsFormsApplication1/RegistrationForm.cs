@@ -1,6 +1,11 @@
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace WindowsFormsApplication1
 {
@@ -10,6 +15,11 @@ namespace WindowsFormsApplication1
         {
             InitializeComponent();
         }
+        public struct Polzovatel
+        {
+            public string one;
+        }
+        string Text_of_Chat = "";
 
         private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -23,6 +33,8 @@ namespace WindowsFormsApplication1
             {
                 loginTextBox.Text = "";
             }
+
+            choice_of_chat_SelectedIndexChanged(sender, e);
         }
 
         private void Reg_Log_Leave(object sender, EventArgs e)
@@ -32,7 +44,7 @@ namespace WindowsFormsApplication1
                 loginTextBox.Text = "Введите логин";
             }
         }
-        
+
         private void ABC_Leave(object sender, EventArgs e)
         {
             if (SubChatTextBox.Text == "")
@@ -83,9 +95,29 @@ namespace WindowsFormsApplication1
 
         private void ParolTextBox_Enter(object sender, EventArgs e)
         {
-            if(ParolTextBox.Text == "Введите пароль")
+            if (ParolTextBox.Text == "Введите пароль")
             {
                 ParolTextBox.Text = "";
+            }
+        }
+
+        private void choice_of_chat_SelectedIndexChanged(object sender, EventArgs e)
+        {        
+            choice();
+        }
+
+        private void choice()
+        {
+            if (choice_of_chat.SelectedIndex == 2)
+            {
+                MessageBox.Show("Введите название вашего чата в графу ниже");
+                //Text_of_Chat = SubChatTextBox.Text;
+                SubChatTextBox.Visible = true;
+            }
+            else
+            {
+                File.AppendAllLines(choice_of_chat.Text + "-users.txt", new String[] { loginTextBox.Text });
+                Text_of_Chat = choice_of_chat.Text;
             }
         }
 
@@ -126,13 +158,25 @@ namespace WindowsFormsApplication1
                         break;
                     }
                 }
+            }
 
-                if (!uzhe_byl)
+            if (!uzhe_byl)
+            {
+                string filename = "password3.txt";
+                File.AppendAllText(filename, Environment.NewLine + loginTextBox.Text + " " + ParolTextBox.Text);
+                LoginForm.usery[kolich].login = loginTextBox.Text;
+                LoginForm.usery[kolich].password = ParolTextBox.Text;
+
+                LoginForm.kolichestvo_userov++;
+
+                if (SubChatTextBox.Visible)
                 {
-                    string filename = "password3.txt";
+                    filename = "password3.txt";
                     File.AppendAllText(filename, Environment.NewLine + loginTextBox.Text + " " + ParolTextBox.Text);
                     LoginForm.usery[kolich].login = loginTextBox.Text;
                     LoginForm.usery[kolich].password = ParolTextBox.Text;
+
+                    Text_of_Chat = SubChatTextBox.Text;
 
                     if (!File.Exists(SubChatTextBox.Text + "-users.txt"))
                     {
@@ -145,11 +189,20 @@ namespace WindowsFormsApplication1
 
                     LoginForm.kolichestvo_userov++;
 
-                    Chat chatForm = new Chat(loginTextBox.Text, SubChatTextBox.Text);
-                    chatForm.ShowDialog();
+                    Chat chForm = new Chat(loginTextBox.Text, SubChatTextBox.Text);
+                    chForm.ShowDialog();
                 }
+                else
+                {
+                    Text_of_Chat = choice_of_chat.Text;
+                }
+
+                Chat chatForm = new Chat(loginTextBox.Text, Text_of_Chat);
+                chatForm.ShowDialog();
             }
+
         }
+
 
         private void Space(object sender, KeyPressEventArgs e)
         {
@@ -161,11 +214,6 @@ namespace WindowsFormsApplication1
         {
             LoginForm loginForm = new LoginForm();
             loginForm.ShowDialog();
-        }
-
-        private void loginTextBox_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }
