@@ -34,6 +34,7 @@ namespace WindowsFormsApplication1
             this.button2 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.PotParolTextBox = new System.Windows.Forms.TextBox();
+            this.SubChatTextBox = new System.Windows.Forms.TextBox();
             this.ParolTextBox = new System.Windows.Forms.TextBox();
             this.loginTextBox = new System.Windows.Forms.TextBox();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
@@ -42,7 +43,7 @@ namespace WindowsFormsApplication1
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(40, 151);
+            this.button2.Location = new System.Drawing.Point(40, 123);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(123, 23);
             this.button2.TabIndex = 4;
@@ -68,7 +69,18 @@ namespace WindowsFormsApplication1
             this.PotParolTextBox.Text = "Повторите пароль";
             this.PotParolTextBox.Enter += new System.EventHandler(this.PotParolTextBox4_Enter);
             this.PotParolTextBox.Leave += new System.EventHandler(this.PotParolTextBox4_Leave);
-            // 
+            //
+            // SubChatTextBox
+            //
+            this.SubChatTextBox.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.SubChatTextBox.Location = new System.Drawing.Point(51, 127);
+            this.SubChatTextBox.Name = "SubChatTextBox";
+            this.SubChatTextBox.Size = new System.Drawing.Size(100, 20);
+            this.SubChatTextBox.TabIndex = 6;
+            this.SubChatTextBox.Text = "peregovory";
+            this.SubChatTextBox.Enter += new System.EventHandler(this.ABC_Enter);
+            this.SubChatTextBox.Leave += new System.EventHandler(this.ABC_Leave);
+            //
             // ParolTextBox
             // 
             this.ParolTextBox.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -89,7 +101,6 @@ namespace WindowsFormsApplication1
             this.loginTextBox.Size = new System.Drawing.Size(100, 20);
             this.loginTextBox.TabIndex = 1;
             this.loginTextBox.Text = "Введите логин";
-            this.loginTextBox.TextChanged += new System.EventHandler(this.loginTextBox_TextChanged);
             this.loginTextBox.Enter += new System.EventHandler(this.Reg_Log_Enter);
             this.loginTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Space);
             this.loginTextBox.Leave += new System.EventHandler(this.Reg_Log_Leave);
@@ -97,7 +108,7 @@ namespace WindowsFormsApplication1
             // linkLabel2
             // 
             this.linkLabel2.AutoSize = true;
-            this.linkLabel2.Location = new System.Drawing.Point(85, 179);
+            this.linkLabel2.Location = new System.Drawing.Point(81, 149);
             this.linkLabel2.Name = "linkLabel2";
             this.linkLabel2.Size = new System.Drawing.Size(37, 13);
             this.linkLabel2.TabIndex = 5;
@@ -106,25 +117,23 @@ namespace WindowsFormsApplication1
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(40, 123);
+            this.textBox1.Location = new System.Drawing.Point(13, 97);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(123, 20);
+            this.textBox1.Size = new System.Drawing.Size(32, 20);
             this.textBox1.TabIndex = 6;
-            this.textBox1.Text = "peregovory";
-            this.textBox1.Enter += new System.EventHandler(this.ABC_Enter);
-            this.textBox1.Leave += new System.EventHandler(this.ABC_Leave);
             // 
             // RegistrationForm
             // 
-            this.ClientSize = new System.Drawing.Size(204, 201);
+            this.ClientSize = new System.Drawing.Size(204, 174);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.loginTextBox);
+            this.Controls.Add(this.SubChatTextBox);
             this.Controls.Add(this.ParolTextBox);
             this.Controls.Add(this.PotParolTextBox);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.linkLabel2);
-            this.MaximumSize = new System.Drawing.Size(240, 240);
+            this.MaximumSize = new System.Drawing.Size(240, 220);
             this.MinimumSize = new System.Drawing.Size(220, 213);
             this.Name = "RegistrationForm";
             this.Text = "Регистрация";
