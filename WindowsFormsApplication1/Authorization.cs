@@ -18,15 +18,28 @@ namespace WindowsFormsApplication1
         public static int kolichestvo_userov;
         public static bool savepass = false;
         public static string saveduser = File.ReadAllText("saveduser.txt");
+        public static string savedparol = File.ReadAllText("savedparol.txt");
+
 
         public LoginForm()
         {
             InitializeComponent();
+            if (File.ReadAllText("savedparol.txt") == "Пароль") 
+            {
+                savepassbox.Checked = false;
+                savepass = false;
+            }
+            else
+            {
+                savepassbox.Checked = true;
+                savepass = true;
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             LoginTextBox.Text = File.ReadAllText("saveduser.txt");
+            PPorolTextBox.Text = File.ReadAllText("savedparol.txt");
 
             File.WriteAllText("AllPolzovoteli.txt", string.Empty);
             GetPut.Get("password3.txt");
@@ -66,7 +79,7 @@ namespace WindowsFormsApplication1
             PPorolTextBox.PasswordChar = '*';
 
             string user = user1.login;
-            string password = PPorolTextBox.Text;
+            string password = user1.password;
 
             bool net_polzovatelya = true;
             bool ne_pomnit_parol = true;
@@ -102,12 +115,18 @@ namespace WindowsFormsApplication1
                 }
                 Chat chatForm = new Chat(LoginTextBox.Text, textBox1.Text);
                 chatForm.ShowDialog();
-			}
+			      }
 
-	        if (savepass)
-    	    {
-	            File.WriteAllText("saveduser.txt", user);
+	          if (savepass)
+    	      {
+	              File.WriteAllText("saveduser.txt", user);
+                File.WriteAllText("savedparol.txt", password);
   	        }
+            else
+            {
+                File.WriteAllText("saveduser.txt", user);
+                File.WriteAllText("savedparol.txt", "Пароль");
+            }
         }
 
         private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -170,9 +189,10 @@ namespace WindowsFormsApplication1
             savepass = savepassbox.Checked;
         }
 
-        private void Button2_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)
         {
-            File.WriteAllText("saveduser.txt", "");
+            Admin adm = new Admin();
+            adm.ShowDialog();
         }
     }
 }
