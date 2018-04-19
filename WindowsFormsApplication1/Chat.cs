@@ -361,20 +361,6 @@ namespace WindowsFormsApplication1
 
         private void Button6_Click(object sender, EventArgs e)
         {
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-            GetPut.Get(textBox4.Text);
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-            GetPut.Put(textBox5.Text);
-        }
-
-        private void button6_Click_1(object sender, EventArgs e)
-        {
             deleteMat = !deleteMat;
             if (!deleteMat)
             {
@@ -388,5 +374,17 @@ namespace WindowsFormsApplication1
                 textBox2.Text = dsad.PrintChat(login, messages);
             }
         }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            GetPut.Get(textBox4.Text);
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            GetPut.Put(textBox5.Text);
+        }
+
+        
     }
 }
