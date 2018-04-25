@@ -170,12 +170,7 @@ namespace WindowsFormsApplication1
                 LoginForm.kolichestvo_userov++;
 
                 if (SubChatTextBox.Visible)
-                {
-                    filename = "password3.txt";
-                    File.AppendAllText(filename, Environment.NewLine + loginTextBox.Text + " " + ParolTextBox.Text);
-                    LoginForm.usery[kolich].login = loginTextBox.Text;
-                    LoginForm.usery[kolich].password = ParolTextBox.Text;
-
+                {                    
                     Text_of_Chat = SubChatTextBox.Text;
 
                     if (!File.Exists(SubChatTextBox.Text + "-users.txt"))
@@ -186,11 +181,6 @@ namespace WindowsFormsApplication1
                     {
                         File.WriteAllText(SubChatTextBox.Text + ".txt", "");
                     }
-
-                    LoginForm.kolichestvo_userov++;
-
-                    Chat chForm = new Chat(loginTextBox.Text, SubChatTextBox.Text);
-                    chForm.ShowDialog();
                 }
                 else
                 {
@@ -200,10 +190,8 @@ namespace WindowsFormsApplication1
                 Chat chatForm = new Chat(loginTextBox.Text, Text_of_Chat);
                 chatForm.ShowDialog();
             }
-
         }
-
-
+        
         private void Space(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (int)Keys.Space)

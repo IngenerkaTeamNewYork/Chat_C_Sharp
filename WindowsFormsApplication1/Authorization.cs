@@ -15,7 +15,7 @@ namespace WindowsFormsApplication1
     {
         public Polzovatel user1;
         public static Polzovatel[] usery = new Polzovatel[500];
-        public static int kolichestvo_userov;
+        public static int kolichestvo_userov = 0;
         public static bool savepass = false;
         public static string saveduser = File.ReadAllText("saveduser.txt");
         public static string savedparol = File.ReadAllText("savedparol.txt");
@@ -64,9 +64,15 @@ namespace WindowsFormsApplication1
             {
                 string stroka_iz_faila = reader.ReadLine().Trim();
                 string[] podstroki = stroka_iz_faila.Split(new Char[] { ' ' });
-                usery[i].login = podstroki[0];
-                usery[i].password = podstroki[1];
-                i++;
+
+                if (podstroki.Length > 1 &&
+                    !String.IsNullOrEmpty(podstroki[0]) && 
+                    !String.IsNullOrEmpty(podstroki[1]))
+                {
+                    usery[i].login = podstroki[0];
+                    usery[i].password = podstroki[1];
+                    i++;
+                }
             }
 
             kolichestvo_userov = i;
