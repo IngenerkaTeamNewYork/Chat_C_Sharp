@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Text;
 using System.Windows.Forms;
 using System.Linq;
 
@@ -18,13 +19,64 @@ namespace WindowsFormsApplication1
         private static List<Soobshenie> messages;
         private static Polzovatel_view[] type = new Polzovatel_view[3];
 
+        public static Button[] LangButtons = new Button[100];
+        public int LangBattonCount = 0;
+
         public string mess = "";
         public string login;
         public const string rasd = "$~#~@*&";
         public string subchat = "peregovory";
         public SubChat dsad = new SubChat("peregovory");
 
-        
+
+        public void Buttons()
+        {
+
+            String LangPath = Application.StartupPath + "\\Lang";
+            String[] FileList = Directory.GetFiles(LangPath, "*.txt");
+            LangBattonCount = FileList.Length;
+            for (int n = 0; n < LangBattonCount; n++)
+            {
+                LangButtons[n] = new Button();
+                LangButtons[n].Top = 108 + 23 * n;
+                LangButtons[n].Left = 268;
+                LangButtons[n].Height = 23;
+                LangButtons[n].Width = 75;
+                LangButtons[n].Text = Path.GetFileName(FileList[n]).Replace(".txt", "");
+                LangButtons[n].MouseClick += new MouseEventHandler(LangChange_Click);
+                this.Controls.Add(LangButtons[n]);
+            }
+
+        }
+
+
+        public void ChangeLang(String Lang, object sender, EventArgs e)
+        {
+            String FileName = Application.StartupPath + "\\Lang\\" + Lang + ".txt";
+            StreamReader stream = new StreamReader(FileName, Encoding.UTF8);
+            string CurrentLine = "";
+
+            while (CurrentLine != null)
+            {
+
+                button6.Text = Parameter(CurrentLine, "StAr", button6.Text);
+                button2.Text = Parameter(CurrentLine, "SiZe", button2.Text);
+                button3.Text = Parameter(CurrentLine, "UpDaTe", button3.Text);
+                button1.Text = Parameter(CurrentLine, "SeNd", button1.Text);
+                label1.Text = Parameter(CurrentLine, "ChAtNaMe", label1.Text);
+                button4.Text = Parameter(CurrentLine, "ChAnGe", button4.Text);
+                checkBox1.Text = Parameter(CurrentLine, "AuToUpDaTe", checkBox1.Text);
+                label2.Text = Parameter(CurrentLine, "AdDmEn", label2.Text);
+                label3.Text = Parameter(CurrentLine, "DoWnLoAdFiLe", label3.Text);
+                label4.Text = Parameter(CurrentLine, "AaDFiLe", label4.Text);
+                CurrentLine = " ";
+                
+                CurrentLine = stream.ReadLine();
+
+            }
+            //Потому что вот здесь она станет null, и больше никогда в условие не зайдет
+            stream.Close();
+        }
 
         public Chat(string _login, String _subchat = "peregovory")
         {
@@ -47,6 +99,8 @@ namespace WindowsFormsApplication1
             }
             saveFileDialog1.Filter = "Text files(*SaveFileDialog.txt)|*.txt|All files(*.*)|*.*";
             openFileDialog1.Filter = "Text files(*OpenFileDialog.txt)|*.txt|All files(*.*)|*.*";
+            //Если не вызвать эту функцию. кнопки не нарисуются)
+            Buttons();
         }
 
         public void SendFileLink(String file)
@@ -58,7 +112,7 @@ namespace WindowsFormsApplication1
                 day = MyTime.GetNetworkTime()
             });
         }
-
+        
         public void ReadList()
         {
             FileStream file2 = new FileStream("словарь мат.txt", FileMode.Open);
@@ -99,8 +153,9 @@ namespace WindowsFormsApplication1
 
         private void Form2_Load(object sender, EventArgs e)
         {
+            //Еще можно здесь вызвать Buttons, а не в конструкторе
             ////////////////////////////////////////////////////////////////////////////////
-
+            BadWords(ref textBox2);
             messages = new List<Soobshenie>();
             File.WriteAllText("Allmatt.txt", string.Empty);
             GetPut.Get("matt.txt");
@@ -118,11 +173,12 @@ namespace WindowsFormsApplication1
                 Close();
                 return;
             }
-
             ReadFontFromFile();
+           
         }
+    
 
-        private void Button1_Click(object sender, EventArgs e)
+        public void Button1_Click(object sender, EventArgs e)
         {
             if (textBox1.Text.Trim() != "")
             {
@@ -220,7 +276,7 @@ namespace WindowsFormsApplication1
             }
         }
 
-        private void Button2_Click(object sender, EventArgs e)
+        public void Button2_Click(object sender, EventArgs e)
         {
             fontDialog1.ShowColor = true;
             fontDialog1.Font = textBox1.Font;
@@ -260,7 +316,7 @@ namespace WindowsFormsApplication1
             }
         }
 
-        private void Button3_Click(object sender, EventArgs e)
+        public void Button3_Click(object sender, EventArgs e)
         {
             File.WriteAllText("AllMessages.txt", string.Empty);
             GetPut.Get(subchat + ".txt");
@@ -289,7 +345,7 @@ namespace WindowsFormsApplication1
             BadWords(ref textBox1);
         }
 
-        private void ThisisswearwordToolStripMenuItem_Click(object sender, EventArgs e)
+        public void ThisisswearwordToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (String.IsNullOrEmpty(textBox2.SelectedText))
             {
@@ -310,7 +366,7 @@ namespace WindowsFormsApplication1
             }
         }
 
-        private void RemoveBadWordToolStripMenuItem_Click(object sender, EventArgs e)
+        public void RemoveBadWordToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show(textBox1.SelectedText);
             SwearWords.Remove(textBox1.SelectedText);
@@ -330,7 +386,7 @@ namespace WindowsFormsApplication1
             }
         }
 
-        private void Button4_Click(object sender, EventArgs e)
+        public void Button4_Click(object sender, EventArgs e)
         {
             subchat = textBox3.Text;
 
@@ -345,7 +401,7 @@ namespace WindowsFormsApplication1
             }
         }
 
-        private void textBox3_KeyDown(object sender, KeyEventArgs e)
+        public void textBox3_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
@@ -354,27 +410,14 @@ namespace WindowsFormsApplication1
             }
         }
 
-        private void Button5_Click(object sender, EventArgs e)
+        public void Button5_Click(object sender, EventArgs e)
         {
             File.AppendAllLines(subchat + "-users.txt", new String[] { comboBox1.Text });
         }
 
-        private void Button6_Click(object sender, EventArgs e)
+        public void Button6_Click(object sender, EventArgs e)
         {
-        }
 
-        private void button7_Click(object sender, EventArgs e)
-        {
-            GetPut.Get(textBox4.Text);
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-            GetPut.Put(textBox5.Text);
-        }
-
-        private void button6_Click_1(object sender, EventArgs e)
-        {
             deleteMat = !deleteMat;
             if (!deleteMat)
             {
@@ -387,6 +430,39 @@ namespace WindowsFormsApplication1
                 messages = dsad.LoadChat(login);
                 textBox2.Text = dsad.PrintChat(login, messages);
             }
+        }
+
+        public void button7_Click(object sender, EventArgs e)
+        {
+            GetPut.Get(textBox4.Text);
+        }
+
+        public void button8_Click(object sender, EventArgs e)
+        {
+            GetPut.Put(textBox5.Text);
+        }
+        String Parameter(String LineFromFile, String ParamName, String DefaultValue)
+        {
+            String ParamValue = DefaultValue;
+            String ParamFullName = ParamName + " = ";
+            if ((LineFromFile.Length > ParamFullName.Length) && LineFromFile.Substring(0, ParamFullName.Length) == ParamFullName)
+            {
+                ParamValue = LineFromFile.Substring(ParamFullName.Length);
+            }
+            return ParamValue;
+        }
+
+        private void LangChange_Click(object sender, EventArgs e)
+        {
+
+            for (int n = 0; n < LangBattonCount; n++)
+            {
+                if (sender.Equals(LangButtons[n]))
+                {
+                    ChangeLang(LangButtons[n].Text, sender, e);
+                }
+            }
+
         }
     }
 }

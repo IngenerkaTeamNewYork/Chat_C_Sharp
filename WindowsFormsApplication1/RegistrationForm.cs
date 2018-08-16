@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Text;
 using System.Windows.Forms;
 using System.Linq;
 
@@ -11,9 +12,57 @@ namespace WindowsFormsApplication1
 {
     public partial class RegistrationForm : Form
     {
+
+        public static Button[] LangButtons = new Button[100];
+        public int LangBattonCount = 0;
+        public void Buttons()
+        {
+
+            String LangPath = Application.StartupPath + "\\Lang";
+            String[] FileList = Directory.GetFiles(LangPath, "*.txt");
+            LangBattonCount = FileList.Length;
+            for (int n = 0; n < LangBattonCount; n++)
+            {
+                LangButtons[n] = new Button();
+                LangButtons[n].Top = 9+23 * n;
+                LangButtons[n].Height = 23;
+                LangButtons[n].Width = 60;
+                LangButtons[n].Text = Path.GetFileName(FileList[n]).Replace(".txt", "");
+                LangButtons[n].MouseClick += new MouseEventHandler(LangChange_Click);
+                this.Controls.Add(LangButtons[n]);
+            }
+
+        }
+
+
+        public void ChangeLang(String Lang, object sender, EventArgs e)
+        {
+            String FileName = Application.StartupPath + "\\Lang\\" + Lang + ".txt";
+            StreamReader stream = new StreamReader(FileName, Encoding.UTF8);
+            string CurrentLine = "";
+
+            while (CurrentLine != null)
+            {
+
+                button2.Text = Parameter(CurrentLine, "SiGn Up", button2.Text);
+                label2.Text = Parameter(CurrentLine, "SiGn Up", label2.Text);
+                PotParolTextBox.Text = Parameter(CurrentLine, "RePeAtPaSsWoRd", PotParolTextBox.Text);
+                ParolTextBox.Text = Parameter(CurrentLine, "PaSsWoRd", ParolTextBox.Text);
+                loginTextBox.Text = Parameter(CurrentLine, "LoGiN", loginTextBox.Text);
+                linkLabel2.Text = Parameter(CurrentLine, "SiGn In", linkLabel2.Text);
+                this.Text = Parameter(CurrentLine, "ReGiStRaTiOn", this.Text);
+                CurrentLine = " ";
+
+                CurrentLine = stream.ReadLine();
+                
+            }
+            //Потому что вот здесь она станет null, и больше никогда в условие не зайдет
+            stream.Close();
+        }
         public RegistrationForm()
         {
             InitializeComponent();
+            Buttons();
         }
         public struct Polzovatel
         {
@@ -186,7 +235,7 @@ namespace WindowsFormsApplication1
                 {
                     Text_of_Chat = choice_of_chat.Text;
                 }
-
+                choice_of_chat.Items.Add(SubChatTextBox.Text);
                 Chat chatForm = new Chat(loginTextBox.Text, Text_of_Chat);
                 chatForm.ShowDialog();
             }
@@ -202,6 +251,31 @@ namespace WindowsFormsApplication1
         {
             LoginForm loginForm = new LoginForm();
             loginForm.ShowDialog();
+        }
+
+        String Parameter(String LineFromFile, String ParamName, String DefaultValue)
+        {
+            String ParamValue = DefaultValue;
+            String ParamFullName = ParamName + " = ";
+            if ((LineFromFile.Length > ParamFullName.Length) && LineFromFile.Substring(0, ParamFullName.Length) == ParamFullName)
+            {
+                ParamValue = LineFromFile.Substring(ParamFullName.Length);
+            }
+            return ParamValue;
+        }
+
+
+        private void LangChange_Click(object sender, EventArgs e)
+        {
+
+            for (int n = 0; n < LangBattonCount; n++)
+            {
+                if (sender.Equals(LangButtons[n]))
+                {
+                    ChangeLang(LangButtons[n].Text, sender, e);
+                }
+            }
+
         }
     }
 }
